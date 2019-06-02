@@ -1,28 +1,28 @@
-.chat-image {
-  display: block;
-  width: 24px;
-  height: 24px;
-  margin: auto 0;
-  background: url('/src/assets/images/icons/chat.svg') center no-repeat;
-}
+.box {
+  .box__title {
+    padding: 0 40px;
 
-.title {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 40px;
-}
+    span.chat-image {
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: auto 0;
+      background: url('/src/assets/images/icons/chat.svg') center no-repeat;
+    }
+  }
 
-.table thead th {
-  border-bottom: none;
-}
+  table thead th {
+    border-bottom: none;
+  }
 
-.table th,
-.table td {
-  border-top: none;
-}
+  .table th,
+  .table td {
+    border-top: none;
+  }
 
-.table th {
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 500;
+  .table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 }

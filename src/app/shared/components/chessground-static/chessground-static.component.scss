@@ -1,10 +1,8 @@
-.cg-board-wrap {
-  // width: 112px;
-  // height: 112px;
-  position: relative;
-  display: block;
-}
-
 .main-board-wrap {
   border: 1px solid #FFD740;
+
+  &>.cg-board-wrap {
+    position: relative;
+    display: block;
+  }
 }

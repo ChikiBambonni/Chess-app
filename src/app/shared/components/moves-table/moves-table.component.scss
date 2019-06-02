@@ -1,11 +1,11 @@
-.table-container {
+.mat-elevation-z8 {
   margin-left: 20px;
   width: 300px;
   height: 512px;
   overflow: auto;
   background: #fff;
-}
 
-.table-container > table {
-  width: 100%;
+  &>table {
+    width: 100%;
+  }
 }
