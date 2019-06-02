@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { calZoom } from '@core/utils/chess.utils';
 
 @Component({
@@ -15,4 +15,8 @@ export class LastGameComponent implements OnInit {
   ngOnInit() {
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.zoom = calZoom(212);
+  }
 }
