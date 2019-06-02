@@ -17,12 +17,13 @@
   text-transform: uppercase;
 }
 
-.last-game__img {
-  border: 2px solid $accent-color-major;
-}
+// .last-game__img {
+//   border: 2px solid $accent-color-major;
+// }
 
 .last-game__info {
-  margin-left: 8px;
+  margin-left: 16px;
+  width: -webkit-fill-available;
 }
 
 .info__game-type {
@@ -65,5 +66,14 @@
 }
 
 .info__opening {
-  margin-top: 16%;
+  position: absolute;
+  bottom: 16px;
+  width: 50%;
+  span {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 500;
+  }
 }
