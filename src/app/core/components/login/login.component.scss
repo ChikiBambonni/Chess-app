@@ -1,35 +1,31 @@
 @import 'variables';
 
-.login-card {
-  max-width: 400px;
-  margin: 0 auto;
-  background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
-  color: $primary-text-color;
-}
-
-.login-container {
+.login {
   margin-top: 80px;
-}
 
-.login-button {
-  display: flex;
-  justify-content: center;
-}
+  .login-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
+    color: $primary-text-color;
+  }
 
-mat-card-footer {
-  margin: 0;
-}
+  .login__button {
+    &>button {
+      outline: none;
+    }
+  }
 
-mat-card-footer p {
-  color: red;
-}
+  &>mat-card-footer {
+    margin: 0;
+  }
 
-.fields-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 0 15px;
-}
+  &>mat-card-footer p {
+    color: red;
+  }
 
-button[type="submit"] {
-  outline: none;
+  .fields-wrapper {
+    flex-direction: column;
+    padding: 0 15px;
+  }
 }

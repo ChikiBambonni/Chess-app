@@ -1,27 +1,29 @@
+@import 'variables';
+
 #header {
   overflow: hidden;
-  background: #3f51b5;
-}
+  background: $primary-color-major;
 
-.header-container {
-  text-align: center;
-  padding-top: 60px;
-}
+  &>div.header {
+    text-align: center;
+    padding-top: 60px;
 
-.header-title {
-  font-size: 56px;
-  font-weight: 300;
-  line-height: 56px;
-  color: #fff;
-}
+    .header__title {
+      font-size: 56px;
+      font-weight: 300;
+      line-height: 56px;
+      color: $primary-text-color;
 
-.header-title h1 {
-  margin: 15px 5px;
-}
+      &>h1 {
+        margin: 15px 5px;
+      }
 
-.header-content {
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 28px;
-  margin: 15px 0 25px;
+      .header__title-content {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 28px;
+        margin: 15px 0 25px;
+      }
+    }
+  }
 }

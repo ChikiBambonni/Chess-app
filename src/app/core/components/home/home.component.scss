@@ -1,53 +1,53 @@
 @import 'variables';
 
-.profile-card,
-.friends-list-card,
-.last-game-card,
-.forum-card,
-.leaderboard-card {
-  background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
-  color: $primary-text-color;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.profile-card,
-.last-game-card {
-  margin-bottom: 24px;
-}
-
-.ui-container {
+div.ui-container {
   padding: 24px;
-}
 
-.profile-card-header__header {
-  background-color: #eee;
-}
+  .profile-card,
+  .friends-list-card,
+  .last-game-card,
+  .forum-card,
+  .leaderboard-card {
+    background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
+    color: $primary-text-color;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
 
-.profile-card__header-title {
-  padding: 0 16px;
-}
+  .profile-card,
+  .last-game-card {
+    margin-bottom: 24px;
+  }
 
-.profile-card__header-title__username {
-  font-size: 18px;
-  font-weight: 500;
-}
+  mat-card.profile-card {
+    .profile-card__header {
+      .profile-card__header-title {
+        padding: 0 16px;
 
-.profile-card__header-title__status {
-  font-size: 12px;
-  color: $success-color;
-}
+        .profile-card__header-title__username {
+          font-size: 18px;
+          font-weight: 500;
+        }
 
-.profile-card__content {
-  font-size: 12px;
-  margin: 8px 0;
-}
+        .profile-card__header-title__status {
+          font-size: 12px;
+          color: $success-color;
+        }
+      }
+    }
 
-.profile-card__content-header {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
+    .profile-card__content {
+      font-size: 12px;
+      margin: 8px 0;
 
-.ui-container__center {
-  height: 100%;
-  padding: 0 9px;
+      .profile-card__content-header {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .ui-container__center {
+    height: 100%;
+    padding: 0 9px;
+  }
 }

@@ -10,6 +10,5 @@ export class NotFoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    document.body.style.backgroundColor = '#f6f6f6';
   }
 }

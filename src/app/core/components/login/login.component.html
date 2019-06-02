@@ -1,16 +1,14 @@
 <notifier-container></notifier-container>
 
-<div class="login-container">
+<div class="login">
   <mat-card class="login-card">
     <mat-card-header>
-      <mat-card-title>
-        Login page
-      </mat-card-title>
+      <mat-card-title>Login page</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="login(form)">
-        <div class="fields-wrapper">
+        <div class="d-flex fields-wrapper">
           <mat-form-field *ngFor="let control of form.LogInControls">
             <input
               matInput
@@ -21,7 +19,7 @@
           </mat-form-field>
         </div>
 
-        <div class="login-button">
+        <div class="d-flex justify-content-center login__button">
           <button type="submit" mat-button>log in</button>
         </div>
       </form>

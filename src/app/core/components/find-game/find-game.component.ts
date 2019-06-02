@@ -15,16 +15,12 @@ export interface DialogData {
 })
 export class FindGameComponent implements OnInit {
 
-  animal: string;
-  name: string;
-
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
-  findGameHandler() {
-    console.log('find game');
+  findGameClick() {
     this.openDialog();
   }
 
