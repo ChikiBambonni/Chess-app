@@ -29,8 +29,7 @@ const randomPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => 
 };
 
 export const calZoom = (width: number) => {
-  const koef = Math.floor(width / 3.2);
-  const clientWidth = document.body.clientWidth;
+  const koef = Math.floor(width / 3.2), clientWidth = document.body.clientWidth;
   return Math.floor(clientWidth * koef / 1910);
 };
 

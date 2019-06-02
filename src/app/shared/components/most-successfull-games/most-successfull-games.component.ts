@@ -1,5 +1,7 @@
-import { calZoom } from './../../../core/utils/chess.utils';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
+
+import { calZoom } from '@core/utils/chess.utils';
 
 @Component({
   selector: 'app-most-successfull-games',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./most-successfull-games.component.scss']
 })
 export class MostSuccessfullGamesComponent implements OnInit {
+
+  // resizeEvent: BehaviorSubject<number>; // =
 
   zoom: number = calZoom(112);
   games = [{
@@ -28,4 +32,8 @@ export class MostSuccessfullGamesComponent implements OnInit {
   ngOnInit() {
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.zoom = calZoom(112);
+  }
 }

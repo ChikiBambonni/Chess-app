@@ -4,7 +4,9 @@ import {
   OnInit,
   Input,
   ElementRef,
-  ViewChild } from '@angular/core';
+  ViewChild,
+  OnChanges,
+  SimpleChanges } from '@angular/core';
 import { Chessground } from 'chessground';
 import { Api } from 'chessground/api';
 
@@ -13,7 +15,7 @@ import { Api } from 'chessground/api';
   templateUrl: './chessground-static.component.html',
   styleUrls: ['./chessground-static.component.scss']
 })
-export class ChessgroundStaticComponent implements OnInit {
+export class ChessgroundStaticComponent implements OnInit, OnChanges {
 
   @Input()
   width: number;
@@ -46,7 +48,6 @@ export class ChessgroundStaticComponent implements OnInit {
         },
       });
       this.cg.set({ fen: this.fen });
-      console.log(this.cg);
     }, 50);
   }
 
@@ -54,12 +55,16 @@ export class ChessgroundStaticComponent implements OnInit {
 
   ngOnInit() {
     this.initChessground();
-    setTimeout(() => {
-      this.setZoom();
-    }, 200);
+    setTimeout(() => this.setZoom(), 200);
   }
 
-  setZoom(/* zoom: number = 35 */) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.zoom) {
+      this.setZoom();
+    }
+  }
+
+  setZoom() {
     const el = this.chessBoard.nativeElement;
     if (el) {
       const px = `${this.zoom / 100 * 320}px`;
