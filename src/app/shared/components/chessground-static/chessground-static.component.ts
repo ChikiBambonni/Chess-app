@@ -22,6 +22,9 @@ export class ChessgroundStaticComponent implements OnInit {
   height: number;
 
   @Input()
+  zoom: number;
+
+  @Input()
   orientation: Color;
 
   @Input()
@@ -52,14 +55,14 @@ export class ChessgroundStaticComponent implements OnInit {
   ngOnInit() {
     this.initChessground();
     setTimeout(() => {
-      this.setZoom(28);
+      this.setZoom();
     }, 200);
   }
 
-  setZoom(zoom: number = 35) {
+  setZoom(/* zoom: number = 35 */) {
     const el = this.chessBoard.nativeElement;
     if (el) {
-      const px = `${zoom / 100 * 320}px`;
+      const px = `${this.zoom / 100 * 320}px`;
       el.style.width = px;
       el.style.height = px;
       document.body.dispatchEvent(new Event('chessground.resize'));

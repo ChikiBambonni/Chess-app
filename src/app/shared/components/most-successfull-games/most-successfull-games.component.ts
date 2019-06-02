@@ -1,3 +1,4 @@
+import { calZoom } from './../../../core/utils/chess.utils';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MostSuccessfullGamesComponent implements OnInit {
 
+  zoom: number = calZoom(112);
   games = [{
     fen: 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 3',
     orientation: 'white',

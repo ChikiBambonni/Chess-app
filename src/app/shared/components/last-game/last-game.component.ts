@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { calZoom } from '@core/utils/chess.utils';
 
 @Component({
   selector: 'app-last-game',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./last-game.component.scss']
 })
 export class LastGameComponent implements OnInit {
+
+  zoom: number = calZoom(212);
 
   constructor() { }
 

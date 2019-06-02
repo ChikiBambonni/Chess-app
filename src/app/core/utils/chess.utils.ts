@@ -28,6 +28,12 @@ const randomPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => 
   }, 1000);
 };
 
+export const calZoom = (width: number) => {
+  const koef = Math.floor(width / 3.2);
+  const clientWidth = document.body.clientWidth;
+  return Math.floor(clientWidth * koef / 1910);
+};
+
 export const defConfig = (chess: Chess, orien: Color): Config => {
   return {
     orientation: orien,
