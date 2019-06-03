@@ -26,6 +26,7 @@ import { FindGameComponent } from '@core/components/find-game/find-game.componen
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
+import { AnalysisComponent } from './components/analysis/analysis.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { SharedModule } from '@shared/shared.module';
     CheakersGameComponent,
     ChessGameComponent,
     FindGameComponent,
-    FindGameDialogComponent
+    FindGameDialogComponent,
+    AnalysisComponent
   ],
   entryComponents: [
     FindGameDialogComponent
