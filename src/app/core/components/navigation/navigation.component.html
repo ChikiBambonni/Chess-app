@@ -13,10 +13,14 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav">
         <li class="nav-item dropdown px-2">
+          <button mat-button [matMenuTriggerFor]="tools">Tools</button>
+          <mat-menu #tools="matMenu">
+            <button *ngFor="let item of toolsItems" mat-menu-item>{{ item }}</button>
+          </mat-menu>
         </li>
         <li class="nav-item px-2">
-          <button mat-button [matMenuTriggerFor]="menu">Games</button>
-          <mat-menu #menu="matMenu">
+          <button mat-button [matMenuTriggerFor]="games">Games</button>
+          <mat-menu #games="matMenu">
             <button *ngFor="let item of menuItems" mat-menu-item (click)="gameMenuSelectHandler(item)">{{ item }}</button>
           </mat-menu>
         </li>

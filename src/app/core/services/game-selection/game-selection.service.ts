@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { gameMenuItems } from '@core/constants/game-menu.constants';
+import { gameMenuItems } from '@core/constants/nav-menu.constants';
 
 @Injectable()
 export class GameSelectionService {

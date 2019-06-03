@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { gameMenuItems } from '@core/constants/game-menu.constants';
+import { gameMenuItems, toolsMenuItems } from '@core/constants/nav-menu.constants';
 import { GameSelectionService } from '@core/services/game-selection/game-selection.service';
 import { AuthenticationService } from '@core/mock-backend/services/auth.service';
 import { UserService } from '@core/mock-backend/services/user.service';
@@ -13,6 +13,7 @@ import { User } from '@core/interfaces/user.interfaces';
 })
 export class NavigationComponent implements OnInit {
   menuItems: string[] = gameMenuItems;
+  toolsItems: string[] = toolsMenuItems;
   user: User = null;
 
   constructor(
