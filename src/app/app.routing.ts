@@ -1,3 +1,4 @@
+import { AnalysisComponent } from './core/components/analysis/analysis.component';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { ChessGameComponent } from '@core/components/chess-game/chess-game.component';
 import { CheakersGameComponent } from '@core/components/cheakers-game/cheakers-game.component';
@@ -16,6 +17,8 @@ const routes: Routes = [
     path: 'checkers', component: CheakersGameComponent, canActivate: [AuthGuardService]
   }, {
     path: 'chess', component: ChessGameComponent, canActivate: [AuthGuardService]
+  }, {
+    path: 'opening#explorer', component: AnalysisComponent
   }, {
     path: '404', component: NotFoundComponent
   }, {

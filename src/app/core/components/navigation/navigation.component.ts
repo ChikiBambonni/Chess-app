@@ -5,6 +5,7 @@ import { GameSelectionService } from '@core/services/game-selection/game-selecti
 import { AuthenticationService } from '@core/mock-backend/services/auth.service';
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
+import { ToolsItem } from '@core/interfaces/nav-menu.interfaces';
 
 @Component({
   selector: 'app-navigation',
@@ -13,7 +14,7 @@ import { User } from '@core/interfaces/user.interfaces';
 })
 export class NavigationComponent implements OnInit {
   menuItems: string[] = gameMenuItems;
-  toolsItems: string[] = toolsMenuItems;
+  toolsItems: ToolsItem[] = toolsMenuItems;
   user: User = null;
 
   constructor(
@@ -26,8 +27,12 @@ export class NavigationComponent implements OnInit {
     this.user = this.userService.getUser();
   }
 
-  gameMenuSelectHandler(gameType: string) {
+  gameMenuClick(gameType: string) {
     this.gameService.changeGame(gameType);
+  }
+
+  toolsMenuClick(tool: string) {
+    console.log(tool);
   }
 
   logoutHandler() {
