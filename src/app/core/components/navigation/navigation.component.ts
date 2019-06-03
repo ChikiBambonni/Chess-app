@@ -31,10 +31,6 @@ export class NavigationComponent implements OnInit {
     this.gameService.changeGame(gameType);
   }
 
-  toolsMenuClick(tool: string) {
-    console.log(tool);
-  }
-
   logoutHandler() {
     this.authService.logout();
   }

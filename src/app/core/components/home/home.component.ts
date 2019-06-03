@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UserService } from '@core/mock-backend/services/user.service';
+import { User } from '@core/interfaces/user.interfaces';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  user: User = null;
 
   onlineFriends = [{
     status: 'online',
@@ -35,9 +40,9 @@ export class HomeComponent implements OnInit {
     title: 'friend 15'
   }];
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
   }
-
 }
