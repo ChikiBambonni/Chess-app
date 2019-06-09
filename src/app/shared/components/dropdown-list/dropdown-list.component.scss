@@ -34,7 +34,7 @@ div.dropdown-list {
     .content__item:hover {
       background-color: $border-color;
       border-left: 2px solid $border-color;
-      border-top: 2px solid $border-color;
+      border-top: 1px solid $border-color;
       cursor: pointer;
     }
   }
