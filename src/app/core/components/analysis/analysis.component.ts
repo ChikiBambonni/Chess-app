@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+
+export interface TableRow {
+  n: string;
+}
 
 @Component({
   selector: 'app-analysis',
@@ -13,7 +18,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 export class AnalysisComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['n'];
-  data = [];
+  data: MatTableDataSource<TableRow>;
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -50,6 +55,10 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
           this.isRateLimitReached = true;
           return of([]);
         })
-      ).subscribe(data => this.data = data);
+      ).subscribe(data => {
+        // this.data = data
+        this.data = new MatTableDataSource<TableRow>(data);
+        this.data.paginator = this.paginator;
+      });
   }
 }
