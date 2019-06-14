@@ -25,10 +25,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = false;
 
-  constructor(private httpClient: HttpClient) { }
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  private castSort(sort: string) {
+    return sort === 'desc' ? -1 : 1;
+  }
+
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
   }
@@ -41,8 +45,11 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          console.log(this.sort.active, this.sort.direction, this.paginator.pageIndex);
-          return this.httpClient.get('/capi/ChikiBambuki/Openings?sort=n');
+          const sortColumn = this.sort.active;
+          const sortDirection = this.castSort(this.sort.direction);
+          const pageNumber = this.paginator.pageIndex + 1;
+
+          return this.httpClient.get(`/capi/ChikiBambuki/Openings?sort={"${sortColumn}": ${sortDirection}}&page=${pageNumber}`);
         }),
         map((data: any) => {
           this.isLoadingResults = false;
