@@ -7,6 +7,7 @@ import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 export interface TableRow {
+  c: string;
   n: string;
 }
 
@@ -17,7 +18,7 @@ export interface TableRow {
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n'];
+  displayedColumns: string[] = ['c', 'n'];
   data: MatTableDataSource<TableRow>;
 
   resultsLength = 0;
@@ -56,7 +57,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
           return of([]);
         })
       ).subscribe(data => {
-        // this.data = data
         this.data = new MatTableDataSource<TableRow>(data);
         this.data.paginator = this.paginator;
       });
