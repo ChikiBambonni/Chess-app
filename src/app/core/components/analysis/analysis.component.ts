@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, Observable, of as observableOf } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -25,24 +25,20 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    // this.httpClient.get('/capi/ChikiBambuki/Openings?sort=n').subscribe(data => {
-    //   console.log(data);
-    // });
   }
 
   ngAfterViewInit() {
-      // If the user changes the sort order, reset back to the first page.
-      // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-      merge(this.paginator.page)
+      merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
+          console.log(this.sort.active, this.sort.direction, this.paginator.pageIndex);
           return this.httpClient.get('/capi/ChikiBambuki/Openings?sort=n');
         }),
         map((data: any) => {
-          // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           this.resultsLength = data._returned;
@@ -51,9 +47,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         }),
         catchError(() => {
           this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
-          return observableOf([]);
+          return of([]);
         })
       ).subscribe(data => this.data = data);
   }
