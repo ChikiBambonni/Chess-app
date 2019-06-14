@@ -1,35 +1,46 @@
-<div class="analysis-container">
-  <mat-card class="table-card">
-    <div class="mat-elevation-z8">
-      <div class="loading-shade"
-           *ngIf="isLoadingResults || isRateLimitReached">
-        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<div class="d-flex flex-row analysis-container">
+  <div class="col-xl-4 analysis-container__left">
+    <mat-card class="table-card">
+      <div class="mat-elevation-z8">
+        <div class="loading-shade"
+              *ngIf="isLoadingResults || isRateLimitReached">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        </div>
+
+        <div class="example-table-container">
+          <table mat-table [dataSource]="data" class="example-table"
+                  matSort matSortActive="n" matSortDirection="desc">
+
+            <ng-container matColumnDef="c">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Code</th>
+              <td mat-cell *matCellDef="let row;">{{ row.c }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="n">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Opening</th>
+              <td mat-cell *matCellDef="let row">{{row.n}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)"></tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [pageSizeOptions]="[15, 20, 30]"
+          [length]="resultsLength"
+          [pageSize]="15">
+        </mat-paginator>
       </div>
-
-      <div class="example-table-container">
-        <table mat-table [dataSource]="data" class="example-table"
-               matSort matSortActive="n" matSortDirection="desc">
-
-          <ng-container matColumnDef="c">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Code</th>
-            <td mat-cell *matCellDef="let row;">{{ row.c }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="n">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Opening</th>
-            <td mat-cell *matCellDef="let row">{{row.n}}</td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
-
-      <mat-paginator
-        [pageSizeOptions]="[15, 20, 30]"
-        [length]="resultsLength"
-        [pageSize]="15"
-      ></mat-paginator>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
+  <div class="col-xl-8 analysis-container__right">
+    <app-chessground-static
+      [width]="512"
+      [height]="512"
+      [zoom]="zoom"
+      [fen]="fen"
+      orientation="white">
+    </app-chessground-static>
+  </div>
 </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
 
 import { calZoom } from '@core/utils/chess.utils';
 
@@ -9,8 +8,6 @@ import { calZoom } from '@core/utils/chess.utils';
   styleUrls: ['./most-successfull-games.component.scss']
 })
 export class MostSuccessfullGamesComponent implements OnInit {
-
-  // resizeEvent: BehaviorSubject<number>; // =
 
   zoom: number = calZoom(112);
   games = [{

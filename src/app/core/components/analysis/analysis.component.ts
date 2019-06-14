@@ -1,3 +1,4 @@
+import { calZoom } from './../../utils/chess.utils';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,6 +18,9 @@ export interface TableRow {
   styleUrls: ['./analysis.component.scss']
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
+
+  zoom: number = calZoom(512);
+  fen: string = null;
 
   displayedColumns: string[] = ['c', 'n'];
   data: MatTableDataSource<TableRow>;
@@ -67,5 +71,9 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
         this.data = new MatTableDataSource<TableRow>(data);
         this.data.paginator = this.paginator;
       });
+  }
+
+  rowClick(row) {
+    this.fen = row.f;
   }
 }

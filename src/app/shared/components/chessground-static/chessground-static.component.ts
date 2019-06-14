@@ -62,6 +62,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
     if (changes.zoom) {
       this.setZoom();
     }
+    if (changes.fen && this.cg) {
+      this.cg.set({ fen: changes.fen.currentValue });
+    }
   }
 
   setZoom() {
