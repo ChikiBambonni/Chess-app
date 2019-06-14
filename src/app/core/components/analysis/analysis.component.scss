@@ -3,6 +3,10 @@
 div.analysis-container {
   padding: 24px;
 
+  .analysis-container__right {
+    margin: auto 0;
+  }
+
   .table-card {
     background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
     color: $primary-text-color;

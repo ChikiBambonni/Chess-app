@@ -1,3 +1,5 @@
+<app-navigation></app-navigation>
+
 <div class="d-flex flex-row analysis-container">
   <div class="col-xl-4 analysis-container__left">
     <mat-card class="table-card">
@@ -35,12 +37,17 @@
     </mat-card>
   </div>
   <div class="col-xl-8 analysis-container__right">
-    <app-chessground-static
-      [width]="512"
-      [height]="512"
-      [zoom]="zoom"
-      [fen]="fen"
-      orientation="white">
-    </app-chessground-static>
+    <div class="d-flex justify-content-center">
+      <app-chessground-static
+        [width]="512"
+        [height]="512"
+        [zoom]="zoom"
+        [fen]="fen"
+        orientation="white">
+      </app-chessground-static>
+      <app-moves-table
+        [data]="data">
+      </app-moves-table>
+    </div>
   </div>
 </div>
