@@ -72,6 +72,6 @@ export class HomeComponent implements OnInit {
   }
 
   changePage($event) {
-    console.log('--------', $event);
+    console.log($event);
   }
 }

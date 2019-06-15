@@ -19,6 +19,7 @@ import { LastGameComponent } from './components/last-game/last-game.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { ChessgroundStaticComponent } from './components/chessground-static/chessground-static.component';
 import { CommonTableComponent } from './components/common-table/common-table.component';
+import { CommonPaginatorComponent } from './components/common-paginator/common-paginator.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { CommonTableComponent } from './components/common-table/common-table.com
     ForumComponent,
     ChessgroundStaticComponent,
     CommonTableComponent,
+    CommonPaginatorComponent,
 
     CheakerPawnComponent,
     CheakerKingComponent,
@@ -59,11 +61,13 @@ import { CommonTableComponent } from './components/common-table/common-table.com
     ForumComponent,
     ChessgroundStaticComponent,
     CommonTableComponent,
+    CommonPaginatorComponent,
 
     CheakerPawnComponent,
     CheakerKingComponent,
     SpaceComponent,
     CheakersGameBoardComponent,
+
   ],
   entryComponents: [
     PromotionChoiceComponent

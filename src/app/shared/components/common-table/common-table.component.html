@@ -16,10 +16,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator
+  <!-- <mat-paginator
     [pageSizeOptions]="[15, 20, 30]"
-    pageSize="15"
+    [pageSize]="15"
     (page)="changePage($event)"
     showFirstLastButtons>
-  </mat-paginator>
+  </mat-paginator> -->
+  <app-common-paginator></app-common-paginator>
 </div>
