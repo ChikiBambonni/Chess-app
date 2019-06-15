@@ -33,6 +33,8 @@ export class CommonTableComponent implements OnInit {
   // @ViewChild(MatSort)
   // sort: MatSort;
 
+  constructor () {}
+
   ngOnInit() {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;

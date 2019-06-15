@@ -1,0 +1,7 @@
+mat-paginator {
+  background-color: inherit;
+  color: inherit;
+  .mat-icon-button[disabled][disabled]{
+    color: red !important;
+  }
+}

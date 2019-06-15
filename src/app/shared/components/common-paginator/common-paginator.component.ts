@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter } from '@angular/core';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-common-paginator',
@@ -7,9 +13,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommonPaginatorComponent implements OnInit {
 
+  @Input()
+  length: number;
+
+  @Input()
+  pageSize: number;
+
+  @Input()
+  pageSizeOptions: number[];
+
+  @Output()
+  page: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  chagePage($event: PageEvent) {
+    this.page.emit($event);
+  }
 }
