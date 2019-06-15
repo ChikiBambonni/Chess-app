@@ -3,8 +3,10 @@ import {
   OnInit,
   ViewChild,
   Input,
-  TemplateRef } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+  EventEmitter,
+  Output } from '@angular/core';
+import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-common-table',
@@ -19,10 +21,28 @@ export class CommonTableComponent implements OnInit {
   @Input()
   dataSource: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+  @Output()
+  sort: EventEmitter<Sort> = new EventEmitter<Sort>();
+
+  @Output()
+  page: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
+  // @ViewChild(MatPaginator)
+  // paginator: MatPaginator;
+
+  // @ViewChild(MatSort)
+  // sort: MatSort;
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
+
+  sortData(sort: Sort) {
+    this.sort.emit(sort);
+  }
+
+  changePage(pageEvent: PageEvent) {
+    this.page.emit(pageEvent);
   }
 }

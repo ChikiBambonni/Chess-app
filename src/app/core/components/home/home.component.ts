@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -64,5 +65,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getUser();
+  }
+
+  sortData($event) {
+    console.log($event);
+  }
+
+  changePage($event) {
+    console.log('--------', $event);
   }
 }

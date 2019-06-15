@@ -43,7 +43,9 @@
         <!-- <app-fide-leaderboard></app-fide-leaderboard> -->
         <app-common-table
           [displayedColumns]="displayedColumns"
-          [dataSource]="ELEMENT_DATA">
+          [dataSource]="ELEMENT_DATA"
+          (sort)="sortData($event)"
+          (page)="changePage($event)">
         </app-common-table>
       </mat-card>
     </div>

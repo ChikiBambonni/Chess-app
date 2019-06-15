@@ -5,11 +5,11 @@
 </ng-template>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDirection="asc">
 
-    <ng-container *ngFor="let columnn of displayedColumns" [matColumnDef]="columnn">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{ element[columnn] }} </td>
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column" disableClear>{{ column }}</th>
+      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -19,6 +19,7 @@
   <mat-paginator
     [pageSizeOptions]="[15, 20, 30]"
     pageSize="15"
+    (page)="changePage($event)"
     showFirstLastButtons>
   </mat-paginator>
 </div>
