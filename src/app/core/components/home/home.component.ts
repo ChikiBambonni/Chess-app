@@ -60,8 +60,6 @@ export class HomeComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
 
-  //template = ``;
-
   constructor(private userService: UserService) { }
 
   ngOnInit() {

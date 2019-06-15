@@ -7,11 +7,9 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
 
-    <!-- <ng-container [ngTemplateOutlet]="columnTemplate"></ng-container> -->
-
     <ng-container *ngFor="let columnn of displayedColumns" [matColumnDef]="columnn">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element[columnn] }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element[columnn] }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

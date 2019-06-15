@@ -19,9 +19,6 @@ export class CommonTableComponent implements OnInit {
   @Input()
   dataSource: MatTableDataSource<any>;
 
-  @Input()
-  columnTemplate: TemplateRef<any>;
-
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
 
