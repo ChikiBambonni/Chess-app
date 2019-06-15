@@ -40,13 +40,7 @@
           <mat-button-toggle value="FIDE">FIDE</mat-button-toggle>
           <mat-button-toggle value="APP">APP</mat-button-toggle>
         </mat-button-toggle-group>
-        <!-- <app-fide-leaderboard></app-fide-leaderboard> -->
-        <app-common-table
-          [displayedColumns]="displayedColumns"
-          [dataSource]="ELEMENT_DATA"
-          (sort)="sortData($event)"
-          (page)="changePage($event)">
-        </app-common-table>
+        <app-fide-leaderboard></app-fide-leaderboard>
       </mat-card>
     </div>
     <div class="col-xl-4 ui-container__right">

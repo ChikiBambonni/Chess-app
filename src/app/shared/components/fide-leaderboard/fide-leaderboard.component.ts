@@ -42,4 +42,12 @@ export class FideLeaderboardComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  sortData($event) {
+    console.log($event);
+  }
+
+  changePage($event) {
+    console.log($event);
+  }
 }

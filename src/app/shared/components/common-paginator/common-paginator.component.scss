@@ -1,6 +1,8 @@
+@import 'variables';
+
 mat-paginator {
-  background-color: inherit;
-  color: inherit;
+  background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
+  color: $primary-text-color;
   .mat-icon-button[disabled][disabled]{
     color: red !important;
   }

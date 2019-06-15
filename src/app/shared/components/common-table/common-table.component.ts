@@ -24,9 +24,6 @@ export class CommonTableComponent implements OnInit {
   @Output()
   sort: EventEmitter<Sort> = new EventEmitter<Sort>();
 
-  @Output()
-  page: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
-
   // @ViewChild(MatPaginator)
   // paginator: MatPaginator;
 
@@ -42,9 +39,5 @@ export class CommonTableComponent implements OnInit {
 
   sortData(sort: Sort) {
     this.sort.emit(sort);
-  }
-
-  changePage(pageEvent: PageEvent) {
-    this.page.emit(pageEvent);
   }
 }
