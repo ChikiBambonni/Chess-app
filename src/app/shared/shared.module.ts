@@ -18,6 +18,7 @@ import { DropdownListComponent } from './components/dropdown-list/dropdown-list.
 import { LastGameComponent } from './components/last-game/last-game.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { ChessgroundStaticComponent } from './components/chessground-static/chessground-static.component';
+import { CommonTableComponent } from './components/common-table/common-table.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ChessgroundStaticComponent } from './components/chessground-static/ches
     LastGameComponent,
     ForumComponent,
     ChessgroundStaticComponent,
+    CommonTableComponent,
 
     CheakerPawnComponent,
     CheakerKingComponent,
@@ -56,6 +58,7 @@ import { ChessgroundStaticComponent } from './components/chessground-static/ches
     LastGameComponent,
     ForumComponent,
     ChessgroundStaticComponent,
+    CommonTableComponent,
 
     CheakerPawnComponent,
     CheakerKingComponent,

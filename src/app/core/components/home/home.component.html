@@ -1,3 +1,30 @@
+<ng-template #columnTemplate>
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef> Country </th>
+    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef> Rating </th>
+    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> Year </th>
+    <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+  </ng-container>
+</ng-template>
+
 <app-navigation></app-navigation>
 
 <div class="ui-container">
@@ -40,7 +67,12 @@
           <mat-button-toggle value="FIDE">FIDE</mat-button-toggle>
           <mat-button-toggle value="APP">APP</mat-button-toggle>
         </mat-button-toggle-group>
-        <app-fide-leaderboard></app-fide-leaderboard>
+        <!-- <app-fide-leaderboard></app-fide-leaderboard> -->
+        <app-common-table
+          [displayedColumns]="displayedColumns"
+          [dataSource]="ELEMENT_DATA"
+          [columnTemplate]="columnTemplate">
+        </app-common-table>
       </mat-card>
     </div>
     <div class="col-xl-4 ui-container__right">
