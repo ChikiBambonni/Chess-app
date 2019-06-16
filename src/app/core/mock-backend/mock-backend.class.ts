@@ -1,5 +1,5 @@
-// import { PaginationInterface } from '@core/interfaces';
-// import { SortDirection } from '@core/enums';
+import { PaginationInterface } from '@core/interfaces/pagination.interface';
+import { SortDirection } from '@core/enums/sort.enums';
 // import { MomentDateService } from '@core/services';
 
 export abstract class MockBackendFactory<Type> {
