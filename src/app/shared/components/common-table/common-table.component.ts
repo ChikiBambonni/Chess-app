@@ -24,17 +24,9 @@ export class CommonTableComponent implements OnInit {
   @Output()
   sort: EventEmitter<Sort> = new EventEmitter<Sort>();
 
-  // @ViewChild(MatPaginator)
-  // paginator: MatPaginator;
-
-  // @ViewChild(MatSort)
-  // sort: MatSort;
-
   constructor () {}
 
   ngOnInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
   }
 
   sortData(sort: Sort) {

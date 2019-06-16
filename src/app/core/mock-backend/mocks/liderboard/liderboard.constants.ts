@@ -1,16 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
-import { Sort } from '@angular/material/sort';
+import { FIDETableElement } from './liderboard.interfaces';
 
-export interface TableElement {
-  name: string;
-  position: number;
-  rating: number;
-  year: number;
-  country: string;
-}
-
-const ELEMENT_DATA: TableElement[] = [
+export const FIDE_DATA: FIDETableElement[] = [
   { position: 1,	 name: 'Carlsen, Magnus', country: 'NOR', rating: 2845, year: 1990 },
   { position: 2,	 name: 'Caruana, Fabiano	', country: 'USA', rating: 2819, year: 1992 },
   { position: 3,	 name: 'Ding, Liren', country: 'CHN', rating: 2809, year: 1992 },
@@ -27,26 +17,3 @@ const ELEMENT_DATA: TableElement[] = [
   { position: 14,	 name: 'Aronian, Levon', country: 'ARM', rating: 2763, year: 1982 },
   { position: 15,	 name: 'Aronian, Levon', country: 'ARM', rating: 2763, year: 1982 },
 ];
-
-@Component({
-  selector: 'app-fide-leaderboard',
-  templateUrl: './fide-leaderboard.component.html',
-  styleUrls: ['./fide-leaderboard.component.scss']
-})
-export class FideLeaderboardComponent implements OnInit {
-
-  displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
-  dataSource = new MatTableDataSource<TableElement>(ELEMENT_DATA);
-
-  ngOnInit() {
-  }
-
-  sortData($event: Sort) {
-    console.log($event);
-    console.log(this.dataSource);
-  }
-
-  changePage($event: PageEvent) {
-    console.log($event);
-  }
-}
