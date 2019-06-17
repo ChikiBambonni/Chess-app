@@ -11,11 +11,19 @@ import { Sort } from '@angular/material/sort';
 })
 export class FideLeaderboardComponent implements OnInit {
 
-  mockClass: LiderboardMocksClass = new LiderboardMocksClass();
+  mockClass: LiderboardMocksClass; //  = new LiderboardMocksClass();
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
-  dataSource = new MatTableDataSource(this.mockClass.getElements());
+  dataSource: MatTableDataSource<any>;//  = new MatTableDataSource(this.mockClass.getElements());
 
   ngOnInit() {
+    this.mockClass = new LiderboardMocksClass();
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.mockClass.getData({
+      pageSize: 15,
+      pageNumber: 1,
+      orderByField: 'year',
+      orderDirection: SortDirection.Asc
+    }).elements;
   }
 
   sortData($event: Sort) {
