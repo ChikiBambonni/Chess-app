@@ -14,48 +14,44 @@ export class FideLeaderboardComponent implements OnInit {
   mockClass: LiderboardMocksClass;
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
   dataSource: MatTableDataSource<any>;
-  sortStatus = {
-    field: 'position',
-    direction: SortDirection.Asc
-  };
-  pageStatus = {
+
+  pageEvent: PageEvent = {
+    pageIndex: 0,
     pageSize: 15,
-    pageNumber: 1,
+    length: 100,
+    previousPageIndex: 0
+  };
+  sortEvent: Sort = {
+    active: 'position',
+    direction: SortDirection.Asc
   };
 
   ngOnInit() {
     this.mockClass = new LiderboardMocksClass();
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.mockClass.getData({
-      pageSize: 15,
-      pageNumber: 1,
-      orderByField: this.sortStatus.field,
-      orderDirection: this.sortStatus.direction
-    }).elements;
+    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
   }
 
   sortData($event: Sort) {
-    const direction: SortDirection = $event.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
-    this.sortStatus.direction = direction;
-    this.sortStatus.field = $event.active;
-
-    this.dataSource.data = this.mockClass.getData({
-      pageSize:  this.pageStatus.pageSize,
-      pageNumber:  this.pageStatus.pageNumber,
-      orderByField: this.sortStatus.field,
-      orderDirection: this.sortStatus.direction
-    }).elements;
+    this.sortEvent = $event;
+    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
   }
 
   changePage($event: PageEvent) {
-    this.pageStatus.pageSize = $event.pageSize;
-    this.pageStatus.pageNumber = $event.pageIndex + 1;
+    this.pageEvent = $event;
+    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
+  }
 
-    this.dataSource.data = this.mockClass.getData({
-      pageSize:  this.pageStatus.pageSize,
-      pageNumber:  this.pageStatus.pageNumber,
-      orderByField: this.sortStatus.field,
-      orderDirection: this.sortStatus.direction
-    }).elements;
+  getSortDirection(sort: Sort) {
+    return sort.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
+  }
+
+  getParams(page: PageEvent, sort: Sort) {
+    return {
+      pageSize:  page.pageSize,
+      pageNumber:  page.pageIndex + 1,
+      orderByField: sort.active,
+      orderDirection: this.getSortDirection(sort)
+    };
   }
 }
