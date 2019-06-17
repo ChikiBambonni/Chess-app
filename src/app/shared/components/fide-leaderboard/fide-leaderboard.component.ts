@@ -29,29 +29,29 @@ export class FideLeaderboardComponent implements OnInit {
   ngOnInit() {
     this.mockClass = new LiderboardMocksClass();
     this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
+    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
   }
 
   sortData($event: Sort) {
     this.sortEvent = $event;
-    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
+    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
   }
 
   changePage($event: PageEvent) {
     this.pageEvent = $event;
-    this.dataSource.data = this.mockClass.getData(this.getParams(this.pageEvent, this.sortEvent)).elements;
+    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
   }
 
   getSortDirection(sort: Sort) {
     return sort.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
   }
 
-  getParams(page: PageEvent, sort: Sort) {
-    return {
+  getData(page: PageEvent, sort: Sort) {
+    return this.mockClass.getData({
       pageSize:  page.pageSize,
       pageNumber:  page.pageIndex + 1,
       orderByField: sort.active,
       orderDirection: this.getSortDirection(sort)
-    };
+    }).elements;
   }
 }
