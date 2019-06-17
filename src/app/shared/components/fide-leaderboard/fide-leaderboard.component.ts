@@ -11,9 +11,17 @@ import { Sort } from '@angular/material/sort';
 })
 export class FideLeaderboardComponent implements OnInit {
 
-  mockClass: LiderboardMocksClass; //  = new LiderboardMocksClass();
+  mockClass: LiderboardMocksClass;
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
-  dataSource: MatTableDataSource<any>;//  = new MatTableDataSource(this.mockClass.getElements());
+  dataSource: MatTableDataSource<any>;
+  sortStatus = {
+    field: 'position',
+    direction: SortDirection.Asc
+  };
+  pageStatus = {
+    pageSize: 15,
+    pageNumber: 1,
+  };
 
   ngOnInit() {
     this.mockClass = new LiderboardMocksClass();
@@ -21,17 +29,33 @@ export class FideLeaderboardComponent implements OnInit {
     this.dataSource.data = this.mockClass.getData({
       pageSize: 15,
       pageNumber: 1,
-      orderByField: 'year',
-      orderDirection: SortDirection.Asc
+      orderByField: this.sortStatus.field,
+      orderDirection: this.sortStatus.direction
     }).elements;
   }
 
   sortData($event: Sort) {
     const direction: SortDirection = $event.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
-    this.dataSource.data = this.mockClass.sort(this.mockClass.getElements(), $event.active, direction);
+    this.sortStatus.direction = direction;
+    this.sortStatus.field = $event.active;
+
+    this.dataSource.data = this.mockClass.getData({
+      pageSize:  this.pageStatus.pageSize,
+      pageNumber:  this.pageStatus.pageNumber,
+      orderByField: this.sortStatus.field,
+      orderDirection: this.sortStatus.direction
+    }).elements;
   }
 
   changePage($event: PageEvent) {
-    console.log($event);
+    this.pageStatus.pageSize = $event.pageSize;
+    this.pageStatus.pageNumber = $event.pageIndex + 1;
+
+    this.dataSource.data = this.mockClass.getData({
+      pageSize:  this.pageStatus.pageSize,
+      pageNumber:  this.pageStatus.pageNumber,
+      orderByField: this.sortStatus.field,
+      orderDirection: this.sortStatus.direction
+    }).elements;
   }
 }
