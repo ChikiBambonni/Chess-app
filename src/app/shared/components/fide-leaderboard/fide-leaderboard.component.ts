@@ -1,3 +1,4 @@
+import { SortDirection } from '@core/enums/sort.enums';
 import { LiderboardMocksClass } from './../../../core/mock-backend/mocks/liderboard/liderboard.class';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
@@ -12,14 +13,14 @@ export class FideLeaderboardComponent implements OnInit {
 
   mockClass: LiderboardMocksClass = new LiderboardMocksClass();
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
-  dataSource = new MatTableDataSource(this.mockClass.getData(null));
+  dataSource = new MatTableDataSource(this.mockClass.getElements());
 
   ngOnInit() {
   }
 
   sortData($event: Sort) {
-    console.log($event);
-    console.log(this.dataSource);
+    const direction: SortDirection = $event.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
+    this.dataSource.data = this.mockClass.sort(this.mockClass.getElements(), $event.active, direction);
   }
 
   changePage($event: PageEvent) {
