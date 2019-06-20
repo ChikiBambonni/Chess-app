@@ -19,19 +19,19 @@ export abstract class MockBackendFactory<Type> {
   }
 
   protected getTableData(params): PaginationInterface<Type> {
-    const pageSize: number = this.getPageSize(params.pageSize);
-    const pageNumber: number = this.getPageNumber(params.pageNumber);
+    const pagesize: number = this.getPageSize(params.pagesize);
+    const page: number = this.getPageNumber(params.page);
 
     const elements = this.sortElements(this.getElements(params), params.orderByField, params.orderDirection);
-    const offset: number = (pageNumber - 1) * pageSize;
-    const offsetElements = elements.slice(offset, offset + Number(pageSize));
+    const offset: number = (page - 1) * pagesize;
+    const offsetElements = elements.slice(offset, offset + Number(pagesize));
 
     return {
-      totalPages: Math.ceil(elements.length / pageSize),
+      totalPages: Math.ceil(elements.length / pagesize),
       totalElements: elements.length,
       elements: offsetElements,
-      pageNumber,
-      pageSize
+      page,
+      pagesize
     };
   }
 

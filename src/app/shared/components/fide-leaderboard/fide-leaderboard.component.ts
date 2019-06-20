@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { SortDirection } from '@core/enums/sort.enums';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
-import { FIDETableElement } from '@core/mock-backend/mocks/liderboard/liderboard.interfaces';
-import { PaginationInterface } from '@core/interfaces/pagination.interface';
 import { Observable } from 'rxjs';
+
+import { SortDirection } from '@core/enums/sort.enums';
 
 @Component({
   selector: 'app-fide-leaderboard',
@@ -33,33 +32,38 @@ export class FideLeaderboardComponent implements OnInit {
   constructor (private http: HttpClient) {}
 
   ngOnInit() {
-    this.getData().subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource();
-      this.dataSource.data = data.elements;
-    });
+    this.getData();
   }
 
   sortData($event: Sort) {
     this.sortEvent = $event;
-    this.getData().subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource();
-      this.dataSource.data = data.elements;
-    });
+    this.getData();
   }
 
   changePage($event: PageEvent) {
     this.pageEvent = $event;
-    this.getData().subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource();
-      this.dataSource.data = data.elements;
-    });
+    this.getData();
   }
 
-  getData(): Observable<any> {
+  getData(): void {
     const sortColumn = this.sortEvent.active;
-    const sortDirection = this.sortEvent.direction === SortDirection.Asc ? 1 : -1;
+    const sortDirection = this.sortEvent.direction;
     const pageSize = this.pageEvent.pageSize;
     const page = this.pageEvent.pageIndex + 1;
-    return this.http.get(`${this.uri}?sort={"${sortColumn}": ${sortDirection}}&pagesize=${pageSize}$page=${page}`);
+
+    this.http.get(`${this.uri}`, {
+      params: {
+        orderByField: sortColumn,
+        orderDirection: sortDirection,
+        pagesize: pageSize,
+        page: page
+      }
+    })
+    .subscribe((data: any) => {
+      if (!this.dataSource) {
+        this.dataSource = new MatTableDataSource();
+      }
+      this.dataSource.data = data.elements;
+    });
   }
 }

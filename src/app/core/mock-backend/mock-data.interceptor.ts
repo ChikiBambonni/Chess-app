@@ -23,8 +23,6 @@ export class MockDataInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(req);
-
     if (this.mockDataService.isMock()) {
       const entity = MockBackendService.keys.find((option: any) => option.pattern.match(req.url));
 
@@ -35,6 +33,8 @@ export class MockDataInterceptor implements HttpInterceptor {
           queryParams: this.getParams(req),
           params
         };
+
+        console.log(requestParams);
 
         return of(new HttpResponse({
           status: 200,
