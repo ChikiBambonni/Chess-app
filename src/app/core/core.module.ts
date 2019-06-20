@@ -27,6 +27,9 @@ import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { AnalysisComponent } from './components/analysis/analysis.component';
+import { MockDataInterceptor } from './mock-backend/mock-data.interceptor';
+import { MockBackendService } from './mock-backend/mock-backend.service';
+import { MockBackendConfig } from './mock-backend/mock-backend-config.constant';
 
 @NgModule({
   imports: [
@@ -68,9 +71,16 @@ import { AnalysisComponent } from './components/analysis/analysis.component';
     ChessGameService,
     UserService,
     AuthenticationService,
+    MockBackendService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: MockDataInterceptor, multi: true },
     fakeBackendProvider
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(private mockBackendService: MockBackendService) {
+    MockBackendService.initConfig(MockBackendConfig);
+    this.mockBackendService.initGlobalMethods();
+  }
+}
