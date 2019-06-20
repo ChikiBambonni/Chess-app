@@ -23,9 +23,10 @@ export class MockDataInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    console.log(req);
+
     if (this.mockDataService.isMock()) {
       const entity = MockBackendService.keys.find((option: any) => option.pattern.match(req.url));
-      console.log(entity);
 
       if (entity) {
         const params = entity.pattern.match(req.url);

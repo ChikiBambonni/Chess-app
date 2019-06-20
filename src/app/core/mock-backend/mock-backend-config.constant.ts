@@ -8,6 +8,6 @@ const UrlsConfig = {
   }
 };
 
- export const MockBackendConfig: MockBackendUrl = new MockBackendUrl(UrlsConfig);
+export const MockBackendConfig: MockBackendUrl = new MockBackendUrl(UrlsConfig);
 
- export const defaultMockDelay = 400;
+export const defaultMockDelay = 400;

@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { SortDirection } from '@core/enums/sort.enums';
-import { LiderboardMocksClass } from './../../../core/mock-backend/mocks/liderboard/liderboard.class';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
+import { FIDETableElement } from '@core/mock-backend/mocks/liderboard/liderboard.interfaces';
+import { PaginationInterface } from '@core/interfaces/pagination.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fide-leaderboard',
@@ -12,7 +14,8 @@ import { Sort } from '@angular/material/sort';
 })
 export class FideLeaderboardComponent implements OnInit {
 
-  mockClass: LiderboardMocksClass;
+  private uri = '/mapi/ChikiBambuki/FIDELeaderboard';
+
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
   dataSource: MatTableDataSource<any>;
 
@@ -30,35 +33,33 @@ export class FideLeaderboardComponent implements OnInit {
   constructor (private http: HttpClient) {}
 
   ngOnInit() {
-    this.mockClass = new LiderboardMocksClass();
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
-
-    this.http.get('/mapi/ChikiBambuki/FIDELeaderboard').subscribe(data => {
-      console.log(data);
-    })
+    this.getData().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource();
+      this.dataSource.data = data.elements;
+    });
   }
 
   sortData($event: Sort) {
     this.sortEvent = $event;
-    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
+    this.getData().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource();
+      this.dataSource.data = data.elements;
+    });
   }
 
   changePage($event: PageEvent) {
     this.pageEvent = $event;
-    this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
+    this.getData().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource();
+      this.dataSource.data = data.elements;
+    });
   }
 
-  getSortDirection(sort: Sort) {
-    return sort.direction === 'asc' ? SortDirection.Asc : SortDirection.Desc;
-  }
-
-  getData(page: PageEvent, sort: Sort) {
-    return this.mockClass.getData({
-      pageSize:  page.pageSize,
-      pageNumber:  page.pageIndex + 1,
-      orderByField: sort.active,
-      orderDirection: this.getSortDirection(sort)
-    }).elements;
+  getData(): Observable<any> {
+    const sortColumn = this.sortEvent.active;
+    const sortDirection = this.sortEvent.direction === SortDirection.Asc ? 1 : -1;
+    const pageSize = this.pageEvent.pageSize;
+    const page = this.pageEvent.pageIndex + 1;
+    return this.http.get(`${this.uri}?sort={"${sortColumn}": ${sortDirection}}&pagesize=${pageSize}$page=${page}`);
   }
 }
