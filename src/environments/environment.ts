@@ -10,7 +10,8 @@ export const environment = {
     'reconnectionDelay': 1000,
     'reconnectionDelayMax' : 5000,
     'reconnectionAttempts': 5
-  }
+  },
+  chessapi: '/capi'
 };
 
 /*
