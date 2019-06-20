@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { SortDirection } from '@core/enums/sort.enums';
 import { LiderboardMocksClass } from './../../../core/mock-backend/mocks/liderboard/liderboard.class';
 import { Component, OnInit } from '@angular/core';
@@ -26,10 +27,16 @@ export class FideLeaderboardComponent implements OnInit {
     direction: SortDirection.Asc
   };
 
+  constructor (private http: HttpClient) {}
+
   ngOnInit() {
     this.mockClass = new LiderboardMocksClass();
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.getData(this.pageEvent, this.sortEvent);
+
+    this.http.get('/mapi/ChikiBambuki/FIDELeaderboard').subscribe(data => {
+      console.log(data);
+    })
   }
 
   sortData($event: Sort) {

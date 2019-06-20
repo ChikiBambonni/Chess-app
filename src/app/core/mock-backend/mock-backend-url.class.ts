@@ -11,7 +11,7 @@ export class MockBackendUrl {
     map.forEach((type: string) => {
       const urlList = Object.keys(this.config[type]);
 
-      urlList.forEach((url: string) => urls[`${environment.chessapi}${url}`] = this.config[type][url]);
+      urlList.forEach((url: string) => urls[`${environment.mongoapi}${url}`] = this.config[type][url]);
     });
 
     return urls;

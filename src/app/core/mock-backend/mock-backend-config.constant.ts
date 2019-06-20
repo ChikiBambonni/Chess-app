@@ -3,8 +3,8 @@ import { LiderboardMocksClass } from './mocks/liderboard/liderboard.class';
 import { MockBackendUrl } from './mock-backend-url.class';
 
 const UrlsConfig = {
-  [ApiType.Chess]: {
-    '/liderboard/fide': new LiderboardMocksClass(),
+  [ApiType.MongoAPI]: {
+    '/ChikiBambuki/FIDELeaderboard': new LiderboardMocksClass(),
   }
 };
 

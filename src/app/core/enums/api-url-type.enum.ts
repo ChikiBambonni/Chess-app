@@ -1,3 +1,3 @@
 export enum ApiType {
-  Chess = 'chessapi'
+  MongoAPI = 'mongoapi'
 }

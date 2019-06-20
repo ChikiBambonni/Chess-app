@@ -11,7 +11,7 @@ export const environment = {
     'reconnectionDelayMax' : 5000,
     'reconnectionAttempts': 5
   },
-  chessapi: '/capi'
+  mongoapi: '/mapi'
 };
 
 /*
