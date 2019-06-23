@@ -17,7 +17,7 @@ export class HttpApi extends Http {
       url: Reflect.getMetadata('apiUrl', this, key),
       baseApiUrl: Reflect.getMetadata('baseApiUrl', this),
       errorResponse: Reflect.getMetadata('errorResponse', this, key),
-      params: Array.from(options.args)[0]
+      params: Array.from(options.args)[0] as object
     };
 
     return this.httpClient
