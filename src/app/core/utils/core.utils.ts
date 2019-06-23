@@ -39,3 +39,34 @@ export const isEmptyObj = (obj: Object): boolean => {
 
   return true;
 };
+
+export const isArrayNullable = (array: any[]): boolean => {
+  return Array.isArray(array) && array.length === 1 && array[0] === null;
+};
+
+export const clean = (obj: object): void => {
+  for (const propName in obj) {
+    if (obj[propName] === null || obj[propName] === undefined) {
+      delete obj[propName];
+    } else if (isArrayNullable(obj[propName])) {
+      delete obj[propName];
+    }
+  }
+};
+
+export const serializeObject = (obj?: object): string => {
+  let str = '';
+
+  if (obj) {
+    Object.keys(obj)
+      .forEach((key: string) => {
+        if (str !== '') {
+          str += '&';
+        }
+
+        str += `${key}=${encodeURIComponent(obj[key])}`;
+      });
+  }
+
+  return str;
+};
