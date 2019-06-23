@@ -34,8 +34,6 @@ export class MockDataInterceptor implements HttpInterceptor {
           params
         };
 
-        console.log(requestParams);
-
         return of(new HttpResponse({
           status: 200,
           body: entity.mock.getData(

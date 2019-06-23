@@ -51,19 +51,26 @@ export class FideLeaderboardComponent implements OnInit {
     const pageSize = this.pageEvent.pageSize;
     const page = this.pageEvent.pageIndex + 1;
 
-    this.http.get(`${this.uri}`, {
-      params: {
-        orderByField: sortColumn,
-        orderDirection: sortDirection,
-        pagesize: pageSize,
-        page: page
-      }
-    })
-    .subscribe((data: any) => {
-      if (!this.dataSource) {
-        this.dataSource = new MatTableDataSource();
-      }
-      this.dataSource.data = data.elements;
-    });
+    // const params = {
+    //   method: 'GET',
+    //   url: this.uri,
+    //   params: {
+    //     orderByField: sortColumn,
+    //     orderDirection: sortDirection,
+    //     pagesize: pageSize,
+    //     page: page
+    //   }
+    // };
+
+    // this.http.request(params.method, params.url, {
+    //   params: params.params
+    // })
+    // .subscribe((data: any) => {
+    //   console.log(data);
+    //   if (!this.dataSource) {
+    //     this.dataSource = new MatTableDataSource();
+    //   }
+    //   this.dataSource.data = data.elements;
+    // });
   }
 }
