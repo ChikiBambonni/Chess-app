@@ -1,6 +1,7 @@
 <div class="fide-table">
   <app-common-table
     [displayedColumns]="displayedColumns"
+    [isLoadingResults]="isLoadingResults"
     [dataSource]="dataSource"
     (sort)="sortData($event)">
   </app-common-table>

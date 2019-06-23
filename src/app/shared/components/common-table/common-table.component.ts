@@ -21,6 +21,9 @@ export class CommonTableComponent implements OnInit {
   @Input()
   dataSource: MatTableDataSource<any>;
 
+  @Input()
+  isLoadingResults: boolean;
+
   @Output()
   sort: EventEmitter<Sort> = new EventEmitter<Sort>();
 

@@ -12,6 +12,8 @@ import { SortDirection } from '@core/enums/sort.enums';
 })
 export class FideLeaderboardComponent implements OnInit {
 
+  isLoadingResults = true;
+
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
   dataSource: MatTableDataSource<any>;
 
@@ -33,11 +35,13 @@ export class FideLeaderboardComponent implements OnInit {
   }
 
   sortData($event: Sort) {
+    this.isLoadingResults = true;
     this.sortEvent = $event;
     this.fetchData();
   }
 
   changePage($event: PageEvent) {
+    this.isLoadingResults = true;
     this.pageEvent = $event;
     this.fetchData();
   }
@@ -53,6 +57,7 @@ export class FideLeaderboardComponent implements OnInit {
         this.dataSource = new MatTableDataSource();
       }
       this.dataSource.data = data.elements;
+      this.isLoadingResults = false;
     });
   }
 }
