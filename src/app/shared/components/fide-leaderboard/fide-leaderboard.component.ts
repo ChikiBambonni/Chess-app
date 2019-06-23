@@ -1,10 +1,8 @@
-import { AppInfoRepository } from './../../../core/services/app-info.repository';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
 
+import { AppInfoRepository } from '@core/services/app-info.repository';
 import { SortDirection } from '@core/enums/sort.enums';
 
 @Component({
@@ -13,8 +11,6 @@ import { SortDirection } from '@core/enums/sort.enums';
   styleUrls: ['./fide-leaderboard.component.scss']
 })
 export class FideLeaderboardComponent implements OnInit {
-
-  private uri = '/mapi/ChikiBambuki/FIDELeaderboard';
 
   displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
   dataSource: MatTableDataSource<any>;
@@ -30,49 +26,33 @@ export class FideLeaderboardComponent implements OnInit {
     direction: SortDirection.Asc
   };
 
-  constructor (private rep: AppInfoRepository) {}
+  constructor (private repository: AppInfoRepository) {}
 
   ngOnInit() {
-    this.getData();
+    this.fetchData();
   }
 
   sortData($event: Sort) {
     this.sortEvent = $event;
-    this.getData();
+    this.fetchData();
   }
 
   changePage($event: PageEvent) {
     this.pageEvent = $event;
-    this.getData();
+    this.fetchData();
   }
 
-  getData(): void {
-    const sortColumn = this.sortEvent.active;
-    const sortDirection = this.sortEvent.direction;
-    const pageSize = this.pageEvent.pageSize;
-    const page = this.pageEvent.pageIndex + 1;
-
-    // const params = {
-    //   method: 'GET',
-    //   url: this.uri,
-    //   params: {
-    //     orderByField: sortColumn,
-    //     orderDirection: sortDirection,
-    //     pagesize: pageSize,
-    //     page: page
-    //   }
-    // };
-
-    // this.http.request(params.method, params.url, {
-    //   params: params.params
-    // })
-    // .subscribe((data: any) => {
-    //   console.log(data);
-    //   if (!this.dataSource) {
-    //     this.dataSource = new MatTableDataSource();
-    //   }
-    //   this.dataSource.data = data.elements;
-    // });
-    this.rep.getFIDETableList().subscribe(console.log);
+  fetchData(): void {
+    this.repository.getFIDETableList({
+      orderByField: this.sortEvent.active,
+      orderDirection: this.sortEvent.direction,
+      pagesize: this.pageEvent.pageSize,
+      page: this.pageEvent.pageIndex + 1
+    }).subscribe((data: any) => {
+      if (!this.dataSource) {
+        this.dataSource = new MatTableDataSource();
+      }
+      this.dataSource.data = data.elements;
+    });
   }
 }
