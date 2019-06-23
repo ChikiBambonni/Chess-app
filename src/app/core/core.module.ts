@@ -20,7 +20,7 @@ import { WebsocketService } from '@core/services/websocket/websocket.service';
 import { notifierConfig } from '@core/constants/notifier.constants';
 import { GameSelectionService } from '@core/services/game-selection/game-selection.service';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
-import { CheakersGameComponent } from '@core/components/cheakers-game/cheakers-game.component';
+
 import { ChessGameComponent } from '@core/components/chess-game/chess-game.component';
 import { FindGameComponent } from '@core/components/find-game/find-game.component';
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
@@ -46,8 +46,6 @@ import { AppInfoRepository } from './services/app-info.repository';
   exports: [
     NavigationComponent,
     HomeComponent,
-
-    CheakersGameComponent,
     ChessGameComponent
   ],
   declarations: [
@@ -55,7 +53,6 @@ import { AppInfoRepository } from './services/app-info.repository';
     HomeComponent,
     LoginComponent,
     NotFoundComponent,
-    CheakersGameComponent,
     ChessGameComponent,
     FindGameComponent,
     FindGameDialogComponent,

@@ -1,14 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialModule } from './../material/material.module';
 import { ChessgroundComponent } from '@shared/components/chessground/chessground.component';
 import { MovesTableComponent } from '@shared/components/moves-table/moves-table.component';
 import { ChatAreaComponent } from '@shared/components/chat-area/chat-area.component';
-import { CheakerPawnComponent } from '@shared/components/cheaker-pawn/cheaker-pawn.component';
-import { CheakerKingComponent } from '@shared/components/cheaker-king/cheaker-king.component';
-import { SpaceComponent } from '@shared/components/space/space.component';
-import { CheakersGameBoardComponent } from '@shared/components/cheakers-game-board/cheakers-game-board.component';
 import { AvatarIconComponent } from '@shared/components/avatar-icon/avatar-icon.component';
 import { MostSuccessfullGamesComponent } from '@shared/components/most-successfull-games/most-successfull-games.component';
 import { AccountInfoComponent } from '@shared/components/account-info/account-info.component';
@@ -20,6 +15,7 @@ import { ForumComponent } from './components/forum/forum.component';
 import { ChessgroundStaticComponent } from './components/chessground-static/chessground-static.component';
 import { CommonTableComponent } from './components/common-table/common-table.component';
 import { CommonPaginatorComponent } from './components/common-paginator/common-paginator.component';
+import { MaterialModule } from './../material/material.module';
 
 @NgModule({
   imports: [
@@ -40,12 +36,7 @@ import { CommonPaginatorComponent } from './components/common-paginator/common-p
     ForumComponent,
     ChessgroundStaticComponent,
     CommonTableComponent,
-    CommonPaginatorComponent,
-
-    CheakerPawnComponent,
-    CheakerKingComponent,
-    SpaceComponent,
-    CheakersGameBoardComponent
+    CommonPaginatorComponent
   ],
   declarations: [
     ChessgroundComponent,
@@ -61,13 +52,7 @@ import { CommonPaginatorComponent } from './components/common-paginator/common-p
     ForumComponent,
     ChessgroundStaticComponent,
     CommonTableComponent,
-    CommonPaginatorComponent,
-
-    CheakerPawnComponent,
-    CheakerKingComponent,
-    SpaceComponent,
-    CheakersGameBoardComponent,
-
+    CommonPaginatorComponent
   ],
   entryComponents: [
     PromotionChoiceComponent
