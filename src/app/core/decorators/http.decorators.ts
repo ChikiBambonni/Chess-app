@@ -10,7 +10,7 @@ export function Api(url: string) {
 
 export function Get(url: string) {
   return function (target, key, descriptor) {
-    Reflect.defineMetadata('apiUrl', url, target, key);
+
     Reflect.defineMetadata('apiUrl', url, target, key);
     Reflect.defineMetadata('method', 'GET', target, key);
 

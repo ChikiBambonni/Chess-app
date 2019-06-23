@@ -3,16 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { Api, Get } from '@core/decorators/http.decorators';
 import { environment } from '@environment';
-// import { RequestCacheService } from './request-cache.service';
 import { HttpApi } from '@core/utils/http-api.class';
-// import { InfoRepositoryResponse } from '../interfaces/app-info-repository.interface';
-// import { InfoRepository } from '../interfaces/info-repository.interface';
+import { InfoRepository } from '@core/interfaces/app-info-repository.interfaces';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable()
 @Api(environment.mongoapi)
-export class AppInfoRepository extends HttpApi {
+export class AppInfoRepository extends HttpApi implements InfoRepository {
 
   constructor(public httpClient: HttpClient) {
     super();
@@ -23,4 +21,3 @@ export class AppInfoRepository extends HttpApi {
     return this.getValue();
   }
 }
-
