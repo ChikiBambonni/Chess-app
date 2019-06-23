@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 
-import { UtilsHttp } from './http.class';
+import { Http } from './http.class';
 
 import 'reflect-metadata';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-export class BaseApi extends  UtilsHttp {
+export class HttpApi extends Http {
   public httpClient: HttpClient;
 
   protected fetch(options?: any): Observable<any> {

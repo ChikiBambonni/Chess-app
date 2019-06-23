@@ -1,3 +1,4 @@
+import { AppInfoRepository } from './../../../core/services/app-info.repository';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
@@ -29,7 +30,7 @@ export class FideLeaderboardComponent implements OnInit {
     direction: SortDirection.Asc
   };
 
-  constructor (private http: HttpClient) {}
+  constructor (private rep: AppInfoRepository) {}
 
   ngOnInit() {
     this.getData();
@@ -72,5 +73,6 @@ export class FideLeaderboardComponent implements OnInit {
     //   }
     //   this.dataSource.data = data.elements;
     // });
+    this.rep.getFIDETableList().subscribe(console.log);
   }
 }

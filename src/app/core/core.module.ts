@@ -30,6 +30,7 @@ import { AnalysisComponent } from './components/analysis/analysis.component';
 import { MockDataInterceptor } from './mock-backend/mock-data.interceptor';
 import { MockBackendService } from './mock-backend/mock-backend.service';
 import { MockBackendConfig } from './mock-backend/mock-backend-config.constant';
+import { AppInfoRepository } from './services/app-info.repository';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { MockBackendConfig } from './mock-backend/mock-backend-config.constant';
     UserService,
     AuthenticationService,
     MockBackendService,
+    AppInfoRepository,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: MockDataInterceptor, multi: true },
