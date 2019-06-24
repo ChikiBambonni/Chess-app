@@ -16,6 +16,8 @@ import { LoginComponent } from './login.component';
     NotifierModule.withConfig(notifierConfig),
     LoginRoutingModule
   ],
-  declarations: [LoginComponent]
+  declarations: [
+    LoginComponent
+  ]
 })
 export class LoginModule { }
