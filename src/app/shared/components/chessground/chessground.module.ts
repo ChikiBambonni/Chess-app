@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AvatarIconComponent } from './avatar-icon.component';
+import { ChessgroundComponent } from './chessground.component';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   declarations: [
-    AvatarIconComponent
+    ChessgroundComponent
   ],
   exports: [
-    AvatarIconComponent
+    ChessgroundComponent
   ]
 })
-export class AvatarIconModule { }
+export class ChessgroundModule { }
