@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { calZoom } from '@core/utils/chess.utils';
 
 @Component({

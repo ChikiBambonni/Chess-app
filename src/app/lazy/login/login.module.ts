@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 
@@ -12,7 +11,6 @@ import { LoginComponent } from './login.component';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,
     NotifierModule.withConfig(notifierConfig),
