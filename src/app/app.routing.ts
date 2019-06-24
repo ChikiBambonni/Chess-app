@@ -1,10 +1,6 @@
-import { AnalysisComponent } from './core/components/analysis/analysis.component';
-import { AuthGuardService } from './guards/auth-guard.service';
-import { ChessGameComponent } from '@core/components/chess-game/chess-game.component';
-import { NotFoundComponent } from '@core/components/not-found/not-found.component';
-import { LoginComponent } from '@core/components/login/login.component';
-
 import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuardService } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -12,13 +8,19 @@ const routes: Routes = [
     loadChildren: () => import('./lazy/home/home.module').then(mod => mod.HomeModule),
     canActivate: [AuthGuardService]
   }, {
-    path: 'login', component: LoginComponent
+    path: 'login',
+    loadChildren: () => import('./lazy/login/login.module').then(mod => mod.LoginModule),
   }, {
-    path: 'chess', component: ChessGameComponent, canActivate: [AuthGuardService]
+    path: 'chess',
+    loadChildren: () => import('./lazy/chess-game/chess-game.module').then(mod => mod.ChessGameModule),
+    canActivate: [AuthGuardService]
   }, {
-    path: 'opening#explorer', component: AnalysisComponent
+    path: 'opening#explorer',
+    loadChildren: () => import('./lazy/analysis/analysis.module').then(mod => mod.AnalysisModule),
+    canActivate: [AuthGuardService]
   }, {
-    path: '404', component: NotFoundComponent
+    path: '404',
+    loadChildren: () => import('./lazy/not-found/not-found.module').then(mod => mod.NotFoundModule),
   }, {
     path: '**', redirectTo: '/404'
   }
