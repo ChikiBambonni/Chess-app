@@ -19,6 +19,9 @@ const routes: Routes = [
   }, {
     path: '404', component: NotFoundComponent
   }, {
+    path: 'lazy-test',
+    loadChildren: () => import('./lazy/test/test.module').then(mod => mod.TestModule)
+  }, {
     path: '**', redirectTo: '/404'
   }
 ];
