@@ -5,13 +5,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NotifierModule } from 'angular-notifier';
 
-import { NavigationComponent } from '@core/components/navigation/navigation.component';
 
-import { LoginComponent } from '@core/components/login/login.component';
+
+
 import { ErrorInterceptor } from '@core/mock-backend/interceptors/error.interceptor';
 import { JwtInterceptor } from '@core/mock-backend/interceptors/jwt.interceptor';
 import { fakeBackendProvider } from '@core/mock-backend/interceptors/auth.interceptor';
-import { NotFoundComponent } from '@core/components/not-found/not-found.component';
+
 import { MessageService } from '@core/services/message/message.service';
 import { ChatService } from '@core/services/chat/chat.service';
 import { UserService } from '@core/mock-backend/services/user.service';
@@ -21,12 +21,11 @@ import { notifierConfig } from '@core/constants/notifier.constants';
 import { GameSelectionService } from '@core/services/game-selection/game-selection.service';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 
-import { ChessGameComponent } from '@core/components/chess-game/chess-game.component';
-import { FindGameComponent } from '@core/components/find-game/find-game.component';
+
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
 import { MaterialModule } from '@material/material.module';
 
-import { AnalysisComponent } from './components/analysis/analysis.component';
+
 import { MockDataInterceptor } from './mock-backend/mock-data.interceptor';
 import { MockBackendService } from './mock-backend/mock-backend.service';
 import { MockBackendConfig } from './mock-backend/mock-backend-config.constant';
@@ -43,19 +42,9 @@ import { AppInfoRepository } from './services/app-info.repository';
     MaterialModule
   ],
   exports: [
-    NavigationComponent,
-
-    ChessGameComponent
   ],
   declarations: [
-    NavigationComponent,
-
-    LoginComponent,
-    NotFoundComponent,
-    ChessGameComponent,
-    FindGameComponent,
     FindGameDialogComponent,
-    AnalysisComponent
   ],
   entryComponents: [
     FindGameDialogComponent
