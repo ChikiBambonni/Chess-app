@@ -9,6 +9,8 @@ import { NavigationComponent } from './navigation.component';
     CommonModule,
     NavigationRoutingModule
   ],
-  declarations: [NavigationComponent]
+  declarations: [
+    NavigationComponent
+  ]
 })
 export class NavigationModule { }
