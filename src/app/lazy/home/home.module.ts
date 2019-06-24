@@ -8,6 +8,7 @@ import { AvatarIconModule } from '@shared/components/avatar-icon/avatar-icon.mod
 import { DropdownListModule } from '@shared/components/dropdown-list/dropdown-list.module';
 import { ForumModule } from '@shared/components/forum/forum.module';
 import { MostSuccessfullGamesModule } from './components/most-successfull-games/most-successfull-games.module';
+import { FideLeaderboardModule } from './components/fide-leaderboard/fide-leaderboard.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -21,6 +22,7 @@ import { HomeComponent } from './home.component';
     DropdownListModule,
     ForumModule,
     MostSuccessfullGamesModule,
+    FideLeaderboardModule,
     HomeRoutingModule,
   ],
   declarations: [
