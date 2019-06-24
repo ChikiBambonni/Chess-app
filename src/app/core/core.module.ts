@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NotifierModule } from 'angular-notifier';
 
 import { NavigationComponent } from '@core/components/navigation/navigation.component';
-import { HomeComponent } from '@core/components/home/home.component';
+
 import { LoginComponent } from '@core/components/login/login.component';
 import { ErrorInterceptor } from '@core/mock-backend/interceptors/error.interceptor';
 import { JwtInterceptor } from '@core/mock-backend/interceptors/jwt.interceptor';
@@ -45,12 +45,12 @@ import { AppInfoRepository } from './services/app-info.repository';
   ],
   exports: [
     NavigationComponent,
-    HomeComponent,
+
     ChessGameComponent
   ],
   declarations: [
     NavigationComponent,
-    HomeComponent,
+
     LoginComponent,
     NotFoundComponent,
     ChessGameComponent,

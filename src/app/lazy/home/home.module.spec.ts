@@ -1,10 +1,10 @@
-import { TestModule } from './test.module';
+import { HomeModule } from './home.module';
 
 describe('TestModule', () => {
-  let testModule: TestModule;
+  let testModule: HomeModule;
 
   beforeEach(() => {
-    testModule = new TestModule();
+    testModule = new HomeModule();
   });
 
   it('should create an instance', () => {

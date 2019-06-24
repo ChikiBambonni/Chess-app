@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home',

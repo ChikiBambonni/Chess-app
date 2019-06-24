@@ -3,13 +3,14 @@ import { AuthGuardService } from './guards/auth-guard.service';
 import { ChessGameComponent } from '@core/components/chess-game/chess-game.component';
 import { NotFoundComponent } from '@core/components/not-found/not-found.component';
 import { LoginComponent } from '@core/components/login/login.component';
-import { HomeComponent } from '@core/components/home/home.component';
 
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, canActivate: [AuthGuardService]
+    path: '',
+    loadChildren: () => import('./lazy/home/home.module').then(mod => mod.HomeModule),
+    canActivate: [AuthGuardService]
   }, {
     path: 'login', component: LoginComponent
   }, {
@@ -18,9 +19,6 @@ const routes: Routes = [
     path: 'opening#explorer', component: AnalysisComponent
   }, {
     path: '404', component: NotFoundComponent
-  }, {
-    path: 'lazy-test',
-    loadChildren: () => import('./lazy/test/test.module').then(mod => mod.TestModule)
   }, {
     path: '**', redirectTo: '/404'
   }
