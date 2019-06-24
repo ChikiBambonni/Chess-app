@@ -1,4 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
@@ -19,9 +18,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSortModule } from '@angular/material';
 
 @NgModule({
-  imports: [
-    // BrowserAnimationsModule
-  ],
   exports: [
     MatMenuModule,
     MatTableModule,
