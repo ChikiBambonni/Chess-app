@@ -25,6 +25,8 @@ import { userProviderFactory } from './app-user-provider.factory';
       multi: true
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

@@ -1,4 +1,3 @@
-import { calZoom } from './../../utils/chess.utils';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,6 +5,8 @@ import { MatTableDataSource } from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+
+import { calZoom } from '@core/utils/chess.utils';
 
 export interface TableRow {
   c: string;
