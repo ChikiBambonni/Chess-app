@@ -9,6 +9,8 @@ import { FindGameComponent } from './find-game.component';
     CommonModule,
     FindGameRoutingModule
   ],
-  declarations: [FindGameComponent]
+  declarations: [
+    FindGameComponent
+  ]
 })
 export class FindGameModule { }
