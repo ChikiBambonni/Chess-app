@@ -20,7 +20,7 @@ import { MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule
+    // BrowserAnimationsModule
   ],
   exports: [
     MatMenuModule,
