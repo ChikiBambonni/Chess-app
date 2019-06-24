@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { NotifierModule } from 'angular-notifier';
+// import { NotifierModule } from 'angular-notifier';
 
 
 
@@ -35,10 +35,10 @@ import { AppInfoRepository } from './services/app-info.repository';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    NotifierModule.withConfig(notifierConfig),
+
     MaterialModule
   ],
   exports: [
