@@ -25,7 +25,7 @@ import { ChessGameComponent } from '@core/components/chess-game/chess-game.compo
 import { FindGameComponent } from '@core/components/find-game/find-game.component';
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
 import { MaterialModule } from '@material/material.module';
-import { SharedModule } from '@shared/shared.module';
+
 import { AnalysisComponent } from './components/analysis/analysis.component';
 import { MockDataInterceptor } from './mock-backend/mock-data.interceptor';
 import { MockBackendService } from './mock-backend/mock-backend.service';
@@ -40,8 +40,7 @@ import { AppInfoRepository } from './services/app-info.repository';
     HttpClientModule,
     RouterModule,
     NotifierModule.withConfig(notifierConfig),
-    MaterialModule,
-    SharedModule
+    MaterialModule
   ],
   exports: [
     NavigationComponent,
