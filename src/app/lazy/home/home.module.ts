@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '@material/material.module';
 import { NavigationModule } from '@shared/components/navigation/navigation.module';
+import { FindGameModule } from '@shared/components/find-game/find-game.module';
 import { AccountInfoModule } from '@shared/components/account-info/account-info.module';
 import { AvatarIconModule } from '@shared/components/avatar-icon/avatar-icon.module';
 import { DropdownListModule } from '@shared/components/dropdown-list/dropdown-list.module';
@@ -18,6 +19,7 @@ import { HomeComponent } from './home.component';
     CommonModule,
     MaterialModule,
     NavigationModule,
+    FindGameModule,
     AccountInfoModule,
     AvatarIconModule,
     DropdownListModule,
