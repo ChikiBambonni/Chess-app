@@ -20,4 +20,9 @@ export class AppInfoRepository extends HttpApi implements InfoRepository {
   public getFIDETableList(params?: object): Observable<any> {
     return this.getValue();
   }
+
+  @Get('/ChikiBambuki/AppLeaderboard')
+  public getAppTableList(params?: object): Observable<any> {
+    return this.getValue();
+  }
 }

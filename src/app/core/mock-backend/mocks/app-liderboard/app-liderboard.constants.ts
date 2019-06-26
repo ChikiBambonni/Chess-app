@@ -1,6 +1,6 @@
 import { AppTableElement } from './app-liderboard.interfaces';
 
-export const FIDE_DATA: AppTableElement[] = [
+export const APP_DATA: AppTableElement[] = [
   { position: 1,	 username: 'Tachka', games: 123, rating: 1845 },
   { position: 2,	 username: 'Techies', games: 123, rating: 284 },
   { position: 3,	 username: 'Starets', games: 312, rating: 543 },
