@@ -12,6 +12,7 @@ import { AuthenticationService } from '@core/mock-backend/services/auth.service'
 import { MessageService } from '@core/services/message/message.service';
 import { ChatService } from '@core/services/chat/chat.service';
 import { UserService } from '@core/mock-backend/services/user.service';
+import { DomUtilsService } from '@core/services/dom-utils/dom-utils.service';
 import { WebsocketService } from '@core/services/websocket/websocket.service';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
@@ -38,6 +39,7 @@ import { AppInfoRepository } from './services/app-info.repository';
   ],
   providers: [
     ChatService,
+    DomUtilsService,
     MessageService,
     WebsocketService,
     ChessGameService,

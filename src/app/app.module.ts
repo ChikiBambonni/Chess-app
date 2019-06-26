@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
@@ -5,7 +6,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppUserService } from './app-user.service';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
-import { routing } from './app.routing';
+import { routes } from './app.routing';
 import { userProviderFactory } from './app-user-provider.factory';
 
 @NgModule({
@@ -15,7 +16,7 @@ import { userProviderFactory } from './app-user-provider.factory';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    routing,
+    RouterModule.forRoot(routes),
     CoreModule
   ],
   providers: [

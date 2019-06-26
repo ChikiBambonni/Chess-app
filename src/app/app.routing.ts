@@ -1,8 +1,8 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { AuthGuardService } from './guards/auth-guard.service';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./lazy/home/home.module').then(mod => mod.HomeModule),
@@ -25,5 +25,3 @@ const routes: Routes = [
     path: '**', redirectTo: '/404'
   }
 ];
-
-export const routing = RouterModule.forRoot(routes);
