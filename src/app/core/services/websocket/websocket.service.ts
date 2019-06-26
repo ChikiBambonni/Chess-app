@@ -5,7 +5,7 @@ import { environment } from '@environment';
 
 import * as io from 'socket.io-client';
 
-import { GameConfig, MoveConfig } from '@core/interfaces/socketIO.interfaces';
+import { GameConfig, MoveConfig } from '@core/interfaces/socket.interfaces';
 
 @Injectable()
 export class WebsocketService {

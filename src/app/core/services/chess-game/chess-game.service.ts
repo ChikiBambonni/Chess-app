@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Color } from 'chessground/types';
 
-import { MoveConfig, GameConfig } from '@core/interfaces/socketIO.interfaces';
+import { MoveConfig, GameConfig } from '@core/interfaces/socket.interfaces';
 import { GameID, Mode } from '@core/interfaces/game.interafces';
 import { WebsocketService } from '@core/services/websocket/websocket.service';
 import { UserService } from '@core/mock-backend/services/user.service';

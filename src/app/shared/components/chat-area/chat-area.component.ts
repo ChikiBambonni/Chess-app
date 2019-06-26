@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Message } from '@core/interfaces/message.interfaces';
-import { Action } from '@core/enums/action.enums';
 import { ChatService } from '@core/services/chat/chat.service';
 
 @Component({
@@ -11,7 +9,7 @@ import { ChatService } from '@core/services/chat/chat.service';
 })
 export class ChatAreaComponent implements OnInit {
 
-  messages: Message[] = [
+  messages = [
     {
       from: {
         id: '123qwe',
@@ -20,7 +18,6 @@ export class ChatAreaComponent implements OnInit {
         password: 'avatar2'
       },
       content: 'message 2 content',
-      action: Action.JOINED,
       timestamp: 123456
     }, {
       from: {
@@ -29,8 +26,6 @@ export class ChatAreaComponent implements OnInit {
         room: '',
         password: 'avatar1'
       },
-      content: 'message 1 content',
-      action: Action.JOINED,
       timestamp: 123456
     }, {
       from: {
@@ -40,7 +35,6 @@ export class ChatAreaComponent implements OnInit {
         password: 'avatar3'
       },
       content: 'message 3 content',
-      action: Action.JOINED,
       timestamp: 123456
     }
   ];

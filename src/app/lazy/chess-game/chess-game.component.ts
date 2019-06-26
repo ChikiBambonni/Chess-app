@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { Key } from 'chessground/types';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
-import { MoveConfig } from '@core/interfaces/socketIO.interfaces';
+import { MoveConfig } from '@core/interfaces/socket.interfaces';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 
 @Component({

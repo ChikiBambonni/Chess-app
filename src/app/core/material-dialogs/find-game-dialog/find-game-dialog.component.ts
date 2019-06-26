@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Mode, ModeListItem, GameModes } from '@core/interfaces/game.interafces';
-import { GameConfig } from '@core/interfaces/socketIO.interfaces';
+import { GameConfig } from '@core/interfaces/socket.interfaces';
 import { findGameTimeout } from '@core/constants/timeout.constants';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 
