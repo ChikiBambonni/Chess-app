@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-// import { NotifierModule } from 'angular-notifier';
-
-
-
 
 import { ErrorInterceptor } from '@core/mock-backend/interceptors/error.interceptor';
 import { JwtInterceptor } from '@core/mock-backend/interceptors/jwt.interceptor';
@@ -17,8 +13,7 @@ import { ChatService } from '@core/services/chat/chat.service';
 import { UserService } from '@core/mock-backend/services/user.service';
 import { AuthenticationService } from '@core/mock-backend/services/auth.service';
 import { WebsocketService } from '@core/services/websocket/websocket.service';
-import { notifierConfig } from '@core/constants/notifier.constants';
-import { GameSelectionService } from '@core/services/game-selection/game-selection.service';
+
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 
 
@@ -35,10 +30,8 @@ import { AppInfoRepository } from './services/app-info.repository';
   imports: [
     CommonModule,
     FormsModule,
-    // ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-
     MaterialModule
   ],
   exports: [
@@ -53,7 +46,6 @@ import { AppInfoRepository } from './services/app-info.repository';
     ChatService,
     MessageService,
     WebsocketService,
-    GameSelectionService,
     ChessGameService,
     UserService,
     AuthenticationService,
