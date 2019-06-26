@@ -24,6 +24,9 @@
       "@core/*" : [
         "src/app/core/*"
       ],
+      "@lazy/*" : [
+        "src/app/lazy/*"
+      ],
       "@material/*": [
         "src/app/material/*"
       ],

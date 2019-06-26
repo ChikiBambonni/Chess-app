@@ -11,6 +11,9 @@
       "@shared/*" : [
         "app/shared/*"
       ],
+      "@lazy/*": [
+        "app/lazy/*"
+      ],
       "@material/*" : [
         "app/material/*"
       ],
