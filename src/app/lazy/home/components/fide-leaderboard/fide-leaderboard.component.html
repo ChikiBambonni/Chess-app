@@ -6,8 +6,8 @@
     (sort)="sortData($event)">
   </app-common-table>
   <app-common-paginator
-    [length]="100"
-    [pageSize]="15"
+    [length]="pageEvent.length"
+    [pageSize]="pageEvent.pageSize"
     [pageSizeOptions]="[15, 20, 30]"
     (page)="changePage($event)">
   </app-common-paginator>

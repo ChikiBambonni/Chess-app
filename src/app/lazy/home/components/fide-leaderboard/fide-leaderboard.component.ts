@@ -20,7 +20,7 @@ export class FideLeaderboardComponent implements OnInit {
   pageEvent: PageEvent = {
     pageIndex: 0,
     pageSize: 15,
-    length: 100,
+    length: 0,
     previousPageIndex: 0
   };
   sortEvent: Sort = {
@@ -57,6 +57,7 @@ export class FideLeaderboardComponent implements OnInit {
         this.dataSource = new MatTableDataSource();
       }
       this.dataSource.data = data.elements;
+      this.pageEvent.length = data.totalElements;
       this.isLoadingResults = false;
     });
   }
