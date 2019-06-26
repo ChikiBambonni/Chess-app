@@ -1,10 +1,10 @@
 import { MockBackendFactory } from '@core/mock-backend/mock-backend.class';
 import { SortDirection } from '@core/enums/sort.enums';
 import { PaginationInterface } from '@core/interfaces/pagination.interface';
-import { FIDE_DATA } from './liderboard.constants';
-import { FIDETableElement } from './liderboard.interfaces';
+import { FIDE_DATA } from './fide-liderboard.constants';
+import { FIDETableElement } from './fide-liderboard.interfaces';
 
-export class LiderboardMocksClass extends MockBackendFactory<FIDETableElement> {
+export class FIDELiderboardMocks extends MockBackendFactory<FIDETableElement> {
   items: FIDETableElement[] = FIDE_DATA;
 
   constructor () {

@@ -1,4 +1,4 @@
-import { FIDETableElement } from './liderboard.interfaces';
+import { FIDETableElement } from './fide-liderboard.interfaces';
 
 export const FIDE_DATA: FIDETableElement[] = [
   { position: 1,	 name: 'Carlsen, Magnus', country: 'NOR', rating: 2845, year: 1990 },

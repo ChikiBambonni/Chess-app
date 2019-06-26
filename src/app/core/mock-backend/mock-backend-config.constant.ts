@@ -1,10 +1,10 @@
 import { ApiType } from '@core/enums/api-url-type.enum';
-import { LiderboardMocksClass } from './mocks/liderboard/liderboard.class';
+import { FIDELiderboardMocks } from './mocks/fide-liderboard/fide-liderboard.class';
 import { MockBackendUrl } from './mock-backend-url.class';
 
 const UrlsConfig = {
   [ApiType.MongoAPI]: {
-    '/ChikiBambuki/FIDELeaderboard': new LiderboardMocksClass(),
+    '/ChikiBambuki/FIDELeaderboard': new FIDELiderboardMocks(),
   }
 };
 
