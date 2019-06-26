@@ -15,7 +15,7 @@
         <li class="nav-item dropdown">
           <button mat-button [matMenuTriggerFor]="tools">Tools</button>
           <mat-menu #tools="matMenu">
-            <button *ngFor="let item of toolsItems" mat-menu-item [routerLink]="[item.uri]">{{ item.title }}</button>
+            <button *ngFor="let item of toolsItems" mat-menu-item [routerLink]="[item.uri]">{{ item.label }}</button>
           </mat-menu>
         </li>
       </ul>

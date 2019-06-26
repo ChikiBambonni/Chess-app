@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { toolsMenuItems } from '@core/constants/nav-menu.constants';
 import { AuthenticationService } from '@core/mock-backend/services/auth.service';
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
-import { ToolsItem } from '@core/interfaces/nav-menu.interfaces';
+import { ToolsItem } from './navigation.interfaces';
+import { toolsMenuItems } from './navigation.constants';
 
 @Component({
   selector: 'app-navigation',

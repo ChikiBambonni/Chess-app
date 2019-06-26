@@ -1,4 +1,4 @@
 export interface ToolsItem {
-  title: string;
+  label: string;
   uri: string;
 }
