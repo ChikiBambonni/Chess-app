@@ -4,9 +4,10 @@ import {
   ViewChild,
   Input,
   EventEmitter,
-  Output } from '@angular/core';
-import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
-import { MatSort, Sort } from '@angular/material/sort';
+  Output,
+  ElementRef } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-common-table',
@@ -26,6 +27,9 @@ export class CommonTableComponent implements OnInit {
 
   @Output()
   sort: EventEmitter<Sort> = new EventEmitter<Sort>();
+
+  @ViewChild('tableDiv')
+  tableDiv: ElementRef;
 
   constructor () {}
 

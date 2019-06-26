@@ -3,6 +3,8 @@
 div.mat-elevation-z8 {
   transition: none !important;
   box-shadow: none !important;
+  max-height: 747px;
+  overflow: auto;
 
   .loading-shade {
     position: absolute;

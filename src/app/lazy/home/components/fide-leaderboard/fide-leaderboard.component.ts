@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
 
