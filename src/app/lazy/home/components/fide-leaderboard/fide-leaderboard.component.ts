@@ -35,46 +35,31 @@ export class FideLeaderboardComponent implements OnInit, OnChanges {
   constructor (private repository: AppInfoRepository) {}
 
   ngOnInit() {
-    this.fetchData(this.selectedTab);
+    this.fetchData();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.selectedTab && !changes.selectedTab.firstChange) {
-      this.fetchData(changes.selectedTab.currentValue);
-    }
   }
 
   sortData($event: Sort) {
     this.sortEvent = $event;
-    this.fetchData(this.selectedTab);
+    this.fetchData();
   }
 
   changePage($event: PageEvent) {
     this.pageEvent = $event;
-    this.fetchData(this.selectedTab);
+    this.fetchData();
   }
 
-  fetchData(tab: string): void {
-    this.isLoadingResults = true;
-    if (tab === 'APP') {
-      this.getAPPTableList().subscribe((data: any) => {
-        if (!this.dataSource) {
-          this.dataSource = new MatTableDataSource();
-        }
-        this.dataSource.data = data.elements;
-        this.pageEvent.length = data.totalElements;
-        this.isLoadingResults = false;
-      });
-    } else if (tab === 'FIDE') {
-      this.getFIDETableList().subscribe((data: any) => {
-        if (!this.dataSource) {
-          this.dataSource = new MatTableDataSource();
-        }
-        this.dataSource.data = data.elements;
-        this.pageEvent.length = data.totalElements;
-        this.isLoadingResults = false;
-      });
-    }
+  fetchData(): void {
+    this.getFIDETableList().subscribe((data: any) => {
+      if (!this.dataSource) {
+        this.dataSource = new MatTableDataSource();
+      }
+      this.dataSource.data = data.elements;
+      this.pageEvent.length = data.totalElements;
+      this.isLoadingResults = false;
+    });
   }
 
   getParams(): object {

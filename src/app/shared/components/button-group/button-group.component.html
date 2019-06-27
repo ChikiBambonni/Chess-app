@@ -3,6 +3,6 @@
     *ngFor="let button of buttonList"
     [value]="button.value"
     (change)="buttonChange(button.value)">
-      {{ button.text }}
+    {{ button.label }}
   </mat-button-toggle>
 </mat-button-toggle-group>

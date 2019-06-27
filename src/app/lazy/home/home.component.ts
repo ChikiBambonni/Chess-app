@@ -1,3 +1,4 @@
+import { AppInfoRepository } from './../../core/services/app-info.repository';
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '@core/mock-backend/services/user.service';
@@ -40,17 +41,30 @@ export class HomeComponent implements OnInit {
     title: 'friend 15'
   }];
 
-  btnList = [{
+  btnList =
+  // {
+  //   'FIDE': {
+  //     label: 'FIDE',
+  //     tableData: this.repository.getFIDETableList()
+  //   },
+  //   'APP': {
+  //     label: 'APP',
+  //     tableData: this.repository.getAppTableList()
+  //   }
+  // };
+  [{
     value: 'FIDE',
-    text: 'FIDE'
+    label: 'FIDE'
   }, {
     value: 'APP',
-    text: 'APP'
+    label: 'APP'
   }];
 
-  selectedTab = 'FIDE';
+  selectedTab: string = this.btnList[0].value;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private repository: AppInfoRepository) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
