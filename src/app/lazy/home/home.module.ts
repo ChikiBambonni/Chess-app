@@ -8,6 +8,7 @@ import { AccountInfoModule } from '@shared/components/account-info/account-info.
 import { AvatarIconModule } from '@shared/components/avatar-icon/avatar-icon.module';
 import { DropdownListModule } from '@shared/components/dropdown-list/dropdown-list.module';
 import { ForumModule } from '@shared/components/forum/forum.module';
+import { ButtonGroupModule } from '@shared/components/button-group/button-group.module';
 import { MostSuccessfullGamesModule } from './components/most-successfull-games/most-successfull-games.module';
 import { FideLeaderboardModule } from './components/fide-leaderboard/fide-leaderboard.module';
 import { LastGameModule } from './components/last-game/last-game.module';
@@ -22,6 +23,7 @@ import { HomeComponent } from './home.component';
     FindGameModule,
     AccountInfoModule,
     AvatarIconModule,
+    ButtonGroupModule,
     DropdownListModule,
     ForumModule,
     MostSuccessfullGamesModule,

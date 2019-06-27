@@ -29,9 +29,10 @@ export class ButtonGroupComponent implements OnInit {
   ngOnInit() {
   }
 
-  buttonClick(value: string) {
+  buttonChange(value: string) {
     if (this.selectedValue !== value) {
       this.selectedChange.emit(value);
+      this.selectedValue = value;
     }
   }
 }

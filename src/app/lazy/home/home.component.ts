@@ -40,9 +40,21 @@ export class HomeComponent implements OnInit {
     title: 'friend 15'
   }];
 
+  btnList = [{
+    value: 'FIDE',
+    text: 'FIDE'
+  }, {
+    value: 'APP',
+    text: 'APP'
+  }];
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
+  }
+
+  btnClick($event) {
+    console.log($event);
   }
 }

@@ -36,10 +36,11 @@
     </div>
     <div class="col-xl-5 ui-container__center">
       <mat-card class="leaderboard-card">
-        <mat-button-toggle-group value="FIDE">
-          <mat-button-toggle value="FIDE">FIDE</mat-button-toggle>
-          <mat-button-toggle value="APP">APP</mat-button-toggle>
-        </mat-button-toggle-group>
+        <app-button-group
+          selectedValue="FIDE"
+          [buttonList]="btnList"
+          (selectedChange)="btnClick($event)">
+        </app-button-group>
         <app-fide-leaderboard></app-fide-leaderboard>
       </mat-card>
     </div>

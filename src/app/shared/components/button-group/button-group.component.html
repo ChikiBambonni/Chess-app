@@ -2,7 +2,7 @@
   <mat-button-toggle
     *ngFor="let button of buttonList"
     [value]="button.value"
-    (click)="buttonClick(button)">
+    (change)="buttonChange(button.value)">
       {{ button.text }}
   </mat-button-toggle>
 </mat-button-toggle-group>
