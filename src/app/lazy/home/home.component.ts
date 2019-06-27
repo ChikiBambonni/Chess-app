@@ -48,13 +48,15 @@ export class HomeComponent implements OnInit {
     text: 'APP'
   }];
 
+  selectedTab = 'FIDE';
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
   }
 
-  btnClick($event) {
-    console.log($event);
+  changeTab($event: string) {
+    this.selectedTab = $event;
   }
 }

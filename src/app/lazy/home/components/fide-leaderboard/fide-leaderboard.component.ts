@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
+import { Observable } from 'rxjs';
 
 import { AppInfoRepository } from '@core/services/app-info.repository';
 import { SortDirection } from '@core/enums/sort.enums';
@@ -10,7 +11,7 @@ import { SortDirection } from '@core/enums/sort.enums';
   templateUrl: './fide-leaderboard.component.html',
   styleUrls: ['./fide-leaderboard.component.scss']
 })
-export class FideLeaderboardComponent implements OnInit {
+export class FideLeaderboardComponent implements OnInit, OnChanges {
 
   isLoadingResults = true;
 
@@ -28,37 +29,68 @@ export class FideLeaderboardComponent implements OnInit {
     direction: SortDirection.Asc
   };
 
+  @Input()
+  selectedTab: string;
+
   constructor (private repository: AppInfoRepository) {}
 
   ngOnInit() {
-    this.fetchData();
+    this.fetchData(this.selectedTab);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.selectedTab && !changes.selectedTab.firstChange) {
+      this.fetchData(changes.selectedTab.currentValue);
+    }
   }
 
   sortData($event: Sort) {
-    this.isLoadingResults = true;
     this.sortEvent = $event;
-    this.fetchData();
+    this.fetchData(this.selectedTab);
   }
 
   changePage($event: PageEvent) {
-    this.isLoadingResults = true;
     this.pageEvent = $event;
-    this.fetchData();
+    this.fetchData(this.selectedTab);
   }
 
-  fetchData(): void {
-    this.repository.getFIDETableList({
+  fetchData(tab: string): void {
+    this.isLoadingResults = true;
+    if (tab === 'APP') {
+      this.getAPPTableList().subscribe((data: any) => {
+        if (!this.dataSource) {
+          this.dataSource = new MatTableDataSource();
+        }
+        this.dataSource.data = data.elements;
+        this.pageEvent.length = data.totalElements;
+        this.isLoadingResults = false;
+      });
+    } else if (tab === 'FIDE') {
+      this.getFIDETableList().subscribe((data: any) => {
+        if (!this.dataSource) {
+          this.dataSource = new MatTableDataSource();
+        }
+        this.dataSource.data = data.elements;
+        this.pageEvent.length = data.totalElements;
+        this.isLoadingResults = false;
+      });
+    }
+  }
+
+  getParams(): object {
+    return {
       orderByField: this.sortEvent.active,
       orderDirection: this.sortEvent.direction,
       pagesize: this.pageEvent.pageSize,
       page: this.pageEvent.pageIndex + 1
-    }).subscribe((data: any) => {
-      if (!this.dataSource) {
-        this.dataSource = new MatTableDataSource();
-      }
-      this.dataSource.data = data.elements;
-      this.pageEvent.length = data.totalElements;
-      this.isLoadingResults = false;
-    });
+    };
+  }
+
+  getFIDETableList(): Observable<any> {
+    return this.repository.getFIDETableList(this.getParams());
+  }
+
+  getAPPTableList(): Observable<any> {
+    return this.repository.getAppTableList(this.getParams());
   }
 }

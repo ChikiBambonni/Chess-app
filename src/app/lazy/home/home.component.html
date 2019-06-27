@@ -37,11 +37,13 @@
     <div class="col-xl-5 ui-container__center">
       <mat-card class="leaderboard-card">
         <app-button-group
-          selectedValue="FIDE"
+          [selectedValue]="selectedTab"
           [buttonList]="btnList"
-          (selectedChange)="btnClick($event)">
+          (selectedChange)="changeTab($event)">
         </app-button-group>
-        <app-fide-leaderboard></app-fide-leaderboard>
+        <app-fide-leaderboard
+          [selectedTab]="selectedTab">
+        </app-fide-leaderboard>
       </mat-card>
     </div>
     <div class="col-xl-4 ui-container__right">
