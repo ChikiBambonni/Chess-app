@@ -1,0 +1,8 @@
+<mat-button-toggle-group [value]="selectedValue">
+  <mat-button-toggle
+    *ngFor="let button of buttonList"
+    [value]="button.value"
+    (click)="buttonClick(button)">
+      {{ button.text }}
+  </mat-button-toggle>
+</mat-button-toggle-group>
