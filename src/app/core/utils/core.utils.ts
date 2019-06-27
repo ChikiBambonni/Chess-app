@@ -12,6 +12,10 @@ export const isEmpty = (arr: Array<any>) => {
   return arr.length === 0;
 };
 
+export const isFunction = (target: any, functionName: string): boolean => {
+  return typeof target[functionName] === 'function';
+}
+
 export const isIncludes = (arr: Array<string | number | boolean>, e: string | number | boolean) => {
   return arr.includes(e);
 };
