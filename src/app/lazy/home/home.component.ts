@@ -41,18 +41,7 @@ export class HomeComponent implements OnInit {
     title: 'friend 15'
   }];
 
-  btnList =
-  // {
-  //   'FIDE': {
-  //     label: 'FIDE',
-  //     tableData: this.repository.getFIDETableList()
-  //   },
-  //   'APP': {
-  //     label: 'APP',
-  //     tableData: this.repository.getAppTableList()
-  //   }
-  // };
-  [{
+  btnList = [{
     value: 'FIDE',
     label: 'FIDE'
   }, {
@@ -62,9 +51,7 @@ export class HomeComponent implements OnInit {
 
   selectedTab: string = this.btnList[0].value;
 
-  constructor(
-    private userService: UserService,
-    private repository: AppInfoRepository) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();

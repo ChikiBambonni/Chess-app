@@ -1,9 +1,9 @@
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 export function TakeUntilDestroy(constructor: Function) {
   const originalDestroy = constructor.prototype.ngOnDestroy;
 
-  if ( typeof originalDestroy !== 'function') {
+  if (typeof originalDestroy !== 'function') {
     console.warn(`${constructor.name} is using @TakeUntilDestroy but does not implement OnDestroy`);
   }
 

@@ -15,7 +15,7 @@ export class FideLeaderboardComponent implements OnInit, OnChanges {
 
   isLoadingResults = true;
 
-  displayedColumns: string[] = ['position', 'name', 'country', 'rating', 'year'];
+  displayedColumns: string[]; // = ['position', 'name', 'country', 'rating', 'year'];
   dataSource: MatTableDataSource<any>;
 
   pageEvent: PageEvent = {
@@ -39,6 +39,7 @@ export class FideLeaderboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.fetchData();
   }
 
   sortData($event: Sort) {
@@ -52,14 +53,28 @@ export class FideLeaderboardComponent implements OnInit, OnChanges {
   }
 
   fetchData(): void {
-    this.getFIDETableList().subscribe((data: any) => {
-      if (!this.dataSource) {
-        this.dataSource = new MatTableDataSource();
-      }
-      this.dataSource.data = data.elements;
-      this.pageEvent.length = data.totalElements;
-      this.isLoadingResults = false;
-    });
+    this.isLoadingResults = true;
+    if (this.selectedTab === 'APP') {
+      this.getAPPTableList().subscribe((data: any) => {
+        if (!this.dataSource) {
+          this.dataSource = new MatTableDataSource();
+        }
+        this.displayedColumns = Object.keys(data.elements[0]);
+        this.dataSource.data = data.elements;
+        this.pageEvent.length = data.totalElements;
+        this.isLoadingResults = false;
+      });
+    } else if (this.selectedTab === 'FIDE') {
+      this.getFIDETableList().subscribe((data: any) => {
+        if (!this.dataSource) {
+          this.dataSource = new MatTableDataSource();
+        }
+        this.displayedColumns = Object.keys(data.elements[0]);
+        this.dataSource.data = data.elements;
+        this.pageEvent.length = data.totalElements;
+        this.isLoadingResults = false;
+      });
+    }
   }
 
   getParams(): object {
