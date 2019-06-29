@@ -1,8 +1,10 @@
-import { AppInfoRepository } from './../../core/services/app-info.repository';
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
+import { ButtonInterface } from '@shared/components/button-group/button-group.interfaces';
+import { LiderboardType } from './components/leaderboard/leaderboard.enums';
+import { ButtonsList } from './components/leaderboard/leaderboard.constants';
 
 @Component({
   selector: 'app-home',
@@ -41,15 +43,8 @@ export class HomeComponent implements OnInit {
     title: 'friend 15'
   }];
 
-  btnList = [{
-    value: 'FIDE',
-    label: 'FIDE'
-  }, {
-    value: 'APP',
-    label: 'APP'
-  }];
-
-  selectedTab: string = this.btnList[0].value;
+  btnList: ButtonInterface<LiderboardType>[] = ButtonsList;
+  selectedTab: LiderboardType = this.btnList[0].value;
 
   constructor(private userService: UserService) { }
 
@@ -57,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.user = this.userService.getUser();
   }
 
-  changeTab($event: string) {
+  changeTab($event: LiderboardType) {
     this.selectedTab = $event;
   }
 }

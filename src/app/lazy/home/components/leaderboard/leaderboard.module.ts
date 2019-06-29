@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CommonPaginatorModule } from '@shared/components/common-paginator/common-paginator.module';
 import { CommonTableModule } from '@shared/components/common-table/common-table.module';
 import { LeaderboardComponent } from './leaderboard.component';
+import { LeaderboardService } from './leaderboard.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { LeaderboardComponent } from './leaderboard.component';
   ],
   exports: [
     LeaderboardComponent
+  ],
+  providers: [
+    LeaderboardService
   ]
 })
 export class LeaderboardModule { }

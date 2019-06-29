@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
 
-import { AppInfoRepository } from '@core/services/app-info.repository';
 import { SortDirection } from '@core/enums/sort.enums';
+import { LiderboardType } from './leaderboard.enums';
+import { LeaderboardService } from './leaderboard.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -32,7 +32,7 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   @Input()
   selectedTab: string;
 
-  constructor (private repository: AppInfoRepository) {}
+  constructor(private boardService: LeaderboardService) {}
 
   ngOnInit() {
     this.fetchData();
@@ -54,43 +54,23 @@ export class LeaderboardComponent implements OnInit, OnChanges {
 
   fetchData(): void {
     this.isLoadingResults = true;
-    if (this.selectedTab === 'APP') {
-      this.getAPPTableList().subscribe((data: any) => {
-        if (!this.dataSource) {
-          this.dataSource = new MatTableDataSource();
-        }
-        this.displayedColumns = Object.keys(data.elements[0]);
-        this.dataSource.data = data.elements;
-        this.pageEvent.length = data.totalElements;
-        this.isLoadingResults = false;
-      });
-    } else if (this.selectedTab === 'FIDE') {
-      this.getFIDETableList().subscribe((data: any) => {
-        if (!this.dataSource) {
-          this.dataSource = new MatTableDataSource();
-        }
-        this.displayedColumns = Object.keys(data.elements[0]);
-        this.dataSource.data = data.elements;
-        this.pageEvent.length = data.totalElements;
-        this.isLoadingResults = false;
-      });
+
+    if (this.selectedTab === LiderboardType.APP) {
+      this.boardService.getAPPTableList(this.sortEvent, this.pageEvent)
+        .subscribe((data: any) => this.setData(data));
+    } else if (this.selectedTab === LiderboardType.FIDE) {
+      this.boardService.getFIDETableList(this.sortEvent, this.pageEvent)
+        .subscribe((data: any) => this.setData(data));
     }
   }
 
-  getParams(): object {
-    return {
-      orderByField: this.sortEvent.active,
-      orderDirection: this.sortEvent.direction,
-      pagesize: this.pageEvent.pageSize,
-      page: this.pageEvent.pageIndex + 1
-    };
-  }
-
-  getFIDETableList(): Observable<any> {
-    return this.repository.getFIDETableList(this.getParams());
-  }
-
-  getAPPTableList(): Observable<any> {
-    return this.repository.getAppTableList(this.getParams());
+  setData(data: any) {
+    if (!this.dataSource) {
+      this.dataSource = new MatTableDataSource();
+    }
+    this.displayedColumns = Object.keys(data.elements[0]);
+    this.dataSource.data = data.elements;
+    this.pageEvent.length = data.totalElements;
+    this.isLoadingResults = false;
   }
 }
