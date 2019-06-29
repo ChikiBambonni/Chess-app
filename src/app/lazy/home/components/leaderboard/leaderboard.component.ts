@@ -1,10 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
 
-import { SortDirection } from '@core/enums/sort.enums';
 import { LiderboardType } from './leaderboard.enums';
 import { LeaderboardService } from './leaderboard.service';
+import { pageEvent, sortEvent } from './leaderboard.constants';
 
 @Component({
   selector: 'app-leaderboard',
@@ -18,16 +24,8 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
 
-  pageEvent: PageEvent = {
-    pageIndex: 0,
-    pageSize: 15,
-    length: 0,
-    previousPageIndex: 0
-  };
-  sortEvent: Sort = {
-    active: 'position',
-    direction: SortDirection.Asc
-  };
+  pageEvent: PageEvent = pageEvent;
+  sortEvent: Sort = sortEvent;
 
   @Input()
   selectedTab: string;
@@ -35,7 +33,6 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   constructor(private boardService: LeaderboardService) {}
 
   ngOnInit() {
-    this.fetchData();
   }
 
   ngOnChanges(changes: SimpleChanges) {
