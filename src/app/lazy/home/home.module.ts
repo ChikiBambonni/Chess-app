@@ -10,7 +10,7 @@ import { DropdownListModule } from '@shared/components/dropdown-list/dropdown-li
 import { ForumModule } from '@shared/components/forum/forum.module';
 import { ButtonGroupModule } from '@shared/components/button-group/button-group.module';
 import { MostSuccessfullGamesModule } from './components/most-successfull-games/most-successfull-games.module';
-import { FideLeaderboardModule } from './components/fide-leaderboard/fide-leaderboard.module';
+import { LeaderboardModule } from './components/leaderboard/leaderboard.module';
 import { LastGameModule } from './components/last-game/last-game.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -27,7 +27,7 @@ import { HomeComponent } from './home.component';
     DropdownListModule,
     ForumModule,
     MostSuccessfullGamesModule,
-    FideLeaderboardModule,
+    LeaderboardModule,
     LastGameModule,
     HomeRoutingModule,
   ],

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CommonPaginatorModule } from '@shared/components/common-paginator/common-paginator.module';
 import { CommonTableModule } from '@shared/components/common-table/common-table.module';
-import { FideLeaderboardComponent } from './fide-leaderboard.component';
+import { LeaderboardComponent } from './leaderboard.component';
 
 @NgModule({
   imports: [
@@ -12,10 +12,10 @@ import { FideLeaderboardComponent } from './fide-leaderboard.component';
     CommonPaginatorModule
   ],
   declarations: [
-    FideLeaderboardComponent
+    LeaderboardComponent
   ],
   exports: [
-    FideLeaderboardComponent
+    LeaderboardComponent
   ]
 })
-export class FideLeaderboardModule { }
+export class LeaderboardModule { }

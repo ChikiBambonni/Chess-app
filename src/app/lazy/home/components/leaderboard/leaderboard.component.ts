@@ -7,15 +7,15 @@ import { AppInfoRepository } from '@core/services/app-info.repository';
 import { SortDirection } from '@core/enums/sort.enums';
 
 @Component({
-  selector: 'app-fide-leaderboard',
-  templateUrl: './fide-leaderboard.component.html',
-  styleUrls: ['./fide-leaderboard.component.scss']
+  selector: 'app-leaderboard',
+  templateUrl: './leaderboard.component.html',
+  styleUrls: ['./leaderboard.component.scss']
 })
-export class FideLeaderboardComponent implements OnInit, OnChanges {
+export class LeaderboardComponent implements OnInit, OnChanges {
 
   isLoadingResults = true;
 
-  displayedColumns: string[]; // = ['position', 'name', 'country', 'rating', 'year'];
+  displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
 
   pageEvent: PageEvent = {
