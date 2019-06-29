@@ -1,4 +1,4 @@
 export enum LiderboardType {
-  FIDE = 'fide',
-  APP = 'app'
+  FIDE = 'FIDE',
+  APP = 'App'
 }

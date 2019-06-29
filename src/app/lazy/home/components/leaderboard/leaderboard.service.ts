@@ -4,11 +4,12 @@ import { PageEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { AppInfoRepository } from '@core/services/app-info.repository';
+import { LiderboardType } from './leaderboard.enums';
 
 @Injectable()
 export class LeaderboardService {
 
-  private getParams(sortEvent: Sort, pageEvent: PageEvent): object {
+  private getParams(sortEvent: Sort, pageEvent: PageEvent) {
     return {
       orderByField: sortEvent.active,
       orderDirection: sortEvent.direction,
@@ -19,11 +20,7 @@ export class LeaderboardService {
 
   constructor(private repository: AppInfoRepository) {}
 
-  getFIDETableList(sortEvent: Sort, pageEvent: PageEvent): Observable<any> {
-    return this.repository.getFIDETableList(this.getParams(sortEvent, pageEvent));
-  }
-
-  getAPPTableList(sortEvent: Sort, pageEvent: PageEvent): Observable<any> {
-    return this.repository.getAppTableList(this.getParams(sortEvent, pageEvent));
+  getTableData(type: LiderboardType, sortEvent: Sort, pageEvent: PageEvent): Observable<any> {
+    return this.repository[`get${type}TableList`](this.getParams(sortEvent, pageEvent));
   }
 }

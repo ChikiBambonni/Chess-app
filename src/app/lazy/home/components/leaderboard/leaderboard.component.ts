@@ -8,6 +8,7 @@ import {
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
 
+import { TrackChanges } from '@core/decorators/changes.decorator';
 import { LiderboardType } from './leaderboard.enums';
 import { LeaderboardService } from './leaderboard.service';
 import { pageEvent, sortEvent } from './leaderboard.constants';
@@ -28,15 +29,15 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   sortEvent: Sort = sortEvent;
 
   @Input()
-  selectedTab: string;
+  selectedTab: LiderboardType;
 
-  constructor(private boardService: LeaderboardService) {}
+  constructor(private lbService: LeaderboardService) {}
 
   ngOnInit() {
   }
 
+  @TrackChanges('selectedTab', 'fetchData')
   ngOnChanges(changes: SimpleChanges) {
-    this.fetchData();
   }
 
   sortData($event: Sort) {
@@ -51,14 +52,8 @@ export class LeaderboardComponent implements OnInit, OnChanges {
 
   fetchData(): void {
     this.isLoadingResults = true;
-
-    if (this.selectedTab === LiderboardType.APP) {
-      this.boardService.getAPPTableList(this.sortEvent, this.pageEvent)
-        .subscribe((data: any) => this.setData(data));
-    } else if (this.selectedTab === LiderboardType.FIDE) {
-      this.boardService.getFIDETableList(this.sortEvent, this.pageEvent)
-        .subscribe((data: any) => this.setData(data));
-    }
+    this.lbService.getTableData(this.selectedTab, this.sortEvent, this.pageEvent)
+      .subscribe((data: any) => this.setData(data));
   }
 
   setData(data: any) {
