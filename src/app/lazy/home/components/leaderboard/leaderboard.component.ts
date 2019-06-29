@@ -9,6 +9,7 @@ import { MatTableDataSource, PageEvent } from '@angular/material';
 import { Sort } from '@angular/material/sort';
 
 import { TrackChanges } from '@core/decorators/changes.decorator';
+import { PaginationInterface } from '@core/interfaces/pagination.interface';
 import { LiderboardType } from './leaderboard.enums';
 import { LeaderboardService } from './leaderboard.service';
 import { pageEvent, sortEvent } from './leaderboard.constants';
@@ -53,14 +54,14 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   fetchData(): void {
     this.isLoadingResults = true;
     this.lbService.getTableData(this.selectedTab, this.sortEvent, this.pageEvent)
-      .subscribe((data: any) => this.setData(data));
+      .subscribe((data: PaginationInterface<any>) => this.setData(data));
   }
 
-  setData(data: any) {
+  setData(data: PaginationInterface<any>) {
     if (!this.dataSource) {
       this.dataSource = new MatTableDataSource();
     }
-    this.displayedColumns = Object.keys(data.elements[0]);
+    this.displayedColumns = Object.keys(data.elements[0] || {});
     this.dataSource.data = data.elements;
     this.pageEvent.length = data.totalElements;
     this.isLoadingResults = false;

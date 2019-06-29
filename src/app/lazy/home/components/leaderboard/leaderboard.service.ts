@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { AppInfoRepository } from '@core/services/app-info.repository';
+import { PaginationInterface } from '@core/interfaces/pagination.interface';
 import { LiderboardType } from './leaderboard.enums';
 
 @Injectable()
@@ -20,7 +21,17 @@ export class LeaderboardService {
 
   constructor(private repository: AppInfoRepository) {}
 
-  getTableData(type: LiderboardType, sortEvent: Sort, pageEvent: PageEvent): Observable<any> {
-    return this.repository[`get${type}TableList`](this.getParams(sortEvent, pageEvent));
+  getTableData(type: LiderboardType, sortEvent: Sort, pageEvent: PageEvent): Observable<PaginationInterface<any>> {
+    if (this.repository[`get${type}TableList`]) {
+      return this.repository[`get${type}TableList`](this.getParams(sortEvent, pageEvent));
+    }
+
+    return of({
+      page: 0,
+      pagesize: 0,
+      totalPages: 0,
+      totalElements: 0,
+      elements: []
+    });
   }
 }
