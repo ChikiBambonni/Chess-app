@@ -10,6 +10,6 @@ export class FriendsListMocks extends MockBackendFactory<FriendsListItem> {
   }
 
   getData(): FriendsListItem[] {
-    return this.getElements();
+    return this.items;
   }
 }

@@ -25,4 +25,9 @@ export class AppInfoRepository extends HttpApi implements InfoRepository {
   public getAppTableList(params?: object): Observable<any> {
     return this.getValue();
   }
+
+  @Get('/ChikiBambuki/UsersList')
+  public getFriendsList(params?: object): Observable<any> {
+    return this.getValue();
+  }
 }

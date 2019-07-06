@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AppInfoRepository } from '@core/services/app-info.repository';
 import { UserService } from '@core/mock-backend/services/user.service';
 import { User } from '@core/interfaces/user.interfaces';
 import { ButtonInterface } from '@shared/components/button-group/button-group.interfaces';
@@ -15,40 +16,15 @@ export class HomeComponent implements OnInit {
 
   user: User = null;
 
-  onlineFriends = [{
-    status: 'online',
-    title: 'friend 1'
-  }, {
-    status: 'online',
-    title: 'friend 2'
-  }, {
-    status: 'online',
-    title: 'friend 3'
-  }, {
-    status: 'online',
-    title: 'friend 5'
-  }];
-
-  offlineFriends = [{
-    status: 'offline',
-    title: 'friend 7'
-  }, {
-    status: 'offline',
-    title: 'friend 8'
-  }, {
-    status: 'offline',
-    title: 'friend 9'
-  }, {
-    status: 'offline',
-    title: 'friend 15'
-  }];
-
   btnList: ButtonInterface<LiderboardType>[] = ButtonsList;
   selectedTab: LiderboardType = this.btnList[0].value;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private repo: AppInfoRepository,
+    private userService: UserService) { }
 
   ngOnInit() {
+    this.repo.getFriendsList().subscribe(console.log);
     this.user = this.userService.getUser();
   }
 
