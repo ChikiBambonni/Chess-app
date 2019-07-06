@@ -1,3 +1,31 @@
-<p>
-  profile-card works!
-</p>
+<div id="card-container">
+  <div class="d-flex profile-card__header">
+    <app-avatar-icon src="https://avatars0.githubusercontent.com/u/26419897?s=460&v=4"></app-avatar-icon>
+    <div class="profile-card__header-title">
+      <div class="profile-card__header-title__username">{{ user.username }}</div>
+      <div class="profile-card__header-title__status">Chilling</div>
+    </div>
+  </div>
+  <div class="profile-card__content">
+    <div class="profile-card__content-header">Most successfull openings:</div>
+    <div class="profile-card__content-games">
+      <div class="d-flex justify-content-between games">
+        <div *ngFor="let game of games" class="games__info">
+          <div class="cg-wrapper">
+            <app-chessground-static
+              [width]="112"
+              [height]="112"
+              [fen]="game.fen"
+              [zoom]="zoom"
+              [orientation]="game.orientation">
+            </app-chessground-static>
+          </div>
+          <div class="games__info-title">{{ game.title }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-card__footer">
+    <app-account-info></app-account-info>
+  </div>
+</div>
