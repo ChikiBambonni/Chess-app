@@ -14,6 +14,7 @@ import { LeaderboardModule } from './components/leaderboard/leaderboard.module';
 import { LastGameModule } from './components/last-game/last-game.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { HomeComponent } from './home.component';
     HomeRoutingModule,
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    ProfileCardComponent
   ]
 })
 export class HomeModule { }
