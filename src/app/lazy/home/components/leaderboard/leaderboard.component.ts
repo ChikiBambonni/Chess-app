@@ -58,9 +58,7 @@ export class LeaderboardComponent implements OnInit, OnChanges {
   }
 
   setData(data: PaginationInterface<any>) {
-    if (!this.dataSource) {
-      this.dataSource = new MatTableDataSource();
-    }
+    this.dataSource = new MatTableDataSource();
     this.displayedColumns = Object.keys(data.elements[0] || {});
     this.dataSource.data = data.elements;
     this.pageEvent.length = data.totalElements;

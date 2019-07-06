@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { AppInfoRepository } from '@core/services/app-info.repository';
 import { PaginationInterface } from '@core/interfaces/pagination.interface';
 import { LiderboardType } from './leaderboard.enums';
+import { LeaderboardLoaderFactory } from './leaderboard.factory';
 
 @Injectable()
 export class LeaderboardService {
@@ -22,16 +23,6 @@ export class LeaderboardService {
   constructor(private repository: AppInfoRepository) {}
 
   getTableData(type: LiderboardType, sortEvent: Sort, pageEvent: PageEvent): Observable<PaginationInterface<any>> {
-    if (this.repository[`get${type}TableList`]) {
-      return this.repository[`get${type}TableList`](this.getParams(sortEvent, pageEvent));
-    }
-
-    return of({
-      page: 0,
-      pagesize: 0,
-      totalPages: 0,
-      totalElements: 0,
-      elements: []
-    });
+    return LeaderboardLoaderFactory.createInstanse(type, this.repository, this.getParams(sortEvent, pageEvent));
   }
 }
