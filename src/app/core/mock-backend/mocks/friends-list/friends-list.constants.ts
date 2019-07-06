@@ -3,28 +3,28 @@ import { FriendsListItem } from './friends-list.interfaces';
 export const FRIENDS_LIST_DATA: FriendsListItem[] = [
   {
     status: 'online',
-    username: 'friend 1'
+    label: 'friend 1'
   }, {
     status: 'online',
-    username: 'friend 2'
+    label: 'friend 2'
   }, {
     status: 'online',
-    username: 'friend 3'
+    label: 'friend 3'
   }, {
     status: 'online',
-    username: 'friend 5'
+    label: 'friend 5'
   }, {
     status: 'offline',
-    username: 'friend 7'
+    label: 'friend 7'
   }, {
     status: 'offline',
-    username: 'friend 8'
+    label: 'friend 8'
   }, {
     status: 'offline',
-    username: 'friend 9'
+    label: 'friend 9'
   }, {
     status: 'offline',
-    username: 'friend 15'
+    label: 'friend 15'
   }
 ];
 

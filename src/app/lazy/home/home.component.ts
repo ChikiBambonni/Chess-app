@@ -15,6 +15,8 @@ import { ButtonsList } from './components/leaderboard/leaderboard.constants';
 export class HomeComponent implements OnInit {
 
   user: User = null;
+  onlineFriends;
+  offlineFriends;
 
   btnList: ButtonInterface<LiderboardType>[] = ButtonsList;
   selectedTab: LiderboardType = this.btnList[0].value;
@@ -24,8 +26,11 @@ export class HomeComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.repo.getFriendsList().subscribe(console.log);
     this.user = this.userService.getUser();
+    this.repo.getFriendsList().subscribe(data => {
+      this.offlineFriends = data.filter(e => e.status === 'offline');
+      this.onlineFriends = data.filter(e => e.status === 'online');
+    });
   }
 
   changeTab($event: LiderboardType) {
