@@ -12,7 +12,7 @@ export abstract class MockBackendFactory<Type> {
     this.delay = Number.isInteger(delay) ? delay : null;
   }
 
-  abstract getData(...args): Type | PaginationInterface<Type>;
+  abstract getData(...args): Type | Type[] | PaginationInterface<Type>;
 
   getElements(...args): Type[] {
     return this.items;
