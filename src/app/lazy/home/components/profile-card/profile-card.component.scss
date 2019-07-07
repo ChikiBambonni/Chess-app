@@ -33,4 +33,26 @@
       margin-bottom: 8px;
     }
   }
+
+  .profile-card__footer {
+    .account-info {
+      margin-top: 16px;
+      border: 1px solid $border-color;
+
+      &>div.account-info__games,
+      &>div.account-info__reg-date {
+        padding: 8px 24px;
+      }
+
+      .title {
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .content {
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+  }
 }
