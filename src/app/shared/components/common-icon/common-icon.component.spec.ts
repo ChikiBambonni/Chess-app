@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvatarIconComponent } from './avatar-icon.component';
+import { CommonIconComponent } from './common-icon.component';
 
-describe('AvatarIconComponent', () => {
-  let component: AvatarIconComponent;
-  let fixture: ComponentFixture<AvatarIconComponent>;
+describe('CommonIconComponent', () => {
+  let component: CommonIconComponent;
+  let fixture: ComponentFixture<CommonIconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AvatarIconComponent ]
+      declarations: [ CommonIconComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvatarIconComponent);
+    fixture = TestBed.createComponent(CommonIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
