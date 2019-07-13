@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { PageEvent, MatTableDataSource } from '@angular/material';
 
@@ -21,6 +21,9 @@ export class OpeningsTableComponent implements OnInit {
   pageEvent: PageEvent = pageEvent;
   sortEvent: Sort = sortEvent;
 
+  @Output()
+  rowClick: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private repository: AppInfoRepository) { }
 
   ngOnInit() {
@@ -35,6 +38,10 @@ export class OpeningsTableComponent implements OnInit {
   changePage($event: PageEvent) {
     this.pageEvent = $event;
     this.fetchData();
+  }
+
+  onRowClick($event) {
+    this.rowClick.emit($event);
   }
 
   fetchData(): void {

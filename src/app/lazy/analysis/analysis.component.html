@@ -3,13 +3,17 @@
 <div class="d-flex flex-row analysis-container">
   <div class="col-xl-4 analysis-container__left">
     <mat-card class="card table-card">
-      <app-openings-table></app-openings-table>
+      <app-openings-table
+        (rowClick)="changeFEN($event)">
+      </app-openings-table>
     </mat-card>
   </div>
   <div class="col-xl-8 analysis-container__right">
     <div class="d-flex justify-content-center">
       <mat-card class="card cg-card">
-        <app-openings-cg></app-openings-cg>
+        <app-openings-cg
+          [fen]="fen">
+      </app-openings-cg>
       </mat-card>
     </div>
   </div>

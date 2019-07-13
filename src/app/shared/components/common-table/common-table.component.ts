@@ -28,6 +28,9 @@ export class CommonTableComponent implements OnInit {
   @Output()
   sort: EventEmitter<Sort> = new EventEmitter<Sort>();
 
+  @Output()
+  rowClick: EventEmitter<any> = new EventEmitter<any>();
+
   @ViewChild('tableDiv')
   tableDiv: ElementRef;
 
@@ -38,5 +41,9 @@ export class CommonTableComponent implements OnInit {
 
   sortData(sort: Sort) {
     this.sort.emit(sort);
+  }
+
+  rowHandler(row) {
+    this.rowClick.emit(row);
   }
 }

@@ -3,6 +3,7 @@
     [displayedColumns]="displayedColumns"
     [isLoadingResults]="isLoadingResults"
     [dataSource]="dataSource"
+    (rowClick)="onRowClick($event)"
     (sort)="sortData($event)">
   </app-common-table>
   <app-common-paginator

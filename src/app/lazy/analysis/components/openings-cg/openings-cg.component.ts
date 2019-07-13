@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { calZoom } from '@core/utils/chess.utils';
 
@@ -10,7 +10,9 @@ import { calZoom } from '@core/utils/chess.utils';
 export class OpeningsCgComponent implements OnInit {
 
   zoom: number = calZoom(512);
-  fen: string = null;
+
+  @Input()
+  fen: string;
 
   constructor() { }
 
