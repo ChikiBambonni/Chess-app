@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@material/material.module';
 import { NavigationModule } from '@shared/components/navigation/navigation.module';
 import { OpeningsTableModule } from './components/openings-table/openings-table.module';
+import { OpeningsCgModule } from './components/openings-cg/openings-cg.module';
 import { AnalysisRoutingModule } from './analysis-routing.module';
 import { AnalysisComponent } from './analysis.component';
 
@@ -13,6 +14,7 @@ import { AnalysisComponent } from './analysis.component';
     MaterialModule,
     NavigationModule,
     OpeningsTableModule,
+    OpeningsCgModule,
     AnalysisRoutingModule
   ],
   declarations: [
