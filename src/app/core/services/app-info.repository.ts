@@ -30,4 +30,9 @@ export class AppInfoRepository extends HttpApi implements InfoRepository {
   public getFriendsList(params?: object): Observable<any> {
     return this.getValue();
   }
+
+  @Get('/ChikiBambuki/Openings')
+  public getOpeningsList(params?: object): Observable<any> {
+    return this.getValue();
+  }
 }
