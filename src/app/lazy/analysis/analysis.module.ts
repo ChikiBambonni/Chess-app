@@ -8,7 +8,6 @@ import { MovesTableModule } from '@shared/components/moves-table/moves.table.mod
 import { AnalysisRoutingModule } from './analysis-routing.module';
 import { AnalysisComponent } from './analysis.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
