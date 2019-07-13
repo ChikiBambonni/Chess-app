@@ -15,6 +15,6 @@ export class AnalysisComponent implements OnInit {
   }
 
   changeFEN($event) {
-    console.log($event, '00');
+    this.fen = $event.f;
   }
 }
