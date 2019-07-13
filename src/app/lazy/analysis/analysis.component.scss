@@ -11,44 +11,5 @@ div.analysis-container {
     background: linear-gradient(to right, $primary-color-minor, $primary-color-major);
     color: $primary-text-color;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-
-    div.mat-elevation-z8 {
-      transition: none !important;
-      box-shadow: none !important;
-
-      .loading-shade {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 56px;
-        right: 0;
-        background: rgba(0, 0, 0, 0.15);
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      table {
-        width: 100%;
-        background: inherit;
-        color: inherit;
-        td, th {
-          color: inherit;
-          border-bottom-color: rgba(0,0,0,.2);
-        }
-        tr:hover {
-          background-color: $primary-color-minor;
-          cursor: pointer;
-        }
-      }
-      mat-paginator {
-        background-color: inherit;
-        color: inherit;
-        .mat-icon-button[disabled][disabled]{
-          color: red !important;
-        }
-      }
-    }
   }
 }

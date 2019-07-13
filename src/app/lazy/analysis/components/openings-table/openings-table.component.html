@@ -1,3 +1,14 @@
-<p>
-  openings-table works!
-</p>
+<div class="openings-table">
+  <app-common-table
+    [displayedColumns]="displayedColumns"
+    [isLoadingResults]="isLoadingResults"
+    [dataSource]="dataSource"
+    (sort)="sortData($event)">
+  </app-common-table>
+  <app-common-paginator
+    [length]="pageEvent.length"
+    [pageSize]="pageEvent.pageSize"
+    [pageSizeOptions]="[15, 20, 30]"
+    (page)="changePage($event)">
+  </app-common-paginator>
+</div>
