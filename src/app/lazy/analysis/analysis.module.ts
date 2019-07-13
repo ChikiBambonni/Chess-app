@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '@material/material.module';
 import { NavigationModule } from '@shared/components/navigation/navigation.module';
-import { ChessgroundStaticModule } from '@shared/components/chessground-static/chessground-static.module';
-import { MovesTableModule } from '@shared/components/moves-table/moves.table.module';
+import { OpeningsTableModule } from './components/openings-table/openings-table.module';
 import { AnalysisRoutingModule } from './analysis-routing.module';
 import { AnalysisComponent } from './analysis.component';
 
@@ -13,8 +12,7 @@ import { AnalysisComponent } from './analysis.component';
     CommonModule,
     MaterialModule,
     NavigationModule,
-    ChessgroundStaticModule,
-    MovesTableModule,
+    OpeningsTableModule,
     AnalysisRoutingModule
   ],
   declarations: [

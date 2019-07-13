@@ -2,7 +2,8 @@
 
 <div class="d-flex flex-row analysis-container">
   <div class="col-xl-4 analysis-container__left">
-    <mat-card class="table-card">
+      <app-openings-table></app-openings-table>
+    <!-- <mat-card class="table-card">
       <div class="mat-elevation-z8">
         <div class="loading-shade"
               *ngIf="isLoadingResults || isRateLimitReached">
@@ -34,11 +35,11 @@
           [pageSize]="15">
         </mat-paginator>
       </div>
-    </mat-card>
+    </mat-card> -->
   </div>
   <div class="col-xl-8 analysis-container__right">
     <div class="d-flex justify-content-center">
-      <app-chessground-static
+      <!-- <app-chessground-static
         [width]="512"
         [height]="512"
         [zoom]="zoom"
@@ -47,7 +48,7 @@
       </app-chessground-static>
       <app-moves-table
         [data]="data">
-      </app-moves-table>
+      </app-moves-table> -->
     </div>
   </div>
 </div>
