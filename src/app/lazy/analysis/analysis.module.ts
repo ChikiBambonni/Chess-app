@@ -8,6 +8,7 @@ import { OpeningsMtModule } from './components/openings-mt/openings-mt.module';
 import { OpeningsCgModule } from './components/openings-cg/openings-cg.module';
 import { AnalysisRoutingModule } from './analysis-routing.module';
 import { AnalysisComponent } from './analysis.component';
+import { AnalysisService } from './analysis.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,9 @@ import { AnalysisComponent } from './analysis.component';
   ],
   declarations: [
     AnalysisComponent
+  ],
+  providers: [
+    AnalysisService
   ]
 })
 export class AnalysisModule { }
