@@ -11,6 +11,7 @@ import { AnalysisService } from './analysis.service';
 export class AnalysisComponent implements OnInit {
 
   fen: string = null;
+  opening: string = null;
   data: ChessMove[] = [];
 
   constructor() { }
@@ -21,5 +22,6 @@ export class AnalysisComponent implements OnInit {
   changeFEN($event) {
     this.data = AnalysisService.castChessMoves($event.m.split(' '));
     this.fen = $event.f;
+    this.opening = $event.n;
   }
 }
