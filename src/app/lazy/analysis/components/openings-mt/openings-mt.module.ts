@@ -1,3 +1,4 @@
+import { EngineGaugeModule } from './../../../../shared/components/engine-gauge/engine-gauge.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,7 +8,8 @@ import { OpeningsMtComponent } from './openings-mt.component';
 @NgModule({
   imports: [
     CommonModule,
-    MovesTableModule
+    MovesTableModule,
+    EngineGaugeModule
   ],
   declarations: [
     OpeningsMtComponent
