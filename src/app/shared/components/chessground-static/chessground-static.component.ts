@@ -30,6 +30,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   orientation: Color;
 
   @Input()
+  coordinates = false;
+
+  @Input()
   fen: string;
 
   @ViewChild('chessBoard')
@@ -41,7 +44,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.cg = Chessground(this.chessBoard.nativeElement, {
         orientation: this.orientation,
-        coordinates: false,
+        coordinates: this.coordinates,
         movable: {
           color: null,
           dests: {}
