@@ -17,7 +17,14 @@ export class AnalysisComponent implements OnInit {
   }
 
   changeFEN($event) {
-    console.log($event);
+    console.log($event.m.split(' '));
+    const rowMoves = $event.m.split(' ');
+    const moves: ChessMove[] = [];
+    for (let i = 0, k = 1; i < rowMoves.length; i += 2) {
+      moves.push({ N: k, white: rowMoves[i], black: rowMoves[i + 1]});
+      k++;
+    }
+    this.data = moves;
     this.fen = $event.f;
   }
 }
