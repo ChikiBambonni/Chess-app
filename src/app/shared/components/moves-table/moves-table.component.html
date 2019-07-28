@@ -1,12 +1,7 @@
-<div ngx-auto-scroll lock-y-offset="10" observe-attributes class="mat-elevation-z8">
-  <table mat-table [dataSource]="data">
-
-    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
-      <th mat-header-cell *matHeaderCellDef>{{ col }}</th>
-      <td mat-cell *matCellDef="let element">{{ element[col] }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+<div ngx-auto-scroll class="openings-table">
+  <app-common-table
+    [displayedColumns]="displayedColumns"
+    [dataSource]="data"
+    (rowClick)="onRowClick($event)">
+  </app-common-table>
 </div>

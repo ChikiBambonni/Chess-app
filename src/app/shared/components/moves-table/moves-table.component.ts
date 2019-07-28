@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, AfterViewChecked, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 
@@ -7,7 +13,7 @@ import { ChessMove } from '@core/interfaces/chess-move.interfaces';
   templateUrl: './moves-table.component.html',
   styleUrls: ['./moves-table.component.scss']
 })
-export class MovesTableComponent implements OnInit, OnChanges {
+export class MovesTableComponent implements OnInit {
   displayedColumns = ['N', 'white', 'black'];
 
   @ViewChild('scrollBottom')
@@ -22,7 +28,7 @@ export class MovesTableComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges() {
-
+  onRowClick($event) {
+    console.log($event);
   }
 }
