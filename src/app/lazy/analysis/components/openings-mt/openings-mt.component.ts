@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 
 @Component({
   selector: 'app-openings-mt',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./openings-mt.component.scss']
 })
 export class OpeningsMtComponent implements OnInit {
+
+  @Input()
+  data: ChessMove[];
 
   constructor() { }
 
