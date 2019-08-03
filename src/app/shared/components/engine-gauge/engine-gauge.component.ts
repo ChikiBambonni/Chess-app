@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as Highcharts from 'highcharts/highcharts';
-const HighchartsMore = require('highcharts/highcharts-more');
-const HighchartsSolidGauge = require('highcharts/modules/solid-gauge');
+import HighchartsMore from 'highcharts/highcharts-more';
+import HighchartsSolidGauge from 'highcharts/modules/solid-gauge';
 HighchartsMore(Highcharts);
 HighchartsSolidGauge(Highcharts);
 
@@ -17,80 +17,72 @@ export class EngineGaugeComponent implements OnInit {
 
   gaugeOptions = {
     chart: {
-      type: 'solidgauge'
+      type: 'solidgauge',
+      backgroundColor: 'transparent'
     },
     title: null,
     pane: {
-        center: ['50%', '85%'],
-        size: '100%',
-        startAngle: -90,
-        endAngle: 90,
-        background: {
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
-            innerRadius: '60%',
-            outerRadius: '90%',
-            shape: 'arc'
-        }
+      center: ['50%', '70%'],
+      size: '130%',
+      startAngle: -90,
+      endAngle: 90,
+      background: {
+        backgroundColor: '#fff',
+        innerRadius: '75%',
+        outerRadius: '100%',
+        shape: 'arc',
+        borderColor: 'transparent'
+      }
     },
     tooltip: {
-        enabled: false
+      enabled: false
     },
     yAxis: {
-        stops: [
-            [0.1, '#55BF3B'], // green
-            [0.5, '#DDDF0D'], // yellow
-            [0.9, '#DF5353'] // red
-        ],
-        lineWidth: 0,
-        minorTickInterval: null,
-        tickAmount: 2,
-        title: {
-            y: -70
-        },
-        labels: {
-            y: 16
-        }
+      min: 0,
+      max: 1,
+      stops: [
+        [0.1, '#e74c3c'], // red
+        [0.5, '#f1c40f'], // yellow
+        [0.9, '#2ecc71'] // green
+      ],
+      minorTickInterval: null,
+      tickPixelInterval: 400,
+      tickWidth: 0,
+      gridLineWidth: 0,
+      gridLineColor: 'transparent',
+      labels: {
+        enabled: false
+      },
+      title: {
+        enabled: false
+      }
+    },
+    credits: {
+      enabled: false
     },
     plotOptions: {
       solidgauge: {
+        innerRadius: '75%',
         dataLabels: {
-          y: 5,
+          y: -45,
           borderWidth: 0,
           useHTML: true
         }
       }
-    }
+    },
+    series: [{
+      data: [0.83],
+      dataLabels: {
+        formatter: function () {
+          return `<span style="color: #ffffff">${this.y > 0 ? '+' : '-'} ${this.y}<span>`;
+        }
+      }
+    }]
   };
 
   constructor() { }
 
   ngOnInit() {
-    this.chart = Highcharts.chart('chartElement', Highcharts.merge(this.gaugeOptions, {
-      yAxis: {
-          min: 0,
-          max: 200,
-          title: {
-              text: 'Speed'
-          }
-      },
-      credits: {
-          enabled: false
-      },
-      series: [{
-        name: 'Speed',
-        data: [80],
-        dataLabels: {
-            format:
-                '<div style="text-align:center">' +
-                '<span style="font-size:25px">{y}</span><br/>' +
-                '<span style="font-size:12px;opacity:0.4">km/h</span>' +
-                '</div>'
-        },
-        tooltip: {
-            valueSuffix: ' km/h'
-        }
-      }]
-    }));
+    this.chart = Highcharts.chart('chartElement', this.gaugeOptions as any);
   }
 }
