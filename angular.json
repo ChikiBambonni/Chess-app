@@ -10,6 +10,18 @@
       "prefix": "app",
       "schematics": {},
       "architect": {
+        "build-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack",
+          "options": {
+            "webpackConfig": "./webpack.config.worker.js"
+          }
+        },
+        "dev-worker": {
+          "builder": "@angular-devkit/build-webpack:webpack",
+          "options": {
+            "webpackConfig": "./src/webpack.config.dev-worker.js"
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {

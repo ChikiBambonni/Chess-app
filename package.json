@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "concurrently --kill-others \"npm run dev-worker\" \"ng serve\"",
+    "build": "npm run build-worker && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-worker": "ng run chess-app:build-worker",
+    "dev-worker": "ng run chess-app6:dev-worker"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +39,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.2.0",
     "socket.io": "^2.2.0",
+    "stockfish": "^10.0.2",
     "ts-transformer-keys": "^0.3.4",
     "url-pattern": "^1.0.3",
     "uuid": "^3.3.2",
@@ -51,6 +54,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.3.0",
+    "concurrently": "^4.1.1",
     "expect": "^24.7.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

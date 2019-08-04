@@ -6,12 +6,16 @@ import HighchartsSolidGauge from 'highcharts/modules/solid-gauge';
 HighchartsMore(Highcharts);
 HighchartsSolidGauge(Highcharts);
 
+import * as stokfish from 'stockfish';
+
 @Component({
   selector: 'app-engine-gauge',
   templateUrl: './engine-gauge.component.html',
   styleUrls: ['./engine-gauge.component.scss']
 })
 export class EngineGaugeComponent implements OnInit {
+
+  worker;
 
   chart: Highcharts.Chart;
 
