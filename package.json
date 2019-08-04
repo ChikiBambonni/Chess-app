@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-worker": "ng run chess-app:build-worker",
-    "dev-worker": "ng run chess-app6:dev-worker"
+    "dev-worker": "ng run chess-app:dev-worker"
   },
   "private": true,
   "dependencies": {

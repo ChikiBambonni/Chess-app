@@ -21,11 +21,11 @@ module.exports = {
       './node_modules'
     ]
   },
-  'entry': {
-    './src/assets/workers/main': [
-      './src/worker/main.worker.ts'
-    ]
-  },
+  // 'entry': {
+  //   './src/assets/workers/main': [
+  //     './src/worker/main.worker.ts'
+  //   ]
+  // },
   'output': {
     'path': process.cwd(),
     'filename': '[name].js'
@@ -56,7 +56,7 @@ module.exports = {
     new ProgressPlugin(),
     new AngularCompilerPlugin({
       'tsConfigPath': './src/tsconfig.worker.json',
-      'entryModule': './src/worker/main.worker.ts'
+      // 'entryModule': './src/worker/main.worker.ts'
     })
   ]
 };

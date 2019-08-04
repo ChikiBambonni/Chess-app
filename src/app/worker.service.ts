@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, Subscription, fromEvent } from 'rxjs';
-import { WorkerMessage } from './worker/app-workers/shared/worker-message.model';
+import { Subject, Observable, fromEvent } from 'rxjs';
 
 @Injectable()
 export class WorkerService {
   public readonly workerPath = 'assets/workers/stockfish.js';
-  workerUpdate$: Observable<WorkerMessage>;
+  workerUpdate$: Observable<string>;
+
   private worker: Worker;
-  private workerSubject: Subject<WorkerMessage>;
-  private workerMessageSubscription: Subscription;
+  private workerSubject: Subject<string>;
 
   constructor() {
     this.workerInit();
   }
 
-  doWork(/*workerMessage: WorkerMessage*/workerMessage: string) {
+  postMessage(workerMessage: string) {
     if (this.worker) {
       this.worker.postMessage(workerMessage);
     }
@@ -24,13 +23,12 @@ export class WorkerService {
     try {
       if (!!this.worker === false) {
         this.worker = new Worker(this.workerPath);
-        this.workerSubject = new Subject<WorkerMessage>();
+        this.workerSubject = new Subject<string>();
         this.workerUpdate$ = this.workerSubject.asObservable();
-        this.workerMessageSubscription = fromEvent(this.worker, 'message')
+        fromEvent(this.worker, 'message')
           .subscribe((response: MessageEvent) => {
-            console.log('-------------------', response)
             if (this.workerSubject) {
-              this.workerSubject.next(WorkerMessage.getInstance(response.data));
+              this.workerSubject.next(response.data);
             }
           }, (error) => console.error('WORKER ERROR::', error));
       }
