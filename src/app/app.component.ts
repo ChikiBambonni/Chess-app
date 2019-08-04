@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { WorkerService } from './worker.service';
+import { WorkerService } from './app-worker.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.listenForWorkerResponse();
-    this.workerService.postMessage('d');
   }
 
   ngOnDestroy(): void {
