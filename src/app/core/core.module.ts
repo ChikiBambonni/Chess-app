@@ -11,7 +11,6 @@ import { fakeBackendProvider } from '@core/mock-backend/interceptors/auth.interc
 import { AuthenticationService } from '@core/mock-backend/services/auth.service';
 import { MessageService } from '@core/services/message/message.service';
 import { ChatService } from '@core/services/chat/chat.service';
-import { ChessEngineService } from '@core/services/chess-engine/chess-engine.service';
 import { UserService } from '@core/mock-backend/services/user.service';
 import { DomUtilsService } from '@core/services/dom-utils/dom-utils.service';
 import { WebsocketService } from '@core/services/websocket/websocket.service';
@@ -44,7 +43,6 @@ import { AppInfoRepository } from './services/app-info.repository';
     MessageService,
     WebsocketService,
     ChessGameService,
-    ChessEngineService,
     UserService,
     AuthenticationService,
     MockBackendService,

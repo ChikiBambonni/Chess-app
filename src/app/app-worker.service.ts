@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable, fromEvent } from 'rxjs';
 
 import { Safe } from '@core/decorators/safe.decorator';
-import { BaseChessEngine } from '@core/utils/chess-engine.class';
 
 @Injectable()
 export class WorkerService {
@@ -18,12 +17,11 @@ export class WorkerService {
   constructor() {
     this.workerInit();
     setTimeout(() => {
-
       this.postMessage('ucinewgame');
       this.postMessage('isready');
       this.postMessage('position startpos moves e2e4 e7e5 h2h4');
+      this.postMessage('go depth 1 wtime 300000 winc 2000 btime 300000 binc 2000');
       this.postMessage('eval');
-      console.log('8888888888888888888', this.engineStatus);
     }, 2000);
   }
 
@@ -65,13 +63,8 @@ export class WorkerService {
     } else {
       let match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/);
 
-      console.log('**********', line.match(/^info .*\bscore (\w+) (-?\d+)/));
-
       if (match) {
         this.isEngineRunning = false;
-        // prepareMove();
-        // uciCmd("eval", evaler)
-        // uciCmd("eval");
       } else if (match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/)) {
         this.engineStatus.search = 'Depth: ' + match[1] + ' Nps: ' + match[2];
       }
