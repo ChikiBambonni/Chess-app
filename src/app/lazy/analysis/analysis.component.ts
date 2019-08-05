@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 import { AnalysisService } from './analysis.service';
+import { Opening } from './analysis.intefaces';
 
 @Component({
   selector: 'app-analysis',
@@ -19,7 +20,7 @@ export class AnalysisComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeFEN($event) {
+  changeFEN($event: Opening) {
     this.data = AnalysisService.castChessMoves($event.m.split(' '));
     this.fen = $event.f;
     this.opening = $event.n;

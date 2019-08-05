@@ -18,8 +18,4 @@ export class OpeningsCgComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  rowClick(row) {
-    this.fen = row.f;
-  }
 }
