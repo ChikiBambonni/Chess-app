@@ -37,7 +37,7 @@ export class OpeningsMtComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.workerService.workerUpdate$.subscribe(line => {
-      this.score = +this.workerService.engineStatus.score;
+      this.score = Number(this.workerService.engineStatus.score);
     });
   }
 
