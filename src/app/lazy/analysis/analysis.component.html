@@ -18,6 +18,7 @@
       <mat-card class="card mv-table">
         <div *ngIf="opening" class="op-title">{{ opening }}</div>
         <app-openings-mt
+          [m]="m"
           [data]="data">
         </app-openings-mt>
       </mat-card>

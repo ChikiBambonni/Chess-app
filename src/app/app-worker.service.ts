@@ -17,11 +17,11 @@ export class WorkerService {
   constructor() {
     this.workerInit();
     setTimeout(() => {
-      this.postMessage('ucinewgame');
-      this.postMessage('isready');
-      this.postMessage('position startpos moves e2e4 e7e5 h2h4');
-      this.postMessage('go depth 1 wtime 300000 winc 2000 btime 300000 binc 2000');
-      this.postMessage('eval');
+      //this.postMessage('ucinewgame');
+      //this.postMessage('isready');
+      // this.postMessage('position startpos moves e2e4 e7e5 h2h4');
+      // this.postMessage('go depth 1 wtime 300000 winc 2000 btime 300000 binc 2000');
+      // this.postMessage('eval');
     }, 2000);
   }
 
@@ -41,7 +41,6 @@ export class WorkerService {
         .subscribe((response: MessageEvent) => {
           if (this.workerSubject) {
             this.onmessage(response.data, 'w');
-            console.log(this.engineStatus);
             this.workerSubject.next(response.data);
           }
         }, (error) => console.error('WORKER ERROR::', error));

@@ -12,6 +12,7 @@ import { Opening } from './analysis.intefaces';
 export class AnalysisComponent implements OnInit {
 
   fen: string = null;
+  m: string = null;
   opening: string = null;
   data: ChessMove[] = [];
 
@@ -24,5 +25,6 @@ export class AnalysisComponent implements OnInit {
     this.data = AnalysisService.castChessMoves($event.m.split(' '));
     this.fen = $event.f;
     this.opening = $event.n;
+    this.m = $event.m;
   }
 }
