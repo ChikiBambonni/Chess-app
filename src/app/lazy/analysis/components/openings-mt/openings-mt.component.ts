@@ -9,6 +9,10 @@ import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 })
 export class OpeningsMtComponent implements OnInit {
 
+  min = -20;
+  max = 20;
+  score = -5;
+
   @Input()
   data: ChessMove[];
 
@@ -16,5 +20,4 @@ export class OpeningsMtComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

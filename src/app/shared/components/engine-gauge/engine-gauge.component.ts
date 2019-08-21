@@ -17,7 +17,6 @@ import { TrackChanges } from '@core/decorators/changes.decorator';
 export class EngineGaugeComponent implements OnInit, OnChanges {
 
   chart: Highcharts.Chart;
-  options = gaugeOptions(-20, 20, 0.83);
 
   @Input()
   min: number;
@@ -31,16 +30,22 @@ export class EngineGaugeComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.chart = Highcharts.chart('chartElement', this.options as any);
+    this.chart = Highcharts.chart('chartElement', <any>gaugeOptions(this.min, this.max, this.data));
   }
 
-  @TrackChanges('selectedTab', 'fetchData')
+  @TrackChanges('data', 'setData')
   ngOnChanges(changes: SimpleChanges) {
   }
 
   private setExtremes(min: number, max: number) {
     if (this.chart) {
       this.chart.yAxis[0].setExtremes(min, max);
+    }
+  }
+
+  private setData() {
+    if (this.chart && this.chart.series[0]) {
+      this.chart.series[0].setData([this.data], true);
     }
   }
 }
