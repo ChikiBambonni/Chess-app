@@ -1,4 +1,4 @@
-export const gaugeOptions = (data: number) => {
+export const gaugeOptions = (min: number, max: number, data: number) => {
   return {
     chart: {
     type: 'solidgauge',
@@ -22,8 +22,8 @@ export const gaugeOptions = (data: number) => {
     enabled: false
   },
   yAxis: {
-    min: -20,
-    max: 20,
+    min: min,
+    max: max,
     stops: [
       [0.9, '#FFD740']
     ],
