@@ -41,6 +41,7 @@ export class WorkerService {
         .subscribe((response: MessageEvent) => {
           if (this.workerSubject) {
             this.onmessage(response.data, 'w');
+            console.log(this.engineStatus);
             this.workerSubject.next(response.data);
           }
         }, (error) => console.error('WORKER ERROR::', error));
