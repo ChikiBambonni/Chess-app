@@ -3,6 +3,7 @@
   [height]="512"
   [zoom]="zoom"
   [fen]="fen"
+  (cgMove)="onMove($event)"
   orientation="white"
   coordinates="true">
 </app-chessground-static>

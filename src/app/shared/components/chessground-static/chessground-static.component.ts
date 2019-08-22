@@ -2,17 +2,19 @@ import {
   Component,
   OnInit,
   Input,
+  Output,
   ElementRef,
   ViewChild,
   OnChanges,
+  EventEmitter,
   SimpleChanges } from '@angular/core';
 import { Chessground } from 'chessground';
 import { Color } from 'chessground/types';
 import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
-import { toDests } from '@core/utils/chess.utils';
 
-import { playOtherSide } from '@core/utils/chess.utils';
+import { toDests, playOtherSide } from '@core/utils/chess.utils';
+import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 
 @Component({
   selector: 'app-chessground-static',
@@ -38,6 +40,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
 
   @Input()
   fen: string;
+
+  @Output()
+  cgMove = new EventEmitter<ChessMove>();
 
   @ViewChild('chessBoard')
   chessBoard: ElementRef;
@@ -65,7 +70,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
         fen: this.fen,
         movable: {
           events: {
-            after: playOtherSide(this.cg, this.chess)
+            after: playOtherSide(this.cg, this.chess, this.cgMove)
           }
         }
       });

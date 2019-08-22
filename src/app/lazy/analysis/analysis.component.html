@@ -12,6 +12,7 @@
     <div class="d-flex justify-content-center">
       <mat-card class="card cg-card">
         <app-openings-cg
+          (cgMove)="onMove($event)"
           [fen]="fen">
         </app-openings-cg>
       </mat-card>

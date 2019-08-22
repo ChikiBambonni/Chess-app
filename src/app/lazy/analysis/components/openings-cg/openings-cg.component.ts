@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output
+} from '@angular/core';
 
 import { calZoom } from '@core/utils/chess.utils';
 
@@ -11,11 +17,18 @@ export class OpeningsCgComponent implements OnInit {
 
   zoom: number = calZoom(512);
 
+  @Output()
+  cgMove = new EventEmitter<any>();
+
   @Input()
   fen: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onMove($event) {
+    this.cgMove.emit($event);
   }
 }
