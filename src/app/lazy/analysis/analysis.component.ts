@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Key } from 'chessground/types';
 import * as _ from 'lodash';
 
-import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
+import { pushMove } from '@core/utils/chess.utils';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
 
@@ -30,21 +30,7 @@ export class AnalysisComponent implements OnInit {
     this.m = $event.m;
   }
 
-  onMove($event) {
-    console.log($event)
-    this.updateData($event);
-  }
-
-  updateData({ to, turn }: { to: Key, turn: string }) {
-    const last: ChessMove = _.last(this.data);
-    const color = turn === 'w' ? 'black' : 'white';
-    if (last[color] !== undefined) {
-      const row = {} as ChessMove;
-      row.N = last.N + 1;
-      row[color] = to;
-      this.data = [...this.data, row];
-    } else {
-      last[color] = to;
-    }
+  onMove($event: CgMove) {
+    this.data = pushMove(this.data, $event);
   }
 }

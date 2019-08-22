@@ -3,10 +3,28 @@ import { take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as Chess from 'chess.js';
 import { Api } from 'chessground/api';
+import * as _ from 'lodash';
+
 import { Config } from 'chessground/config';
 import { Color, Role, Key } from 'chessground/types';
 
-import { CgMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove, CgTurn, ChessMove } from '@core/interfaces/chess-move.interfaces';
+
+export const pushMove = (data: ChessMove[], { to, turn }: { to: Key, turn: CgTurn }): ChessMove[] => {
+  let moves: ChessMove[] = [...data];
+  const last: ChessMove = _.last(moves);
+  const color = turn === 'w' ? 'black' : 'white';
+  if (last[color] !== undefined) {
+    const row = {} as ChessMove;
+    row.N = last.N + 1;
+    row[color] = to;
+    moves = [...moves, row];
+  } else {
+    last[color] = to;
+  }
+
+  return moves;
+};
 
 const randomPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => {
   setTimeout(() => {
