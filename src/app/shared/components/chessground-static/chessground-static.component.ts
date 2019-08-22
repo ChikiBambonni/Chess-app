@@ -15,6 +15,8 @@ import * as Chess from 'chess.js';
 
 import { toDests, playOtherSide } from '@core/utils/chess.utils';
 import { CgMove } from '@core/interfaces/chess-move.interfaces';
+import { TrackChanges } from '@core/decorators/changes.decorator';
+import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
 
 @Component({
   selector: 'app-chessground-static',
@@ -84,13 +86,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
     setTimeout(() => this.setZoom(), 200);
   }
 
+  @TrackChanges('zoom', 'setZoom')
+  @TrackChanges('fen', 'setFEN', ChangesStrategy.NonFirst)
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.zoom) {
-      this.setZoom();
-    }
-    if (changes.fen && this.cg) {
-      this.cg.set({ fen: changes.fen.currentValue });
-    }
   }
 
   setZoom() {
@@ -101,5 +99,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
       el.style.height = px;
       document.body.dispatchEvent(new Event('chessground.resize'));
     }
+  }
+
+  setFEN() {
+    this.cg.set({ fen: this.fen });
   }
 }
