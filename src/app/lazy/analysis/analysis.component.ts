@@ -13,8 +13,8 @@ export class AnalysisComponent implements OnInit {
 
   fen: string = null;
   m: string = null;
-  opening: string = null;
-  data: ChessMove[] = [];
+  opening = 'Custom Variation';
+  data: ChessMove[] = [{ N: 1 }];
 
   constructor() { }
 

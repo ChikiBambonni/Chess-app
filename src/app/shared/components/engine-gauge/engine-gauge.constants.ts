@@ -2,7 +2,8 @@ export const gaugeOptions = (min: number, max: number, data: number) => {
   return {
     chart: {
     type: 'solidgauge',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    marginTop: 10,
   },
   title: null,
   pane: {
