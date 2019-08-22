@@ -31,6 +31,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   onMove($event) {
+    console.log($event)
     this.updateData($event);
   }
 

@@ -14,7 +14,7 @@ import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
 import { toDests, playOtherSide } from '@core/utils/chess.utils';
-import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove } from '@core/interfaces/chess-move.interfaces';
 
 @Component({
   selector: 'app-chessground-static',
@@ -42,7 +42,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   fen: string;
 
   @Output()
-  cgMove = new EventEmitter<ChessMove>();
+  cgMove = new EventEmitter<CgMove>();
 
   @ViewChild('chessBoard')
   chessBoard: ElementRef;

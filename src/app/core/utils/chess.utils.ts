@@ -1,11 +1,12 @@
 import { EventEmitter } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
 import * as Chess from 'chess.js';
 import { Api } from 'chessground/api';
 import { Config } from 'chessground/config';
 import { Color, Role, Key } from 'chessground/types';
+
+import { CgMove } from '@core/interfaces/chess-move.interfaces';
 
 const randomPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => {
   setTimeout(() => {
@@ -84,7 +85,7 @@ const toVertical = (move: Key) => {
 export const toColor = (chess: Chess) => (chess.turn() === 'w')  ? 'white' : 'black';
 export const toPromotion = (role: Role) => role.substring(0, 1);
 
-export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => {
+export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove> = null) => {
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     cg.set({
@@ -100,7 +101,7 @@ export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<any> =
   };
 };
 
-export const aiPlay = (cg: Api, chess: Chess, promotionSubject: Subject<any>, cgMove: EventEmitter<any> = null) => {
+export const aiPlay = (cg: Api, chess: Chess, promotionSubject: Subject<any>, cgMove: EventEmitter<CgMove> = null) => {
   return (orig, dest) => {
     if (isPromotion(chess)) {
       promotionSubject.next({ column: toVertical(dest), color: chess.turn() });
@@ -122,7 +123,7 @@ export const aiPlay = (cg: Api, chess: Chess, promotionSubject: Subject<any>, cg
   };
 };
 
-export const opPlay = (cg: Api, chess: Chess, cgMove = null) => {
+export const opPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove> = null) => {
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     if (cgMove) {
