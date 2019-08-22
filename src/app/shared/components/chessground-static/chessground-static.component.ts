@@ -1,4 +1,3 @@
-import { Color } from 'chessground/types';
 import {
   Component,
   OnInit,
@@ -8,7 +7,12 @@ import {
   OnChanges,
   SimpleChanges } from '@angular/core';
 import { Chessground } from 'chessground';
+import { Color } from 'chessground/types';
 import { Api } from 'chessground/api';
+import * as Chess from 'chess.js';
+import { toDests } from '@core/utils/chess.utils';
+
+import { playOtherSide } from '@core/utils/chess.utils';
 
 @Component({
   selector: 'app-chessground-static',
@@ -39,18 +43,32 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   chessBoard: ElementRef;
 
   private cg: Api = null;
+  private chess: Chess = new Chess();
 
   private initChessground(): void {
     setTimeout(() => {
       this.cg = Chessground(this.chessBoard.nativeElement, {
         orientation: this.orientation,
         coordinates: this.coordinates,
+        // movable: {
+        //   color: null,
+        //   dests: {}
+        // },
         movable: {
-          color: null,
-          dests: {}
+          color: 'white',
+          free: false,
+          dests: toDests(this.chess),
+          showDests: true,
         },
       });
-      this.cg.set({ fen: this.fen });
+      this.cg.set({
+        fen: this.fen,
+        movable: {
+          events: {
+            after: playOtherSide(this.cg, this.chess)
+          }
+        }
+      });
     }, 200);
   }
 

@@ -20,7 +20,7 @@ export class OpeningsMtComponent implements OnInit, OnChanges {
 
   min = -20;
   max = 20;
-  score = -5;
+  score = 0;
 
   @Input()
   data: ChessMove[];
