@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 import { WorkerService } from '../../app-worker.service';
 import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
-import { pushMove } from '@core/utils/chess.utils';
+import { pushMove, appendMove } from '@core/utils/chess.utils';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
 
@@ -14,8 +14,8 @@ import { Opening } from './analysis.intefaces';
 })
 export class AnalysisComponent implements OnInit {
 
-  fen: string = null;
-  m: string = null;
+  fen = '';
+  m = '';
   opening = 'Custom Variation';
   score = 0;
   data: ChessMove[] = [{ N: 1 }];
@@ -43,6 +43,7 @@ export class AnalysisComponent implements OnInit {
 
   onMove($event: CgMove) {
     this.data = pushMove(this.data, $event);
+    this.m = appendMove($event, this.m);
     this.setM();
     console.log('Move', $event, this.m);
   }

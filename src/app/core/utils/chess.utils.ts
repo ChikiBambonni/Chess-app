@@ -26,6 +26,11 @@ export const pushMove = (data: ChessMove[], { to, turn }: { to: Key, turn: CgTur
   return moves;
 };
 
+export const appendMove = (move: CgMove, moves: string) => {
+  const { from, to } = move;
+  return `${moves} ${from}${to}`;
+};
+
 const randomPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<any> = null) => {
   setTimeout(() => {
     const moves = chess.moves({ verbose: true });
