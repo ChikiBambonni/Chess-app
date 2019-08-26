@@ -6,7 +6,7 @@ import { Api } from 'chessground/api';
 import * as _ from 'lodash';
 
 import { Config } from 'chessground/config';
-import { Color, Role, Key } from 'chessground/types';
+import { Color, Role, Key, FEN } from 'chessground/types';
 
 import { CgMove, CgTurn, ChessMove } from '@core/interfaces/chess-move.interfaces';
 
@@ -100,9 +100,19 @@ export const toDests = (chess: Chess) => {
   return dests;
 };
 
-const toVertical = (move: Key) => {
+export const toVertical = (move: Key) => {
   const vericals = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   return vericals.indexOf(move.substring(0, 1)) + 1;
+};
+
+export const toFEN = (m: string): FEN => {
+  const chess = new Chess();
+  m.split(' ').forEach((e: string) => {
+    const moves = <Key[]>e.match(/.{1,2}/g);
+    chess.move({ from: moves[0], to: moves[1], promotion: 'q' }); // TODO: implement other piece promotion
+  });
+
+  return chess.fen();
 };
 
 export const toColor = (chess: Chess) => (chess.turn() === 'w')  ? 'white' : 'black';

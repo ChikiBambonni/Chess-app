@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
+import * as Chess from 'chess.js';
 
 import { WorkerService } from '../../app-worker.service';
 import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
-import { pushMove, appendMove } from '@core/utils/chess.utils';
+import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
 
@@ -36,7 +37,7 @@ export class AnalysisComponent implements OnInit {
 
   changeFEN($event: Opening) {
     this.data = AnalysisService.castChessMoves($event.m.split(' '));
-    this.fen = $event.f;
+    this.fen = toFEN($event.m);
     this.opening = $event.n;
     this.m = $event.m;
     this.setM();
