@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 
 import { WorkerService } from '../../app-worker.service';
 import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
+import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove } from '@core/utils/chess.utils';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
@@ -23,8 +24,8 @@ export class AnalysisComponent implements OnInit {
   constructor(private workerService: WorkerService) { }
 
   private setM() {
-    this.workerService.postMessage(`position startpos moves ${this.m}`);
-    this.workerService.postMessage('go depth 1 wtime 300000 winc 2000 btime 300000 binc 2000');
+    this.workerService.postMessage(UCI_COMMANDS.startPosMove + this.m);
+    this.workerService.postMessage(UCI_COMMANDS.goDepth);
   }
 
   ngOnInit() {
