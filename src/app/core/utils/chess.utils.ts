@@ -119,7 +119,7 @@ export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove
       }
     });
     if (cgMove) {
-      cgMove.emit({from: orig, to: dest, turn: chess.turn() });
+      cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
     }
   };
 };
@@ -132,14 +132,14 @@ export const aiPlay = (cg: Api, chess: Chess, promotionSubject: Subject<any>, cg
         cg.setPieces({ [dest]: { role , color: toColor(chess), promoted: true} });
         chess.move({ from: orig, to: dest, promotion: toPromotion(role) });
         if (cgMove) {
-          cgMove.emit({from: orig, to: dest, turn: chess.turn() });
+          cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
         }
         randomPlay(cg, chess, cgMove);
       });
     } else {
       chess.move({ from: orig, to: dest });
       if (cgMove) {
-        cgMove.emit({from: orig, to: dest, turn: chess.turn() });
+        cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
       }
       randomPlay(cg, chess, cgMove);
     }
@@ -150,7 +150,7 @@ export const opPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove> = nul
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     if (cgMove) {
-      cgMove.emit({from: orig, to: dest, turn: chess.turn() });
+      cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
     }
   };
 };

@@ -102,6 +102,11 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   }
 
   setFEN() {
-    this.cg.set({ fen: this.fen });
+    if (this.chess.validate_fen(this.fen).valid) {
+      this.chess.load(this.fen);
+      this.cg.set({ fen: this.fen });
+    } else {
+      console.error('Error setting fen');
+    }
   }
 }

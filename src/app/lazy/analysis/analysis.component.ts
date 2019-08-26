@@ -43,9 +43,9 @@ export class AnalysisComponent implements OnInit {
   }
 
   onMove($event: CgMove) {
+    this.fen = $event.fen;
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
     this.setM();
-    console.log('Move', $event, this.m);
   }
 }
