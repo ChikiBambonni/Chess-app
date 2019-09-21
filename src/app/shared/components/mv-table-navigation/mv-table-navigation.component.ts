@@ -19,4 +19,7 @@ export class MvTableNavigationComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick($event) {
+    console.log('clicked');
+  }
 }

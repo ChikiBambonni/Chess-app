@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'app-common-icon',
@@ -16,8 +22,15 @@ export class CommonIconComponent implements OnInit {
   @Input()
   height: number;
 
+  @Output()
+  imgEvent = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  imgClick() {
+    this.imgEvent.emit(null);
   }
 }
