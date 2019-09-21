@@ -6,4 +6,12 @@ div.mv-icons-container {
   padding: 8px;
   border-bottom: 1px solid $primary-text-color;
   border-top: 1px solid $primary-text-color;
+
+  &>div.icon {
+    cursor: pointer;
+  }
+
+  &>div.icon:hover {
+    transform: scale(1.2);
+  }
 }
