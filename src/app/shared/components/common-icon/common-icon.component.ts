@@ -10,6 +10,12 @@ export class CommonIconComponent implements OnInit {
   @Input()
   src: string;
 
+  @Input()
+  width: number;
+
+  @Input()
+  height: number;
+
   constructor() { }
 
   ngOnInit() {

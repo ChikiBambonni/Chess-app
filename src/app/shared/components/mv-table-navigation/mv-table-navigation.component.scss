@@ -1,4 +1,9 @@
+@import 'variables';
+
 div.mv-icons-container {
   display: flex;
   justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid $primary-text-color;
+  border-top: 1px solid $primary-text-color;
 }
