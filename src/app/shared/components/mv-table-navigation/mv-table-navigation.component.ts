@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MvTableNavigationComponent implements OnInit {
 
+  images = [
+    'assets/images/icons/start.svg',
+    'assets/images/icons/back.svg',
+    'assets/images/icons/next.svg',
+    'assets/images/icons/end.svg'
+  ];
+
   constructor() { }
 
   ngOnInit() {

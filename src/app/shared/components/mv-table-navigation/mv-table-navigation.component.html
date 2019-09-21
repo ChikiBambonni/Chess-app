@@ -1,4 +1,9 @@
-<app-common-icon src="assets/images/icons/back.svg"></app-common-icon>
-<app-common-icon src="assets/images/icons/end.svg"></app-common-icon>
-<app-common-icon src="assets/images/icons/next.svg"></app-common-icon>
-<app-common-icon src="assets/images/icons/start.svg"></app-common-icon>
+<div class="mv-icons-container">
+  <!-- <app-common-icon src="assets/images/icons/back.svg"></app-common-icon>
+  <app-common-icon src="assets/images/icons/end.svg"></app-common-icon>
+  <app-common-icon src="assets/images/icons/next.svg"></app-common-icon>
+  <app-common-icon src="assets/images/icons/start.svg"></app-common-icon> -->
+  <div *ngFor="let image of images" class="icon-wrapper">
+    <app-common-icon [src]="image"></app-common-icon>
+  </div>
+</div>
