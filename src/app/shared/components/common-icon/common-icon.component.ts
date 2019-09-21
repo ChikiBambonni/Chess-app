@@ -31,6 +31,6 @@ export class CommonIconComponent implements OnInit {
   }
 
   imgClick() {
-    this.imgEvent.emit(null);
+    this.imgEvent.emit({ src: this.src });
   }
 }

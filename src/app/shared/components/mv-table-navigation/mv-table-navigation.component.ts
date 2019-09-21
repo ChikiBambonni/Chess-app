@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ArrowEvents } from '@core/enums/chess-events.enumn';
+
 @Component({
   selector: 'app-mv-table-navigation',
   templateUrl: './mv-table-navigation.component.html',
@@ -8,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class MvTableNavigationComponent implements OnInit {
 
   images = [
-    'assets/images/icons/start.svg',
-    'assets/images/icons/back.svg',
-    'assets/images/icons/next.svg',
-    'assets/images/icons/end.svg'
-  ];
+    {
+      uri: 'assets/images/icons/start.svg',
+      type: ArrowEvents.First
+    }, {
+      uri: 'assets/images/icons/back.svg',
+      type: ArrowEvents.Prev
+    }, {
+      uri: 'assets/images/icons/next.svg',
+      type: ArrowEvents.Next
+    }, {
+      uri: 'assets/images/icons/end.svg',
+      type: ArrowEvents.Last
+    }];
 
   constructor() { }
 
@@ -20,6 +30,6 @@ export class MvTableNavigationComponent implements OnInit {
   }
 
   onClick($event) {
-    console.log('clicked');
+    console.log('clicked', this.images.filter(i => i.uri === $event.src)[0].type);
   }
 }
