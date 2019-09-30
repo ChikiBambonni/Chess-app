@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import * as Chess from 'chess.js';
 
-import { WorkerService } from '../../app-worker.service';
 import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
+import { ArrowEvents } from '@core/enums/chess-events.enumn';
+import { WorkerService } from '../../app-worker.service';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
 
@@ -55,6 +55,23 @@ export class AnalysisComponent implements OnInit {
   }
 
   onArrowChange($event) {
-    console.log('Arrow changed', $event);
+    switch ($event.type) {
+      case ArrowEvents.First: {
+        console.log('First came');
+        break;
+      }
+      case ArrowEvents.Next: {
+        console.log('Next came');
+        break;
+      }
+      case ArrowEvents.Prev: {
+        console.log('Prev came');
+        break;
+      }
+      case ArrowEvents.Last: {
+        console.log('Last came');
+        break;
+      }
+    }
   }
 }
