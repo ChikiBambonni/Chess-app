@@ -1,5 +1,7 @@
 <div class="analysis-moves-table">
-  <app-mv-table-navigation></app-mv-table-navigation>
+  <app-mv-table-navigation
+    (changeEvent)="onChange($event)">
+  </app-mv-table-navigation>
   <app-moves-table
     [data]="data">
   </app-moves-table>

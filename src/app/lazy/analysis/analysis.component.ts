@@ -16,7 +16,8 @@ import { Opening } from './analysis.intefaces';
 })
 export class AnalysisComponent implements OnInit {
 
-  fen = '';
+  fenArr: string[] = [];
+  currentFEN = '';
   m = '';
   opening = 'Custom Variation';
   score = 0;
@@ -37,16 +38,23 @@ export class AnalysisComponent implements OnInit {
 
   changeFEN($event: Opening) {
     this.data = AnalysisService.castChessMoves($event.m.split(' '));
-    this.fen = toFEN($event.m);
+    this.currentFEN = toFEN($event.m);
     this.opening = $event.n;
     this.m = $event.m;
+    this.fenArr = [];
     this.setM();
   }
 
   onMove($event: CgMove) {
-    this.fen = $event.fen;
+    this.currentFEN = $event.fen;
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
+    this.fenArr.push(this.currentFEN);
+    console.log(this.fenArr)
     this.setM();
+  }
+
+  onArrowChange($event) {
+    console.log('Arrow changed', $event);
   }
 }

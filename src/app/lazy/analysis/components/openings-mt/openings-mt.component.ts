@@ -2,6 +2,8 @@ import {
   Component,
   OnInit,
   Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
@@ -25,8 +27,15 @@ export class OpeningsMtComponent implements OnInit {
   @Input()
   m: string;
 
+  @Output()
+  changeArrow: EventEmitter<any> = new EventEmitter(); // TODO: provide interface here
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChange($event) {
+    this.changeArrow.emit($event);
   }
 }

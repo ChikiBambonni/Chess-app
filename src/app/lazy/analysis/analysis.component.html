@@ -13,12 +13,13 @@
       <mat-card class="card cg-card">
         <app-openings-cg
           (cgMove)="onMove($event)"
-          [fen]="fen">
+          [fen]="currentFEN">
         </app-openings-cg>
       </mat-card>
       <mat-card class="card mv-table">
         <div *ngIf="opening" class="op-title">{{ opening }}</div>
         <app-openings-mt
+          (changeArrow)="onArrowChange($event)"
           [m]="m"
           [score]="score"
           [data]="data">

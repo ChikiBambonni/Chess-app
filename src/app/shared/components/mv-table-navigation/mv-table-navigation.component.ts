@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+import { IChessEvent } from '@core/interfaces/chess-events.interfaces';
+import { ArrowEvents } from '@core/enums/chess-events.enumn';
 import { images } from './mv-table.constants';
 
 @Component({
@@ -9,7 +11,10 @@ import { images } from './mv-table.constants';
 })
 export class MvTableNavigationComponent implements OnInit {
 
-  imgs = images;
+  imgs: IChessEvent[] = images;
+
+  @Output()
+  changeEvent: EventEmitter<{ type: ArrowEvents }> = new EventEmitter<{ type: ArrowEvents }>();
 
   constructor() { }
 
@@ -17,6 +22,10 @@ export class MvTableNavigationComponent implements OnInit {
   }
 
   onClick($event) {
-    // console.log('clicked', this.images.filter(i => i.uri === $event.src)[0].type);
+    this.changeEvent.emit({ type: this.getType($event.src) });
+  }
+
+  getType(src: string): ArrowEvents {
+    return this.imgs.filter(i => i.uri === src)[0].type;
   }
 }
