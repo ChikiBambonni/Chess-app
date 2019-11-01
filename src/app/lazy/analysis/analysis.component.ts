@@ -16,8 +16,8 @@ import { Opening } from './analysis.intefaces';
 })
 export class AnalysisComponent implements OnInit {
 
-  fenArr: string[] = [];
-  currentFEN = '';
+  fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
+  currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
   m = '';
   opening = 'Custom Variation';
   score = 0;
@@ -50,7 +50,7 @@ export class AnalysisComponent implements OnInit {
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
     this.fenArr.push(this.currentFEN);
-    console.log(this.fenArr)
+    console.log(this.fenArr);
     this.setM();
   }
 
@@ -65,7 +65,9 @@ export class AnalysisComponent implements OnInit {
         break;
       }
       case ArrowEvents.Prev: {
-        console.log('Prev came');
+        // console.log('Prev came', this.currentFEN, this.fenArr[this.fenArr.length - 1]);
+        this.currentFEN = AnalysisService.getPrevFen(this.currentFEN, this.fenArr);
+        // this.currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
         break;
       }
       case ArrowEvents.Last: {

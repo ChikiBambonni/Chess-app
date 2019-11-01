@@ -15,4 +15,14 @@ export class AnalysisService {
 
     return moves;
   }
+
+  static getPrevFen(fenString: string, fenArr: string[]): string {
+    const index = fenArr.findIndex(fen => fen === fenString) - 1;
+
+    if (index >= 0) {
+      return fenArr[index];
+    }
+
+    return fenString;
+  }
 }
