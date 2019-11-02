@@ -23,6 +23,9 @@ export class CommonTableComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   @Input()
+  selectedCellValue: any;
+
+  @Input()
   isLoadingResults: boolean;
 
   @Output()

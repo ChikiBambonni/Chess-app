@@ -24,6 +24,9 @@ export class OpeningsMtComponent implements OnInit {
   @Input()
   data: ChessMove[];
 
+  @Input() // TODO: provide interface here
+  selectedCellValue: any;
+
   @Input()
   m: string;
 
@@ -36,6 +39,7 @@ export class OpeningsMtComponent implements OnInit {
   }
 
   onChange($event) {
+    console.log(this.data);
     this.changeArrow.emit($event);
   }
 }

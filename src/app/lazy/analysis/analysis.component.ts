@@ -18,6 +18,7 @@ export class AnalysisComponent implements OnInit {
 
   fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
   currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+  selectedCellValue = 'e2';
   m = '';
   opening = 'Custom Variation';
   score = 0;

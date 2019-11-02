@@ -22,6 +22,9 @@ export class MovesTableComponent implements OnInit {
   @Input()
   data: ChessMove[];
 
+  @Input()
+  selectedCellValue: any;
+
   constructor() { }
 
   ngOnInit() {

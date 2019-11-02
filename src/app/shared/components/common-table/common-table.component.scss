@@ -37,6 +37,10 @@ div.mat-elevation-z8 {
       background-color: $primary-color-minor;
       cursor: pointer;
     }
+
+    td.current-selection {
+      background-color: $primary-color-minor;
+    }
   }
   mat-paginator {
     background-color: inherit;

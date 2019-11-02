@@ -8,7 +8,7 @@
 
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column" disableClear>{{ column }}</th>
-      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'current-selection': element[column] === selectedCellValue }"> {{ element[column] }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
