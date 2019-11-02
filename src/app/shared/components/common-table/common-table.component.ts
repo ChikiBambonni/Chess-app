@@ -9,6 +9,8 @@ import {
 import { MatTableDataSource } from '@angular/material';
 import { Sort } from '@angular/material/sort';
 
+import { TableSelectedCell } from './common-table.interfaces';
+
 @Component({
   selector: 'app-common-table',
   templateUrl: './common-table.component.html',
@@ -23,7 +25,7 @@ export class CommonTableComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   @Input()
-  selectedCellValue: any;
+  selectedCellValue: TableSelectedCell;
 
   @Input()
   isLoadingResults: boolean;
@@ -48,5 +50,9 @@ export class CommonTableComponent implements OnInit {
 
   rowHandler(row) {
     this.rowClick.emit(row);
+  }
+
+  getLastCellValue(value: any) {
+    console.log(value);
   }
 }

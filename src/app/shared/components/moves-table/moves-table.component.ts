@@ -1,12 +1,11 @@
 import {
   Component,
   OnInit,
-  Input,
-  ViewChild,
-  ElementRef
+  Input
 } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { TableSelectedCell } from '../common-table/common-table.interfaces';
 
 @Component({
   selector: 'app-moves-table',
@@ -16,14 +15,11 @@ import { ChessMove } from '@core/interfaces/chess-move.interfaces';
 export class MovesTableComponent implements OnInit {
   displayedColumns = ['N', 'white', 'black'];
 
-  @ViewChild('scrollBottom')
-  private tableContainer: ElementRef;
-
   @Input()
   data: ChessMove[];
 
   @Input()
-  selectedCellValue: any;
+  selectedCellValue: TableSelectedCell;
 
   constructor() { }
 

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 
 @Component({
   selector: 'app-openings-mt',
@@ -24,8 +25,8 @@ export class OpeningsMtComponent implements OnInit {
   @Input()
   data: ChessMove[];
 
-  @Input() // TODO: provide interface here
-  selectedCellValue: any;
+  @Input()
+  selectedCellValue: TableSelectedCell;
 
   @Input()
   m: string;

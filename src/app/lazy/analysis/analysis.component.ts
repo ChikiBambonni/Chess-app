@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 
+import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
@@ -18,7 +19,7 @@ export class AnalysisComponent implements OnInit {
 
   fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
   currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-  selectedCellValue = ''; // TODO: provide obj here like: {N:1, value: 'e2'}
+  selectedCellValue: TableSelectedCell = { N: 1, column: 'white', value: 'e4'};
   m = '';
   opening = 'Custom Variation';
   score = 0;
@@ -48,9 +49,9 @@ export class AnalysisComponent implements OnInit {
 
   onMove($event: CgMove) {
     this.currentFEN = $event.fen;
+    //this.selectedCellValue = $event.to;
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
-    this.selectedCellValue = $event.to;
     this.fenArr.push(this.currentFEN);
     this.setM();
   }
