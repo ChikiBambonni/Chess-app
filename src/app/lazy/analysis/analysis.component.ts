@@ -18,7 +18,7 @@ export class AnalysisComponent implements OnInit {
 
   fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
   currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-  selectedCellValue = 'e2';
+  selectedCellValue = ''; // TODO: provide obj here like: {N:1, value: 'e2'}
   m = '';
   opening = 'Custom Variation';
   score = 0;
@@ -50,6 +50,7 @@ export class AnalysisComponent implements OnInit {
     this.currentFEN = $event.fen;
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
+    this.selectedCellValue = $event.to;
     this.fenArr.push(this.currentFEN);
     this.setM();
   }
