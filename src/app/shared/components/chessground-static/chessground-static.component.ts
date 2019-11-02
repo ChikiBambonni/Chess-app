@@ -17,6 +17,7 @@ import { toDests, playOtherSide } from '@core/utils/chess.utils';
 import { CgMove } from '@core/interfaces/chess-move.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
+import { toColor } from '@core/utils/chess.utils';
 
 @Component({
   selector: 'app-chessground-static',
@@ -104,7 +105,15 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   setFEN() {
     if (this.chess.validate_fen(this.fen).valid) {
       this.chess.load(this.fen);
-      this.cg.set({ fen: this.fen });
+      this.cg.set({
+        fen: this.fen,
+        turnColor: toColor(this.chess),
+        movable: {
+          color: toColor(this.chess),
+          dests: toDests(this.chess)
+        }
+      });
+      console.log(this.chess.turn(), this.chess, this.cg);
     } else {
       console.error('Error setting fen');
     }
