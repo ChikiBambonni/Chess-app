@@ -29,7 +29,7 @@ export class AnalysisService {
   static getNextFen(currentFen: string, fenArr: string[]): string {
     const index = fenArr.findIndex(fen => fen === currentFen) + 1;
 
-    if (index !== 0 && index <= fenArr.length) {
+    if (index !== 0 && index < fenArr.length) {
       return fenArr[index];
     }
 

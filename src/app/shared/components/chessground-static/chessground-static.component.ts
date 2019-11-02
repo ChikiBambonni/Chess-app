@@ -113,7 +113,6 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
           dests: toDests(this.chess)
         }
       });
-      console.log(this.chess.turn(), this.chess, this.cg);
     } else {
       console.error('Error setting fen');
     }

@@ -50,7 +50,6 @@ export class AnalysisComponent implements OnInit {
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
     this.fenArr.push(this.currentFEN);
-    console.log(this.fenArr);
     this.setM();
   }
 
