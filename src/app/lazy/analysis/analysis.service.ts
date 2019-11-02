@@ -16,13 +16,23 @@ export class AnalysisService {
     return moves;
   }
 
-  static getPrevFen(fenString: string, fenArr: string[]): string {
-    const index = fenArr.findIndex(fen => fen === fenString) - 1;
+  static getPrevFen(currentFen: string, fenArr: string[]): string {
+    const index = fenArr.findIndex(fen => fen === currentFen) - 1;
 
     if (index >= 0) {
       return fenArr[index];
     }
 
-    return fenString;
+    return currentFen;
+  }
+
+  static getNextFen(currentFen: string, fenArr: string[]): string {
+    const index = fenArr.findIndex(fen => fen === currentFen) + 1;
+
+    if (index !== 0 && index <= fenArr.length) {
+      return fenArr[index];
+    }
+
+    return currentFen;
   }
 }

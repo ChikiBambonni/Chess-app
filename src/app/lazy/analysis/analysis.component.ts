@@ -61,13 +61,11 @@ export class AnalysisComponent implements OnInit {
         break;
       }
       case ArrowEvents.Next: {
-        console.log('Next came');
+        this.currentFEN = AnalysisService.getNextFen(this.currentFEN, this.fenArr);
         break;
       }
       case ArrowEvents.Prev: {
-        // console.log('Prev came', this.currentFEN, this.fenArr[this.fenArr.length - 1]);
         this.currentFEN = AnalysisService.getPrevFen(this.currentFEN, this.fenArr);
-        // this.currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
         break;
       }
       case ArrowEvents.Last: {
