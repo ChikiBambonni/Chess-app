@@ -35,4 +35,12 @@ export class AnalysisService {
 
     return currentFen;
   }
+
+  static getLastFen(fenArr: string[]): string {
+    return fenArr[fenArr.length - 1];
+  }
+
+  static getFirstFen(fenArr: string[]): string {
+    return fenArr[0];
+  }
 }

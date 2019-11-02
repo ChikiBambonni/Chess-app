@@ -57,7 +57,7 @@ export class AnalysisComponent implements OnInit {
   onArrowChange($event) {
     switch ($event.type) {
       case ArrowEvents.First: {
-        console.log('First came');
+        this.currentFEN = AnalysisService.getFirstFen(this.fenArr);
         break;
       }
       case ArrowEvents.Next: {
@@ -69,7 +69,7 @@ export class AnalysisComponent implements OnInit {
         break;
       }
       case ArrowEvents.Last: {
-        console.log('Last came');
+        this.currentFEN = AnalysisService.getLastFen(this.fenArr);
         break;
       }
     }
