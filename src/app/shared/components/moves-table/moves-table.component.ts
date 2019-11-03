@@ -5,7 +5,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { ChessMove } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '../common-table/common-table.interfaces';
 
 @Component({

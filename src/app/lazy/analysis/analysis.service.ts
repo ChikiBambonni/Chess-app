@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ChessMove } from '@core/interfaces/chess-move.interfaces';
-import { CgTurn } from '@core/interfaces/chess-move.interfaces';
+import { ChessMove } from '@core/interfaces/chess.interfaces';
+import { CgTurn } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 
 @Injectable()

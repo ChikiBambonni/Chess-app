@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { ArrowEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
-import { ChessMove, CgMove } from '@core/interfaces/chess-move.interfaces';
+import { ChessMove, CgMove } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
 import { WorkerService } from '../../app-worker.service';

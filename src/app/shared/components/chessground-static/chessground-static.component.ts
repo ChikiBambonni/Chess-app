@@ -14,7 +14,7 @@ import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
 import { toDests, playOtherSide } from '@core/utils/chess.utils';
-import { CgMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
 import { toColor } from '@core/utils/chess.utils';

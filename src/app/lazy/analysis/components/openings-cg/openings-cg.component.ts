@@ -6,7 +6,7 @@ import {
   Output
 } from '@angular/core';
 
-import { CgMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove } from '@core/interfaces/chess.interfaces';
 import { calZoom } from '@core/utils/chess.utils';
 
 @Component({

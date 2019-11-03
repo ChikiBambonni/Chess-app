@@ -28,7 +28,7 @@ import {
   defConfig
 } from '@core/utils/chess.utils';
 import { MoveConfig } from '@core/interfaces/socket.interfaces';
-import { CgMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove } from '@core/interfaces/chess.interfaces';
 import { GameModes } from '@core/interfaces/game.interafces';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 import { PromotionChoiceComponent } from '@shared/components/promotion-choice/promotion-choice.component';

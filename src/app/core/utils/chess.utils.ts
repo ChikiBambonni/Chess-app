@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 import { Config } from 'chessground/config';
 import { Color, Role, Key, FEN } from 'chessground/types';
 
-import { CgMove, CgTurn, ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { CgMove, CgTurn, ChessMove } from '@core/interfaces/chess.interfaces';
 
 export const pushMove = (data: ChessMove[], { to, turn }: { to: Key, turn: CgTurn }): ChessMove[] => {
   let moves: ChessMove[] = [...data];
