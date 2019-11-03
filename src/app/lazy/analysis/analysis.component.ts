@@ -68,6 +68,7 @@ export class AnalysisComponent implements OnInit {
       }
       case ArrowEvents.Next: {
         this.currentFEN = AnalysisService.getNextFen(this.currentFEN, this.fenArr);
+        this.selectedCellValue = AnalysisService.getNextMove(this.selectedCellValue, this.data);
         break;
       }
       case ArrowEvents.Prev: {

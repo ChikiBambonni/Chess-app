@@ -49,12 +49,30 @@ export class AnalysisService {
   static getPrevMove(currentMove: TableSelectedCell, moves: ChessMove[]): TableSelectedCell {
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
+      const isWhite = currentMove.column === 'white';
 
       if (index !== -1) {
         return {
-          N: currentMove.column === 'white' ? moves[index].N - 1 : moves[index].N , // TODO: Define enum
-          column: currentMove.column === 'white' ? 'black' : 'white',
-          value:  currentMove.column === 'white' ? moves[index - 1].black : moves[index].white
+          N: isWhite ? moves[index].N - 1 : moves[index].N , // TODO: Define enum
+          column: isWhite ? 'black' : 'white',
+          value:  isWhite ? moves[index - 1].black : moves[index].white
+        };
+      }
+    }
+
+    return currentMove;
+  }
+
+  static getNextMove(currentMove: TableSelectedCell, moves: ChessMove[]): TableSelectedCell {
+    if (currentMove) {
+      const index = moves.findIndex(m => m.N === currentMove.N);
+      const isWhite = currentMove.column === 'white';
+
+      if (index !== -1) {
+        return {
+          N: isWhite ? moves[index].N : moves[index].N + 1 , // TODO: Define enum
+          column: isWhite ? 'black' : 'white',
+          value:  isWhite ? moves[index].black : moves[index + 1].white
         };
       }
     }
