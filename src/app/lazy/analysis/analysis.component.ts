@@ -49,9 +49,9 @@ export class AnalysisComponent implements OnInit {
 
   onMove($event: CgMove) {
     this.currentFEN = $event.fen;
-    this.selectedCellValue = {
-      N: Math.ceil(this.m.split(' ').length / 2),
-      column: $event.turn === 'w' ? 'black' : 'white',
+    this.selectedCellValue = { // TODO: define interface
+      N: AnalysisService.getN(this.m),
+      column: AnalysisService.getNextTurn($event.turn),
       value: $event.to
     };
     this.data = pushMove(this.data, $event);

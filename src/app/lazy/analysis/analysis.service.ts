@@ -1,3 +1,4 @@
+import { CgTurn } from './../../core/interfaces/chess-move.interfaces';
 import { Injectable } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
@@ -19,21 +20,13 @@ export class AnalysisService {
   static getPrevFen(currentFen: string, fenArr: string[]): string {
     const index = fenArr.findIndex(fen => fen === currentFen) - 1;
 
-    if (index >= 0) {
-      return fenArr[index];
-    }
-
-    return currentFen;
+    return index >= 0 ? fenArr[index] : currentFen;
   }
 
   static getNextFen(currentFen: string, fenArr: string[]): string {
     const index = fenArr.findIndex(fen => fen === currentFen) + 1;
 
-    if (index !== 0 && index < fenArr.length) {
-      return fenArr[index];
-    }
-
-    return currentFen;
+    return index !== 0 && index < fenArr.length ? fenArr[index] : currentFen;
   }
 
   static getLastFen(fenArr: string[]): string {
@@ -42,5 +35,13 @@ export class AnalysisService {
 
   static getFirstFen(fenArr: string[]): string {
     return fenArr[0];
+  }
+
+  static getNextTurn(turn: CgTurn): 'white' | 'black' { // TODO: define interface
+    return turn === 'w' ? 'black' : 'white';
+  }
+
+  static getN(moves: string): number { // TODO: define interface
+    return Math.ceil(moves.split(' ').length / 2);
   }
 }
