@@ -1,5 +1,5 @@
-import { ArrowEvents } from '@core/enums/chess-events.enumn';
 import { IChessEvent } from '@core/interfaces/chess-events.interfaces';
+import { ArrowEvents } from './mv-table-navigation.enums';
 
 export const images: IChessEvent[] = [
   {

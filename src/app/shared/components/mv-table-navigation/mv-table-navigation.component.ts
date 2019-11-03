@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { IChessEvent } from '@core/interfaces/chess-events.interfaces';
-import { ArrowEvents } from '@core/enums/chess-events.enumn';
+import { ArrowEvents } from './mv-table-navigation.enums';
 import { images } from './mv-table.constants';
 
 @Component({
