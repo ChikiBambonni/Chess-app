@@ -19,7 +19,7 @@ export class AnalysisComponent implements OnInit {
 
   fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
   currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-  selectedCellValue: TableSelectedCell = { N: 1, column: 'white', value: 'e4'};
+  selectedCellValue: TableSelectedCell;
   m = '';
   opening = 'Custom Variation';
   score = 0;
@@ -49,7 +49,11 @@ export class AnalysisComponent implements OnInit {
 
   onMove($event: CgMove) {
     this.currentFEN = $event.fen;
-    //this.selectedCellValue = $event.to;
+    this.selectedCellValue = {
+      N: Math.ceil(this.m.split(' ').length / 2),
+      column: $event.turn === 'w' ? 'black' : 'white',
+      value: $event.to
+    };
     this.data = pushMove(this.data, $event);
     this.m = appendMove($event, this.m);
     this.fenArr.push(this.currentFEN);
