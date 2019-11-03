@@ -55,7 +55,7 @@ export class AnalysisService {
         return {
           N: isWhite ? moves[index].N - 1 : moves[index].N , // TODO: Define enum
           column: isWhite ? ChessTurn.Black : ChessTurn.White,
-          value:  isWhite ? moves[index - 1].black : moves[index].white
+          value:  isWhite && moves[index - 1] ? moves[index - 1].black : moves[index].white
         };
       }
     }
@@ -72,7 +72,7 @@ export class AnalysisService {
         return {
           N: isWhite ? moves[index].N : moves[index].N + 1 , // TODO: Define enum
           column: isWhite ? ChessTurn.Black : ChessTurn.White,
-          value:  isWhite ? moves[index].black : moves[index + 1].white
+          value:  isWhite ? moves[index].black : (moves[index + 1] ? moves[index + 1].white : moves[index].black)
         };
       }
     }
