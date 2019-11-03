@@ -1,7 +1,8 @@
-import { CgTurn } from './../../core/interfaces/chess-move.interfaces';
 import { Injectable } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
+import { CgTurn } from '@core/interfaces/chess-move.interfaces';
+import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 
 @Injectable()
 export class AnalysisService {
@@ -43,5 +44,21 @@ export class AnalysisService {
 
   static getN(moves: string): number { // TODO: define interface
     return Math.ceil(moves.split(' ').length / 2);
+  }
+
+  static getPrevMove(currentMove: TableSelectedCell, moves: ChessMove[]): TableSelectedCell {
+    if (currentMove) {
+      const index = moves.findIndex(m => m.N === currentMove.N);
+
+      if (index !== -1) {
+        return {
+          N: currentMove.column === 'white' ? moves[index].N - 1 : moves[index].N , // TODO: Define enum
+          column: currentMove.column === 'white' ? 'black' : 'white',
+          value:  currentMove.column === 'white' ? moves[index - 1].black : moves[index].white
+        };
+      }
+    }
+
+    return currentMove;
   }
 }
