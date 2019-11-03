@@ -2,4 +2,12 @@ div.moves-table {
   height: 224px;
   width: 400px;
   overflow: auto;
+
+  td:not(:first-child) {
+    text-align: center;
+  }
+
+  th:not(:first-child) > div.mat-sort-header-container {
+    justify-content: center;
+  }
 }

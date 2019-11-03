@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  Input
+  Input,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { ChessMove } from '@core/interfaces/chess-move.interfaces';
@@ -10,7 +11,8 @@ import { TableSelectedCell } from '../common-table/common-table.interfaces';
 @Component({
   selector: 'app-moves-table',
   templateUrl: './moves-table.component.html',
-  styleUrls: ['./moves-table.component.scss']
+  styleUrls: ['./moves-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MovesTableComponent implements OnInit {
   displayedColumns = ['N', 'white', 'black'];
