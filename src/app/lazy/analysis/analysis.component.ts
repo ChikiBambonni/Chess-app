@@ -64,6 +64,7 @@ export class AnalysisComponent implements OnInit {
     switch ($event.type) {
       case ArrowEvents.First: {
         this.currentFEN = AnalysisService.getFirstFen(this.fenArr);
+        this.selectedCellValue = AnalysisService.getFirstMove(this.data);
         break;
       }
       case ArrowEvents.Next: {
@@ -78,6 +79,7 @@ export class AnalysisComponent implements OnInit {
       }
       case ArrowEvents.Last: {
         this.currentFEN = AnalysisService.getLastFen(this.fenArr);
+        this.selectedCellValue = AnalysisService.getLastMove(this.data);
         break;
       }
     }

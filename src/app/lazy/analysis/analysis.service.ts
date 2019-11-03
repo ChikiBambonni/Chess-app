@@ -79,4 +79,20 @@ export class AnalysisService {
 
     return currentMove;
   }
+
+  static getFirstMove(moves: ChessMove[]): TableSelectedCell {
+    return {
+      N: 0,
+      column: 'white',
+      value: moves[0].white
+    };
+  }
+
+  static getLastMove(moves: ChessMove[]): TableSelectedCell {
+    return {
+      N: moves[moves.length - 1].N,
+      column: moves[moves.length - 1].black ? 'black' : 'white',
+      value: moves[moves.length - 1].black ? moves[moves.length - 1].black : moves[moves.length - 1].white
+    };
+  }
 }
