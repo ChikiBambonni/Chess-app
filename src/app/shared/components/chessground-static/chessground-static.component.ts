@@ -89,7 +89,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
 
   @TrackChanges('zoom', 'setZoom')
   @TrackChanges('fen', 'setFEN', ChangesStrategy.NonFirst)
-  @TrackChanges('orientation', 'setOrientation')
+  @TrackChanges('orientation', 'setOrientation', ChangesStrategy.NonFirst)
   ngOnChanges(changes: SimpleChanges) {
   }
 
