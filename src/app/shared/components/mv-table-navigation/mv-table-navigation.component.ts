@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { ArrowEvents } from './mv-table-navigation.enums';
 import { images } from './mv-table.constants';
-import { ChessEvent } from './mv-table-navigation.interfaces';
+import { JumpItem } from './mv-table-navigation.interfaces';
 
 @Component({
   selector: 'app-mv-table-navigation',
@@ -11,7 +11,7 @@ import { ChessEvent } from './mv-table-navigation.interfaces';
 })
 export class MvTableNavigationComponent implements OnInit {
 
-  imgs: ChessEvent[] = images;
+  imgs: JumpItem[] = images;
 
   @Output()
   changeEvent: EventEmitter<{ type: ArrowEvents }> = new EventEmitter<{ type: ArrowEvents }>();

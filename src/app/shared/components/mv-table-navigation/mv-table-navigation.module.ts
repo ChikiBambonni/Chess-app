@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { CommonIconModule } from '@shared/components/common-icon/common-icon.module';
 import { MvTableNavigationComponent } from './mv-table-navigation.component';
+import { MaterialModule } from '@material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    CommonIconModule
+    CommonIconModule,
+    MaterialModule
   ],
   declarations: [
     MvTableNavigationComponent

@@ -1,17 +1,21 @@
 import { ArrowEvents } from './mv-table-navigation.enums';
-import { ChessEvent } from './mv-table-navigation.interfaces';
+import { JumpItem } from './mv-table-navigation.interfaces';
 
-export const images: ChessEvent[] = [
+export const images: JumpItem[] = [
   {
     uri: 'assets/images/icons/start.svg',
-    type: ArrowEvents.First
+    type: ArrowEvents.First,
+    title: 'First move'
   }, {
     uri: 'assets/images/icons/back.svg',
-    type: ArrowEvents.Prev
+    type: ArrowEvents.Prev,
+    title: 'Previous move'
   }, {
     uri: 'assets/images/icons/next.svg',
-    type: ArrowEvents.Next
+    type: ArrowEvents.Next,
+    title: 'Next move'
   }, {
     uri: 'assets/images/icons/end.svg',
-    type: ArrowEvents.Last
+    type: ArrowEvents.Last,
+    title: 'Last move'
 }];

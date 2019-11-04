@@ -1,6 +1,7 @@
 <div class="mv-icons-container">
   <div class="icon flip-icon">
     <app-common-icon
+      matTooltip="Flip the board"
       width="18"
       height="18"
       src="assets/images/icons/flip.svg"
@@ -9,10 +10,11 @@
   </div>
   <div *ngFor="let image of imgs" class="icon arrow-icon">
     <app-common-icon
+      [matTooltip]="image.title"
       width="18"
       height="18"
       [src]="image.uri"
-      (imgEvent)="onClick($event)" >
+      (imgEvent)="onClick($event)">
     </app-common-icon>
   </div>
 </div>

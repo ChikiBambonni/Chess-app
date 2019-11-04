@@ -1,6 +1,7 @@
 import { ArrowEvents } from './mv-table-navigation.enums';
 
-export interface ChessEvent {
+export interface JumpItem {
   uri: string;
   type: ArrowEvents;
+  title: string;
 }
