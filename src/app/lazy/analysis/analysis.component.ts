@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
+import { Color } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { ArrowEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
@@ -23,6 +24,7 @@ export class AnalysisComponent implements OnInit {
   m = '';
   opening = 'Custom Variation';
   score = 0;
+  orientation: Color = 'white';
   data: ChessMove[] = [{ N: 1 }];
 
   constructor(private workerService: WorkerService) { }

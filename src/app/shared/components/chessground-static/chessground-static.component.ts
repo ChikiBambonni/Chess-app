@@ -89,6 +89,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
 
   @TrackChanges('zoom', 'setZoom')
   @TrackChanges('fen', 'setFEN', ChangesStrategy.NonFirst)
+  @TrackChanges('orientation', 'setOrientation')
   ngOnChanges(changes: SimpleChanges) {
   }
 
@@ -116,5 +117,9 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
     } else {
       console.error('Error setting fen');
     }
+  }
+
+  setOrientation(orientation: Color) {
+    this.cg.set({ orientation });
   }
 }

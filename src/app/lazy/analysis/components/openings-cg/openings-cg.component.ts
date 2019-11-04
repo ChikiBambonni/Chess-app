@@ -1,3 +1,4 @@
+import { Color } from 'chessground/types';
 import {
   Component,
   OnInit,
@@ -20,6 +21,9 @@ export class OpeningsCgComponent implements OnInit {
 
   @Output()
   cgMove = new EventEmitter<CgMove>();
+
+  @Input()
+  orientation: Color;
 
   @Input()
   fen: string;
