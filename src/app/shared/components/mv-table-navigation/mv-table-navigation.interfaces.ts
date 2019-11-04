@@ -1,7 +1,7 @@
-import { ArrowEvents } from './mv-table-navigation.enums';
+import { MvNavigationEvents } from './mv-table-navigation.enums';
 
 export interface JumpItem {
   uri: string;
-  type: ArrowEvents;
+  type: MvNavigationEvents;
   title: string;
 }

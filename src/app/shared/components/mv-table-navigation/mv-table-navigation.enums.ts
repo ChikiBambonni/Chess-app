@@ -1,4 +1,5 @@
-export enum ArrowEvents {
+export enum MvNavigationEvents {
+  Flip = 'Flip',
   Last = 'Last',
   Next = 'Next',
   Prev = 'Prev',

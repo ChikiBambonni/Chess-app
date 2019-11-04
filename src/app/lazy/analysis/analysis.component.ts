@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Color } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
-import { ArrowEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
+import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
 import { ChessMove, CgMove } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
@@ -64,22 +64,26 @@ export class AnalysisComponent implements OnInit {
 
   onArrowChange($event) {
     switch ($event.type) {
-      case ArrowEvents.First: {
+      case MvNavigationEvents.Flip: {
+        this.orientation = this.orientation === 'white' ? 'black' : 'white';
+        break;
+      }
+      case MvNavigationEvents.First: {
         this.currentFEN = AnalysisService.getFirstFen(this.fenArr);
         this.selectedCellValue = AnalysisService.getFirstMove(this.data);
         break;
       }
-      case ArrowEvents.Next: {
+      case MvNavigationEvents.Next: {
         this.currentFEN = AnalysisService.getNextFen(this.currentFEN, this.fenArr);
         this.selectedCellValue = AnalysisService.getNextMove(this.selectedCellValue, this.data);
         break;
       }
-      case ArrowEvents.Prev: {
+      case MvNavigationEvents.Prev: {
         this.currentFEN = AnalysisService.getPrevFen(this.currentFEN, this.fenArr);
         this.selectedCellValue = AnalysisService.getPrevMove(this.selectedCellValue, this.data);
         break;
       }
-      case ArrowEvents.Last: {
+      case MvNavigationEvents.Last: {
         this.currentFEN = AnalysisService.getLastFen(this.fenArr);
         this.selectedCellValue = AnalysisService.getLastMove(this.data);
         break;
