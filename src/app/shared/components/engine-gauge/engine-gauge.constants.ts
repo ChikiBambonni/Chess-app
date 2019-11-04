@@ -4,11 +4,12 @@ export const gaugeOptions = (min: number, max: number, data: number) => {
     type: 'solidgauge',
     backgroundColor: 'transparent',
     marginTop: 10,
+    height: '300px'
   },
   title: null,
   pane: {
     center: ['50%', '70%'],
-    size: '130%',
+    size: '100%',
     startAngle: -90,
     endAngle: 90,
     background: {
