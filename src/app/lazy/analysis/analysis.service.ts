@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Key } from 'chessground/types';
 
 import { ChessTurn } from '@core/enums/chess.enums';
 import { ChessMove, CgTurn } from '@core/interfaces/chess.interfaces';
@@ -9,7 +10,7 @@ export class AnalysisService {
 
   constructor() {}
 
-  static castChessMoves(m: string[]): ChessMove[] {
+  static castChessMoves(m: Key[]): ChessMove[] {
     const moves: ChessMove[] = [];
     for (let i = 0, k = 1; i < m.length; i += 2) {
       moves.push({ N: k++, white: m[i], black: m[i + 1] });

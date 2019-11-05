@@ -4,8 +4,8 @@ export type CgTurn = 'b' | 'w';
 
 export interface ChessMove {
   N: number;
-  white?: string;
-  black?: string;
+  white?: Key;
+  black?: Key;
 }
 
 export interface CgMove {

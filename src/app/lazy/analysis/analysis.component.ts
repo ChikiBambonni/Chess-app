@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { Color } from 'chessground/types';
+import { Color, Key } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
@@ -41,7 +41,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   changeFEN($event: Opening) {
-    this.data = AnalysisService.castChessMoves($event.m.split(' '));
+    this.data = AnalysisService.castChessMoves($event.m.split(' ') as Key[]);
     this.currentFEN = toFEN($event.m);
     this.opening = $event.n;
     this.m = $event.m;
