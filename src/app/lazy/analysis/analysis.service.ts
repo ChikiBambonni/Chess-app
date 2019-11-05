@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { Key } from 'chessground/types';
 
 import { ChessTurn } from '@core/enums/chess.enums';
-import { ChessMove, CgTurn } from '@core/interfaces/chess.interfaces';
+import { CgTurn } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
 
 @Injectable()
 export class AnalysisService {
 
   constructor() {}
 
-  static castChessMoves(m: Key[]): ChessMove[] {
-    const moves: ChessMove[] = [];
+  static castChessMoves(m: Key[]): MovesTableItem[] {
+    const moves: MovesTableItem[] = [];
     for (let i = 0, k = 1; i < m.length; i += 2) {
       moves.push({ N: k++, white: m[i], black: m[i + 1] });
     }
@@ -47,7 +48,7 @@ export class AnalysisService {
     return Math.ceil(moves.split(' ').length / 2);
   }
 
-  static getPrevMove(currentMove: TableSelectedCell, moves: ChessMove[]): TableSelectedCell {
+  static getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
       const isWhite = currentMove.column === ChessTurn.White;
@@ -64,7 +65,7 @@ export class AnalysisService {
     return currentMove;
   }
 
-  static getNextMove(currentMove: TableSelectedCell, moves: ChessMove[]): TableSelectedCell {
+  static getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
       const isWhite = currentMove.column === ChessTurn.White;
@@ -81,7 +82,7 @@ export class AnalysisService {
     return currentMove;
   }
 
-  static getFirstMove(moves: ChessMove[]): TableSelectedCell {
+  static getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
     return {
       N: 0,
       column: ChessTurn.White,
@@ -89,7 +90,7 @@ export class AnalysisService {
     };
   }
 
-  static getLastMove(moves: ChessMove[]): TableSelectedCell {
+  static getLastMove(moves: MovesTableItem[]): TableSelectedCell {
     return {
       N: moves[moves.length - 1].N,
       column: moves[moves.length - 1].black ? ChessTurn.Black : ChessTurn.White,

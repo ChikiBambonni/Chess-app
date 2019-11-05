@@ -5,8 +5,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { ChessMove } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '../common-table/common-table.interfaces';
+import { MovesTableItem } from './moves-table.constants';
 
 @Component({
   selector: 'app-moves-table',
@@ -18,7 +18,7 @@ export class MovesTableComponent implements OnInit {
   displayedColumns = ['N', 'white', 'black'];
 
   @Input()
-  data: ChessMove[];
+  data: MovesTableItem[];
 
   @Input()
   selectedCellValue: TableSelectedCell;

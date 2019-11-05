@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Key } from 'chessground/types';
 
-import { ChessMove } from '@core/interfaces/chess.interfaces';
 import { MoveConfig } from '@core/interfaces/socket.interfaces';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
 
 @Component({
   selector: 'app-chess-game',
@@ -14,7 +14,7 @@ import { ChessGameService } from '@core/services/chess-game/chess-game.service';
 })
 export class ChessGameComponent implements OnInit {
 
-  data: ChessMove[] = [{ N: 1 }];
+  data: MovesTableItem[] = [{ N: 1 }];
 
   constructor(
     private chessService: ChessGameService) { }
@@ -26,11 +26,11 @@ export class ChessGameComponent implements OnInit {
     this.chessService.emitEvent('makeMove', Object.assign($event, { room: this.chessService.gameID }));
   }
 
-  updateData({ to, turn }: { to: Key, turn: string }) {
-    const last: ChessMove = _.last(this.data);
+  updateData({ to, turn }: { to: Key, turn: string }) { // TODO: remove this logic
+    const last: MovesTableItem = _.last(this.data);
     const color = turn === 'w' ? 'black' : 'white';
     if (last[color] !== undefined) {
-      const row = {} as ChessMove;
+      const row = {} as MovesTableItem;
       row.N = last.N + 1;
       row[color] = to;
       this.data = [...this.data, row];

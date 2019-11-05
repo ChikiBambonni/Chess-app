@@ -6,8 +6,8 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { ChessMove } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
 
 @Component({
   selector: 'app-openings-mt',
@@ -23,7 +23,7 @@ export class OpeningsMtComponent implements OnInit {
   score: number;
 
   @Input()
-  data: ChessMove[];
+  data: MovesTableItem[];
 
   @Input()
   selectedCellValue: TableSelectedCell;

@@ -8,14 +8,16 @@ import * as _ from 'lodash';
 import { Config } from 'chessground/config';
 import { Color, Role, Key, FEN } from 'chessground/types';
 
-import { CgMove, CgTurn, ChessMove } from '@core/interfaces/chess.interfaces';
+import { CgMove, CgTurn } from '@core/interfaces/chess.interfaces';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
 
-export const pushMove = (data: ChessMove[], { to, turn }: { to: Key, turn: CgTurn }): ChessMove[] => {
-  let moves: ChessMove[] = [...data];
-  const last: ChessMove = _.last(moves);
+export const pushMove = (data: MovesTableItem[], { to, turn }: { to: Key, turn: CgTurn }): MovesTableItem[] => {
+  // TODO: remove this function
+  let moves: MovesTableItem[] = [...data];
+  const last: MovesTableItem = _.last(moves);
   const color = turn === 'w' ? 'black' : 'white';
   if (last[color] !== undefined) {
-    const row = {} as ChessMove;
+    const row = {} as MovesTableItem;
     row.N = last.N + 1;
     row[color] = to;
     moves = [...moves, row];

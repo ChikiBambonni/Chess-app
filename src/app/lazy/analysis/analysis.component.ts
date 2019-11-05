@@ -4,7 +4,8 @@ import { Color, Key } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
-import { ChessMove, CgMove } from '@core/interfaces/chess.interfaces';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { CgMove } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
 import { WorkerService } from '../../app-worker.service';
@@ -25,7 +26,7 @@ export class AnalysisComponent implements OnInit {
   opening = 'Custom Variation';
   score = 0;
   orientation: Color = 'white';
-  data: ChessMove[] = [{ N: 1 }];
+  data: MovesTableItem[] = [{ N: 1 }];
 
   constructor(private workerService: WorkerService) { }
 
