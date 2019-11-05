@@ -9,7 +9,7 @@ import { Config } from 'chessground/config';
 import { Color, Role, Key, FEN } from 'chessground/types';
 
 import { CgMove, CgTurn } from '@core/interfaces/chess.interfaces';
-import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 
 export const pushMove = (data: MovesTableItem[], { to, turn }: { to: Key, turn: CgTurn }): MovesTableItem[] => {
   // TODO: remove this function

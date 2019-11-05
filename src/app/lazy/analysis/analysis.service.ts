@@ -4,7 +4,7 @@ import { Key } from 'chessground/types';
 import { ChessTurn } from '@core/enums/chess.enums';
 import { CgTurn } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
-import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 
 @Injectable()
 export class AnalysisService {

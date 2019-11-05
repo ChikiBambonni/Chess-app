@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 import { TableSelectedCell } from '../common-table/common-table.interfaces';
-import { MovesTableItem } from './moves-table.constants';
+import { MovesTableItem } from './moves-table.interfaces';
 
 @Component({
   selector: 'app-moves-table',

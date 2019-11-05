@@ -5,7 +5,7 @@ import { Key } from 'chessground/types';
 
 import { MoveConfig } from '@core/interfaces/socket.interfaces';
 import { ChessGameService } from '@core/services/chess-game/chess-game.service';
-import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 
 @Component({
   selector: 'app-chess-game',

@@ -4,7 +4,7 @@ import { Color, Key } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
-import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 import { CgMove } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';

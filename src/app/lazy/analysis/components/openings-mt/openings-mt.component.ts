@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
-import { MovesTableItem } from '@shared/components/moves-table/moves-table.constants';
+import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 
 @Component({
   selector: 'app-openings-mt',
