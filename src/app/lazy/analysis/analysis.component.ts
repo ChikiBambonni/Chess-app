@@ -1,16 +1,18 @@
+import { startingFEN, defaultOrientation } from './../../core/constants/chess.constants';
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { Color, Key } from 'chessground/types';
+import { Color, Key, FEN } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
 import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 import { CgMove } from '@core/interfaces/chess.interfaces';
-import { UCI_COMMANDS } from '@core/constants/stockfish-worker.constants';
+import { UCI_COMMANDS, startingScore } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
 import { WorkerService } from '../../app-worker.service';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
+import { startingFENArray } from '@core/constants/chess.constants';
 
 @Component({
   selector: 'app-analysis',
@@ -19,14 +21,16 @@ import { Opening } from './analysis.intefaces';
 })
 export class AnalysisComponent implements OnInit {
 
-  fenArr: string[] = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'];
-  currentFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-  selectedCellValue: TableSelectedCell;
+  currentFEN: FEN = startingFEN;
+  fenArr: FEN[] = startingFENArray;
   m = '';
+
+  orientation: Color = defaultOrientation;
+  score: number = startingScore;
   opening = 'Custom Variation';
-  score = 0;
-  orientation: Color = 'white';
+
   data: MovesTableItem[] = [{ N: 1 }];
+  selectedCellValue: TableSelectedCell;
 
   constructor(private workerService: WorkerService) { }
 
