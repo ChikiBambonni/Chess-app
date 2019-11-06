@@ -32,7 +32,9 @@ export class AnalysisComponent implements OnInit {
   data: MovesTableItem[] = [{ N: 1 }];
   selectedCellValue: TableSelectedCell;
 
-  constructor(private workerService: WorkerService) { }
+  constructor(
+    private analysisService: AnalysisService,
+    private workerService: WorkerService) { }
 
   private setM() {
     this.workerService.postMessage(UCI_COMMANDS.startPosMove + this.m);
@@ -46,7 +48,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   changeFEN($event: Opening) {
-    this.data = AnalysisService.castChessMoves($event.m.split(' ') as Key[]);
+    this.data = this.analysisService.castChessMoves($event.m.split(' ') as Key[]);
     this.currentFEN = toFEN($event.m);
     this.opening = $event.n;
     this.m = $event.m;
@@ -57,8 +59,8 @@ export class AnalysisComponent implements OnInit {
   onMove($event: CgMove) {
     this.currentFEN = $event.fen;
     this.selectedCellValue = { // TODO: define interface
-      N: AnalysisService.getN(this.m),
-      column: AnalysisService.getNextTurn($event.turn),
+      N: this.analysisService.getN(this.m),
+      column: this.analysisService.getNextTurn($event.turn),
       value: $event.to
     };
     this.data = pushMove(this.data, $event);
@@ -74,23 +76,23 @@ export class AnalysisComponent implements OnInit {
         break;
       }
       case MvNavigationEvents.First: {
-        this.currentFEN = AnalysisService.getFirstFen(this.fenArr);
-        this.selectedCellValue = AnalysisService.getFirstMove(this.data);
+        this.currentFEN = this.analysisService.getFirstFen(this.fenArr);
+        this.selectedCellValue = this.analysisService.getFirstMove(this.data);
         break;
       }
       case MvNavigationEvents.Next: {
-        this.currentFEN = AnalysisService.getNextFen(this.currentFEN, this.fenArr);
-        this.selectedCellValue = AnalysisService.getNextMove(this.selectedCellValue, this.data);
+        this.currentFEN = this.analysisService.getNextFen(this.currentFEN, this.fenArr);
+        this.selectedCellValue = this.analysisService.getNextMove(this.selectedCellValue, this.data);
         break;
       }
       case MvNavigationEvents.Prev: {
-        this.currentFEN = AnalysisService.getPrevFen(this.currentFEN, this.fenArr);
-        this.selectedCellValue = AnalysisService.getPrevMove(this.selectedCellValue, this.data);
+        this.currentFEN = this.analysisService.getPreviousFen(this.currentFEN, this.fenArr);
+        this.selectedCellValue = this.analysisService.getPrevMove(this.selectedCellValue, this.data);
         break;
       }
       case MvNavigationEvents.Last: {
-        this.currentFEN = AnalysisService.getLastFen(this.fenArr);
-        this.selectedCellValue = AnalysisService.getLastMove(this.data);
+        this.currentFEN = this.analysisService.getLastFen(this.fenArr);
+        this.selectedCellValue = this.analysisService.getLastMove(this.data);
         break;
       }
     }

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Key } from 'chessground/types';
 
-import { ChessTurn } from '@core/enums/chess.enums';
-import { CgTurn } from '@core/interfaces/chess.interfaces';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
+import { GlobalAnalysisUtils } from '@core/utils/global-analysis-utils.class';
+import { ChessTurn } from '@core/enums/chess.enums';
 
 @Injectable()
-export class AnalysisService {
+export class AnalysisService extends GlobalAnalysisUtils {
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
-  static castChessMoves(m: Key[]): MovesTableItem[] {
+  castChessMoves(m: Key[]): MovesTableItem[] {
     const moves: MovesTableItem[] = [];
     for (let i = 0, k = 1; i < m.length; i += 2) {
       moves.push({ N: k++, white: m[i], black: m[i + 1] });
@@ -20,35 +22,7 @@ export class AnalysisService {
     return moves;
   }
 
-  static getPrevFen(currentFen: string, fenArr: string[]): string {
-    const index = fenArr.findIndex(fen => fen === currentFen) - 1;
-
-    return index >= 0 ? fenArr[index] : currentFen;
-  }
-
-  static getNextFen(currentFen: string, fenArr: string[]): string {
-    const index = fenArr.findIndex(fen => fen === currentFen) + 1;
-
-    return index !== 0 && index < fenArr.length ? fenArr[index] : currentFen;
-  }
-
-  static getLastFen(fenArr: string[]): string {
-    return fenArr[fenArr.length - 1];
-  }
-
-  static getFirstFen(fenArr: string[]): string {
-    return fenArr[0];
-  }
-
-  static getNextTurn(turn: CgTurn): ChessTurn {
-    return turn === 'w' ? ChessTurn.Black : ChessTurn.White;
-  }
-
-  static getN(moves: string): number { // TODO: define interface
-    return Math.ceil(moves.split(' ').length / 2);
-  }
-
-  static getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
+  getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
       const isWhite = currentMove.column === ChessTurn.White;
@@ -65,7 +39,7 @@ export class AnalysisService {
     return currentMove;
   }
 
-  static getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
+  getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
       const isWhite = currentMove.column === ChessTurn.White;
@@ -82,7 +56,7 @@ export class AnalysisService {
     return currentMove;
   }
 
-  static getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
+  getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
     return {
       N: 0,
       column: ChessTurn.White,
@@ -90,7 +64,7 @@ export class AnalysisService {
     };
   }
 
-  static getLastMove(moves: MovesTableItem[]): TableSelectedCell {
+  getLastMove(moves: MovesTableItem[]): TableSelectedCell {
     return {
       N: moves[moves.length - 1].N,
       column: moves[moves.length - 1].black ? ChessTurn.Black : ChessTurn.White,
