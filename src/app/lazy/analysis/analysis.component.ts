@@ -1,6 +1,5 @@
-import { startingFEN, defaultOrientation } from './../../core/constants/chess.constants';
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
+import * as _ from 'lodash'; // TODO: get rid of lodash
 import { Color, Key, FEN } from 'chessground/types';
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
@@ -9,10 +8,11 @@ import { MovesTableItem } from '@shared/components/moves-table/moves-table.inter
 import { CgMove } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS, startingScore } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
+import { startingFENArray } from '@core/constants/chess.constants';
+import { startingFEN, defaultOrientation } from '@core/constants/chess.constants';
 import { WorkerService } from '../../app-worker.service';
 import { AnalysisService } from './analysis.service';
 import { Opening } from './analysis.intefaces';
-import { startingFENArray } from '@core/constants/chess.constants';
 
 @Component({
   selector: 'app-analysis',
@@ -40,7 +40,7 @@ export class AnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workerService.workerUpdate$.subscribe(line => {
+    this.workerService.workerUpdate$.subscribe(() => {
       this.score = Number(this.workerService.engineStatus.score);
     });
   }
