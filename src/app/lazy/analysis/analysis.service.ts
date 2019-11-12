@@ -5,6 +5,7 @@ import { TableSelectedCell } from '@shared/components/common-table/common-table.
 import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
 import { GlobalAnalysisUtils } from '@core/utils/global-analysis-utils.class';
 import { ChessTurn } from '@core/enums/chess.enums';
+import { Safe } from '@core/decorators/safe.decorator';
 
 @Injectable()
 export class AnalysisService extends GlobalAnalysisUtils {
@@ -38,6 +39,7 @@ export class AnalysisService extends GlobalAnalysisUtils {
     return moves;
   }
 
+  @Safe({ returnValue: null })
   getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (this.isFirst(currentMove, 1)) return this.getFirstMove(moves);
 
@@ -56,6 +58,7 @@ export class AnalysisService extends GlobalAnalysisUtils {
     return currentMove;
   }
 
+  @Safe({ returnValue: null })
   getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (this.isFirst(currentMove, 0)) return this.createMove(moves[0].N, ChessTurn.White, moves[0].white);
     else if (this.isLast(currentMove, moves.length)) return currentMove;
@@ -75,10 +78,12 @@ export class AnalysisService extends GlobalAnalysisUtils {
     return currentMove;
   }
 
+  @Safe({ returnValue: null })
   getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
     return this.createMove(0, ChessTurn.White, moves[0].white);
   }
 
+  @Safe({ returnValue: null })
   getLastMove(moves: MovesTableItem[]): TableSelectedCell {
     const lastMove: MovesTableItem = moves[moves.length - 1];
 
