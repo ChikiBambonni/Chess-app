@@ -18,8 +18,8 @@ export class AnalysisService extends GlobalAnalysisUtils {
     return cell.N === n && cell.column === ChessTurn.White;
   }
 
-  private isLast(cell: TableSelectedCell, n: number): boolean {
-    return cell.N === n && cell.column === ChessTurn.Black;
+  private isLast(cell: TableSelectedCell, moves: MovesTableItem[]): boolean {
+    return cell.N === moves.length && (cell.column === ChessTurn.Black || !moves[moves.length - 1].black);
   }
 
   private isWhite(cell: TableSelectedCell): boolean {
@@ -61,17 +61,17 @@ export class AnalysisService extends GlobalAnalysisUtils {
   @Safe({ returnValue: null })
   getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
     if (this.isFirst(currentMove, 0)) return AnalysisService.createMove(moves[0].N, ChessTurn.White, moves[0].white);
-    else if (this.isLast(currentMove, moves.length)) return currentMove;
+    else if (this.isLast(currentMove, moves)) return currentMove;
 
     const index = moves.findIndex(m => m.N === currentMove.N);
     if (index !== -1) {
       const isWhite = currentMove.column === ChessTurn.White;
-      const move =  moves[index];
+      const move = moves[index];
 
       return AnalysisService.createMove(
         move.N + Number(!isWhite),
         isWhite ? ChessTurn.Black : ChessTurn.White,
-        isWhite ? move.black : (moves[index + 1] ? moves[index + 1].white : move.black)
+        isWhite ? move.black : moves[index + 1].white
       );
     }
 

@@ -10,7 +10,12 @@
       <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column" disableClear>{{ column }}</th>
       <td mat-cell
         *matCellDef="let element; let i = index;"
-        [ngClass]="{'current-selection': selectedCellValue && selectedCellValue.N === i + 1 && selectedCellValue.column === column && element[column] === selectedCellValue.value }">
+        [ngClass]="{'current-selection':
+          selectedCellValue &&
+          selectedCellValue.N === i + 1 &&
+          selectedCellValue.column === column &&
+          selectedCellValue.value &&
+          element[column] === selectedCellValue.value }">
         {{ element[column] }} </td>
     </ng-container>
 
