@@ -23,32 +23,47 @@ export class AnalysisService extends GlobalAnalysisUtils {
   }
 
   getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
-    if (currentMove) {
-      const index = moves.findIndex(m => m.N === currentMove.N);
-      const isWhite = currentMove.column === ChessTurn.White;
+    if (currentMove.N === 1 && currentMove.column === ChessTurn.White) {
+      currentMove.N = 0;
+      return currentMove;
+    }
 
-      if (index !== -1) {
-        return {
-          N: isWhite ? moves[index].N - 1 : moves[index].N , // TODO: Define enum
-          column: isWhite ? ChessTurn.Black : ChessTurn.White,
-          value:  isWhite && moves[index - 1] ? moves[index - 1].black : moves[index].white
-        };
-      }
+    const index = moves.findIndex(m => m.N === currentMove.N);
+
+    if (index !== -1) {
+      const isWhite = currentMove.column === ChessTurn.White;
+      const move = isWhite ? (moves[index - 1] ? moves[index - 1] : { N: 0, black: '', white: ''}) : moves[index];
+
+      return {
+        N: move.N,
+        column: isWhite ? ChessTurn.Black : ChessTurn.White,
+        value:  isWhite ? move.black : move.white
+      };
     }
 
     return currentMove;
   }
 
   getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
+    if (currentMove.N === 0 && currentMove.column === ChessTurn.White) {
+      currentMove.N = 1;
+      return currentMove;
+    } else if (currentMove.N === moves.length && currentMove.column === ChessTurn.Black) {
+      return currentMove;
+    }
+
     if (currentMove) {
       const index = moves.findIndex(m => m.N === currentMove.N);
       const isWhite = currentMove.column === ChessTurn.White;
 
       if (index !== -1) {
+        const move =  moves[index];
+        const nextMove = moves[index + 1];
+
         return {
-          N: isWhite ? moves[index].N : moves[index].N + 1 , // TODO: Define enum
+          N: move.N + Number(!isWhite),
           column: isWhite ? ChessTurn.Black : ChessTurn.White,
-          value:  isWhite ? moves[index].black : (moves[index + 1] ? moves[index + 1].white : moves[index].black)
+          value:  isWhite ? move.black : (nextMove ? nextMove.white : move.black)
         };
       }
     }
@@ -65,10 +80,12 @@ export class AnalysisService extends GlobalAnalysisUtils {
   }
 
   getLastMove(moves: MovesTableItem[]): TableSelectedCell {
+    const lastMove: MovesTableItem = moves[moves.length - 1];
+
     return {
-      N: moves[moves.length - 1].N,
-      column: moves[moves.length - 1].black ? ChessTurn.Black : ChessTurn.White,
-      value: moves[moves.length - 1].black ? moves[moves.length - 1].black : moves[moves.length - 1].white
+      N: lastMove.N,
+      column: lastMove.black ? ChessTurn.Black : ChessTurn.White,
+      value: lastMove.black ? lastMove.black : lastMove.white
     };
   }
 }
