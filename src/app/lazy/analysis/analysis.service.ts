@@ -9,6 +9,22 @@ import { ChessTurn } from '@core/enums/chess.enums';
 @Injectable()
 export class AnalysisService extends GlobalAnalysisUtils {
 
+  private isFirst(cell: TableSelectedCell, n: number): boolean {
+    return cell.N === n && cell.column === ChessTurn.White;
+  }
+
+  private isLast(cell: TableSelectedCell, n: number): boolean {
+    return cell.N === n && cell.column === ChessTurn.Black;
+  }
+
+  private isWhite(cell: TableSelectedCell): boolean {
+    return cell.column === ChessTurn.White;
+  }
+
+  private createMove(N: number, column: string, value: string): TableSelectedCell {
+    return { N, column, value };
+  }
+
   constructor() {
     super();
   }
@@ -23,69 +39,53 @@ export class AnalysisService extends GlobalAnalysisUtils {
   }
 
   getPrevMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
-    if (currentMove.N === 1 && currentMove.column === ChessTurn.White) {
-      currentMove.N = 0;
-      return currentMove;
-    }
+    if (this.isFirst(currentMove, 1)) return this.getFirstMove(moves);
 
     const index = moves.findIndex(m => m.N === currentMove.N);
-
     if (index !== -1) {
-      const isWhite = currentMove.column === ChessTurn.White;
-      const move = isWhite ? (moves[index - 1] ? moves[index - 1] : { N: 0, black: '', white: ''}) : moves[index];
+      const isWhite = this.isWhite(currentMove);
+      const move = isWhite ? moves[index - 1] : moves[index];
 
-      return {
-        N: move.N,
-        column: isWhite ? ChessTurn.Black : ChessTurn.White,
-        value:  isWhite ? move.black : move.white
-      };
+      return this.createMove(
+        move.N,
+        isWhite ? ChessTurn.Black : ChessTurn.White,
+        isWhite ? move.black : move.white
+      );
     }
 
     return currentMove;
   }
 
   getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
-    if (currentMove.N === 0 && currentMove.column === ChessTurn.White) {
-      currentMove.N = 1;
-      return currentMove;
-    } else if (currentMove.N === moves.length && currentMove.column === ChessTurn.Black) {
-      return currentMove;
-    }
+    if (this.isFirst(currentMove, 0)) return this.createMove(moves[0].N, ChessTurn.White, moves[0].white);
+    else if (this.isLast(currentMove, moves.length)) return currentMove;
 
-    if (currentMove) {
-      const index = moves.findIndex(m => m.N === currentMove.N);
+    const index = moves.findIndex(m => m.N === currentMove.N);
+    if (index !== -1) {
       const isWhite = currentMove.column === ChessTurn.White;
+      const move =  moves[index];
 
-      if (index !== -1) {
-        const move =  moves[index];
-        const nextMove = moves[index + 1];
-
-        return {
-          N: move.N + Number(!isWhite),
-          column: isWhite ? ChessTurn.Black : ChessTurn.White,
-          value:  isWhite ? move.black : (nextMove ? nextMove.white : move.black)
-        };
-      }
+      return this.createMove(
+        move.N + Number(!isWhite),
+        isWhite ? ChessTurn.Black : ChessTurn.White,
+        isWhite ? move.black : (moves[index + 1] ? moves[index + 1].white : move.black)
+      );
     }
 
     return currentMove;
   }
 
   getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
-    return {
-      N: 0,
-      column: ChessTurn.White,
-      value: moves[0].white
-    };
+    return this.createMove(0, ChessTurn.White, moves[0].white);
   }
 
   getLastMove(moves: MovesTableItem[]): TableSelectedCell {
     const lastMove: MovesTableItem = moves[moves.length - 1];
 
-    return {
-      N: lastMove.N,
-      column: lastMove.black ? ChessTurn.Black : ChessTurn.White,
-      value: lastMove.black ? lastMove.black : lastMove.white
-    };
+    return this.createMove(
+      lastMove.N,
+      lastMove.black ? ChessTurn.Black : ChessTurn.White,
+      lastMove.black ? lastMove.black : lastMove.white
+    );
   }
 }
