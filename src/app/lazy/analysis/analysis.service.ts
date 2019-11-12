@@ -10,6 +10,10 @@ import { Safe } from '@core/decorators/safe.decorator';
 @Injectable()
 export class AnalysisService extends GlobalAnalysisUtils {
 
+  static createMove(N: number, column: string, value: string): TableSelectedCell {
+    return { N, column, value };
+  }
+
   private isFirst(cell: TableSelectedCell, n: number): boolean {
     return cell.N === n && cell.column === ChessTurn.White;
   }
@@ -20,10 +24,6 @@ export class AnalysisService extends GlobalAnalysisUtils {
 
   private isWhite(cell: TableSelectedCell): boolean {
     return cell.column === ChessTurn.White;
-  }
-
-  private createMove(N: number, column: string, value: string): TableSelectedCell {
-    return { N, column, value };
   }
 
   constructor() {
@@ -48,7 +48,7 @@ export class AnalysisService extends GlobalAnalysisUtils {
       const isWhite = this.isWhite(currentMove);
       const move = isWhite ? moves[index - 1] : moves[index];
 
-      return this.createMove(
+      return AnalysisService.createMove(
         move.N,
         isWhite ? ChessTurn.Black : ChessTurn.White,
         isWhite ? move.black : move.white
@@ -60,7 +60,7 @@ export class AnalysisService extends GlobalAnalysisUtils {
 
   @Safe({ returnValue: null })
   getNextMove(currentMove: TableSelectedCell, moves: MovesTableItem[]): TableSelectedCell {
-    if (this.isFirst(currentMove, 0)) return this.createMove(moves[0].N, ChessTurn.White, moves[0].white);
+    if (this.isFirst(currentMove, 0)) return AnalysisService.createMove(moves[0].N, ChessTurn.White, moves[0].white);
     else if (this.isLast(currentMove, moves.length)) return currentMove;
 
     const index = moves.findIndex(m => m.N === currentMove.N);
@@ -68,7 +68,7 @@ export class AnalysisService extends GlobalAnalysisUtils {
       const isWhite = currentMove.column === ChessTurn.White;
       const move =  moves[index];
 
-      return this.createMove(
+      return AnalysisService.createMove(
         move.N + Number(!isWhite),
         isWhite ? ChessTurn.Black : ChessTurn.White,
         isWhite ? move.black : (moves[index + 1] ? moves[index + 1].white : move.black)
@@ -80,14 +80,14 @@ export class AnalysisService extends GlobalAnalysisUtils {
 
   @Safe({ returnValue: null })
   getFirstMove(moves: MovesTableItem[]): TableSelectedCell {
-    return this.createMove(0, ChessTurn.White, moves[0].white);
+    return AnalysisService.createMove(0, ChessTurn.White, moves[0].white);
   }
 
   @Safe({ returnValue: null })
   getLastMove(moves: MovesTableItem[]): TableSelectedCell {
     const lastMove: MovesTableItem = moves[moves.length - 1];
 
-    return this.createMove(
+    return AnalysisService.createMove(
       lastMove.N,
       lastMove.black ? ChessTurn.Black : ChessTurn.White,
       lastMove.black ? lastMove.black : lastMove.white

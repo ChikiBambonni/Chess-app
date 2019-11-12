@@ -21,7 +21,7 @@
         <div *ngIf="opening" class="op-title">{{ opening }}</div>
         <app-openings-mt
           (changeArrow)="onArrowChange($event)"
-          [m]="m"
+          [pgn]="pgn"
           [score]="score"
           [data]="data"
           [selectedCellValue]="selectedCellValue">

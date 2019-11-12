@@ -8,6 +8,7 @@ import {
 
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
+import { PGN } from '@core/interfaces/chess.interfaces';
 
 @Component({
   selector: 'app-openings-mt',
@@ -29,7 +30,7 @@ export class OpeningsMtComponent implements OnInit {
   selectedCellValue: TableSelectedCell;
 
   @Input()
-  m: string;
+  pgn: PGN;
 
   @Output()
   changeArrow: EventEmitter<any> = new EventEmitter(); // TODO: provide interface here

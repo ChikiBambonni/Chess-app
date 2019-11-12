@@ -5,7 +5,7 @@ import { Color, Key, FEN } from 'chessground/types';
 import { TableSelectedCell } from '@shared/components/common-table/common-table.interfaces';
 import { MvNavigationEvents } from '@shared/components/mv-table-navigation/mv-table-navigation.enums';
 import { MovesTableItem } from '@shared/components/moves-table/moves-table.interfaces';
-import { CgMove } from '@core/interfaces/chess.interfaces';
+import { CgMove, PGN } from '@core/interfaces/chess.interfaces';
 import { UCI_COMMANDS, startingScore } from '@core/constants/stockfish-worker.constants';
 import { pushMove, appendMove, toFEN } from '@core/utils/chess.utils';
 import { startingFENArray } from '@core/constants/chess.constants';
@@ -23,7 +23,7 @@ export class AnalysisComponent implements OnInit {
 
   currentFEN: FEN = startingFEN;
   fenArr: FEN[] = startingFENArray;
-  m = '';
+  pgn: PGN = ''; // TODO: add numeration to string
 
   orientation: Color = defaultOrientation;
   score: number = startingScore;
@@ -37,7 +37,7 @@ export class AnalysisComponent implements OnInit {
     private workerService: WorkerService) { }
 
   private setM() {
-    this.workerService.postMessage(UCI_COMMANDS.startPosMove + this.m);
+    this.workerService.postMessage(UCI_COMMANDS.startPosMove + this.pgn);
     this.workerService.postMessage(UCI_COMMANDS.goDepth);
   }
 
@@ -51,20 +51,20 @@ export class AnalysisComponent implements OnInit {
     this.data = this.analysisService.castChessMoves($event.m.split(' ') as Key[]);
     this.currentFEN = toFEN($event.m);
     this.opening = $event.n;
-    this.m = $event.m;
+    this.pgn = $event.m;
     this.fenArr = [];
     this.setM();
   }
 
   onMove($event: CgMove) {
     this.currentFEN = $event.fen;
-    this.selectedCellValue = { // TODO: define interface
-      N: this.analysisService.getN(this.m),
-      column: this.analysisService.getNextTurn($event.turn),
-      value: $event.to
-    };
+    this.selectedCellValue = AnalysisService.createMove(
+      this.analysisService.getN(this.pgn),
+      this.analysisService.getNextTurn($event.turn),
+      $event.to
+    );
     this.data = pushMove(this.data, $event);
-    this.m = appendMove($event, this.m);
+    this.pgn = appendMove($event, this.pgn);
     this.fenArr.push(this.currentFEN);
     this.setM();
   }
