@@ -29,9 +29,6 @@ export class OpeningsMtComponent implements OnInit {
   @Input()
   selectedCellValue: TableSelectedCell;
 
-  @Input()
-  pgn: PGN;
-
   @Output()
   changeArrow: EventEmitter<any> = new EventEmitter(); // TODO: provide interface here
 
@@ -41,7 +38,6 @@ export class OpeningsMtComponent implements OnInit {
   }
 
   onChange($event) {
-    console.log(this.data);
     this.changeArrow.emit($event);
   }
 }
