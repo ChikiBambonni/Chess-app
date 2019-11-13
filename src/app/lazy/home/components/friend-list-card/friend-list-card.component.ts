@@ -9,7 +9,7 @@ import { AppInfoRepository } from '@core/services/app-info.repository';
 })
 export class FriendListCardComponent implements OnInit {
 
-  onlineFriends;
+  onlineFriends; // TODO: define interface
   offlineFriends;
 
   constructor(private repo: AppInfoRepository) { }
