@@ -3,6 +3,7 @@
 .box {
   .box__title {
     padding: 0 8px 12px 8px;
+    border-bottom: 1px solid $border-color;
 
     span.chat-image {
       display: block;
@@ -16,11 +17,11 @@
   table {
     thead {
       th {
-        border-top: none;
-        border-bottom: none;
-        font-size: 12px;
-        text-transform: uppercase;
-        font-weight: 500;
+        // border-top: none;
+        // border-bottom: none;
+        // font-size: 12px;
+        // text-transform: uppercase;
+        // font-weight: 500;
       }
     }
   }

@@ -9,6 +9,7 @@
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column" disableClear>{{ column }}</th>
       <td mat-cell
+        class="header-align-right"
         *matCellDef="let element; let i = index;"
         [ngClass]="{'current-selection':
           selectedCellValue &&
