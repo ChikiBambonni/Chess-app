@@ -2,6 +2,17 @@
 
 div.ui-container {
   padding: 24px;
+  height: calc(100vh - 56px);
+
+  &>div {
+    height: 100%;
+
+    div.ui-container__center {
+      .leaderboard-card {
+        height: 100%;
+      }
+    }
+  }
 
   .profile-card,
   .friends-list-card,

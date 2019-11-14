@@ -16,7 +16,7 @@ export const ButtonsList: ButtonInterface<LiderboardType>[] = [
 
 export const pageEvent: PageEvent = {
   pageIndex: 0,
-  pageSize: 10,
+  pageSize: 15,
   length: 0,
   previousPageIndex: 0
 };
