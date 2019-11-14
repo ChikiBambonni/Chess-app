@@ -5,6 +5,10 @@ div.analysis-container {
 
   .analysis-container__right {
     margin: auto 0;
+
+    .mv-table {
+      max-height: 444px;
+    }
   }
 
   .card {

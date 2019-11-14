@@ -42,6 +42,8 @@ export class AnalysisComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('---------------------------');
+    console.log(window.innerHeight);
     this.workerService.workerUpdate$.subscribe(() => {
       this.score = Number(this.workerService.engineStatus.score);
     });

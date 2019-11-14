@@ -7,36 +7,15 @@
       <div><span style="font-size: 18px;">Chess-app forum</span></div>
     </div>
     <div>
-      <!-- <form class="example-form"> -->
-        <!-- <mat-form-field class="example-full-width"> -->
+        <mat-form-field class="example-full-width">
           <input matInput placeholder="Search...">
-        <!-- </mat-form-field> -->
-      <!-- </form> -->
+        </mat-form-field>
     </div>
   </div>
-  <!-- <mat-divider class="title-divider"></mat-divider> -->
   <div class="box__table">
-    <!-- <table class="categs slist slist-pad">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Topics</th>
-          <th>Posts</th>
-          <th>Last post</th>
-        </tr>
-      </thead>
-
-
-      <mat-divider></mat-divider>
-      <tbody>
-      </tbody>
-    </table> -->
-
-    <div ngx-auto-scroll class="moves-table">
-      <app-common-table
-        [displayedColumns]="displayedColumns"
-        [dataSource]="items">
-      </app-common-table>
-    </div>
+    <app-common-table
+      [displayedColumns]="displayedColumns"
+      [dataSource]="items">
+    </app-common-table>
   </div>
 </div>
