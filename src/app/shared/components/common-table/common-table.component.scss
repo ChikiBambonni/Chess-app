@@ -3,8 +3,7 @@
 div.mat-elevation-z8 {
   transition: none !important;
   box-shadow: none !important;
-  // overflow: hidden;
-  max-height: calc(100vh - 220px);
+  height: calc(100% - 56px);
   overflow: auto;
 
   .loading-shade {
