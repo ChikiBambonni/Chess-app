@@ -1,4 +1,4 @@
-import { NotifierConfig } from 'angular-notifier/src/models/notifier-config.model';
+import { NotifierConfig } from 'angular-notifier';
 
 export const notifierConfig: NotifierConfig = {
   position: {

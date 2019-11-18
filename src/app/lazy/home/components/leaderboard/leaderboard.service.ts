@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 
 import { AppInfoRepository } from '@core/services/app-info.repository';

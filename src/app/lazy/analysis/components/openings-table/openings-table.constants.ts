@@ -1,5 +1,5 @@
 import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 
 import { SortDirection } from '@core/enums/sort.enums';
 

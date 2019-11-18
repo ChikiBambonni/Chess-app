@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Output,
   ElementRef } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 
 import { TableSelectedCell } from './common-table.interfaces';
@@ -36,7 +36,7 @@ export class CommonTableComponent implements OnInit {
   @Output()
   rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild('tableDiv')
+  @ViewChild('tableDiv',  { static: false })
   tableDiv: ElementRef;
 
   constructor () {}

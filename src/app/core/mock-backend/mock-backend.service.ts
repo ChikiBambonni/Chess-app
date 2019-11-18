@@ -5,7 +5,7 @@ import { StorageService } from '@core/services/storage/storage.service';
 import { BackendDataMode } from './mock-backend.enum';
 import { MockBackendUrl } from './mock-backend-url.class';
 
-import * as UrlPattern from 'url-pattern';
+import UrlPattern from 'url-pattern';
 
 @Injectable()
 export class MockBackendService {

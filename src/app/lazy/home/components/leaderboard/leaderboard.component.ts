@@ -5,7 +5,8 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import { MatTableDataSource, PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 
 import { TrackChanges } from '@core/decorators/changes.decorator';

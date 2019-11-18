@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { FindGameDialogComponent } from '@core/material-dialogs/find-game-dialog/find-game-dialog.component';
 

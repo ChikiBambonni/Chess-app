@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, VERSION } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { WorkerService } from './app-worker.service';
@@ -9,6 +9,8 @@ import { WorkerService } from './app-worker.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  ver = VERSION.full;
+
   workerServiceSubscription: Subscription;
 
   constructor(private workerService: WorkerService) {}

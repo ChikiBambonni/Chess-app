@@ -47,10 +47,10 @@ export class ChessgroundComponent implements OnInit, OnDestroy {
   private chess: Chess = new Chess();
   private cg: Api = null;
 
-  @ViewChild('chessBoard')
+  @ViewChild('chessBoard', { static: false })
   chessBoard: ElementRef;
 
-  @ViewChild('promotionContainer', { read: ViewContainerRef })
+  @ViewChild('promotionContainer', { read: ViewContainerRef, static: false })
   entry: ViewContainerRef;
 
   @Output()

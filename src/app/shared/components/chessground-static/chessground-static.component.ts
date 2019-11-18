@@ -47,7 +47,7 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   @Output()
   cgMove = new EventEmitter<CgMove>();
 
-  @ViewChild('chessBoard')
+  @ViewChild('chessBoard', { static: false })
   chessBoard: ElementRef;
 
   private cg: Api = null;

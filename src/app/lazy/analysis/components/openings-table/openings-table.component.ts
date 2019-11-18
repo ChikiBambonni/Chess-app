@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sort } from '@angular/material/sort';
-import { PageEvent, MatTableDataSource } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { AppInfoRepository } from '@core/services/app-info.repository';
 import { PaginationInterface } from '@core/interfaces/pagination.interface';

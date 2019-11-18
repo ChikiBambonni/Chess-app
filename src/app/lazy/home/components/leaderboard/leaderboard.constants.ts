@@ -1,6 +1,6 @@
 import { SortDirection } from '@core/enums/sort.enums';
 import { Sort } from '@angular/material/sort';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { ButtonInterface } from '@shared/components/button-group/button-group.interfaces';
 import { LiderboardType } from './leaderboard.enums';
 
