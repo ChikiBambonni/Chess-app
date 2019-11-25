@@ -88,6 +88,13 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
               this.promotionSubject.pipe(take(1)).subscribe((role: Role) => {
                 this.cg.setPieces({ [move.to]: { role , color: toColor(this.chess), promoted: true} });
                 this.chess.move({ from: move.from, to: move.to, promotion: toPromotion(role) });
+                this.cg.set({
+                  turnColor: toColor(this.chess),
+                  movable: {
+                    color: toColor(this.chess),
+                    dests: toDests(this.chess)
+                  }
+                });
               });
             } else {
               this.chess.move({ from: move.from, to: move.to });
