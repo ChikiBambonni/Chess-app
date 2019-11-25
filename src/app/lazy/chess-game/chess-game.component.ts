@@ -22,20 +22,20 @@ export class ChessGameComponent implements OnInit {
   ngOnInit() {}
 
   cgMove($event: MoveConfig) {
-    this.updateData($event);
-    this.chessService.emitEvent('makeMove', Object.assign($event, { room: this.chessService.gameID }));
+    // this.updateData($event);
+    // this.chessService.emitEvent('makeMove', Object.assign($event, { room: this.chessService.gameID }));
   }
 
   updateData({ to, turn }: { to: Key, turn: string }) { // TODO: remove this logic
-    const last: MovesTableItem = _.last(this.data);
-    const color = turn === 'w' ? 'black' : 'white';
-    if (last[color] !== undefined) {
-      const row = {} as MovesTableItem;
-      row.N = last.N + 1;
-      row[color] = to;
-      this.data = [...this.data, row];
-    } else {
-      last[color] = to;
-    }
+  //   const last: MovesTableItem = _.last(this.data);
+  //   const color = turn === 'w' ? 'black' : 'white';
+  //   if (last[color] !== undefined) {
+  //     const row = {} as MovesTableItem;
+  //     row.N = last.N + 1;
+  //     row[color] = to;
+  //     this.data = [...this.data, row];
+  //   } else {
+  //     last[color] = to;
+  //   }
   }
 }

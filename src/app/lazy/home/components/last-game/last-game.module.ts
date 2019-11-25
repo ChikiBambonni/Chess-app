@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ChessgroundStaticModule } from '@shared/components/chessground-static/chessground-static.module';
+import { ChessgroundModule } from '@shared/components/chessground/chessground.module';
 import { LastGameComponent } from './last-game.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ChessgroundStaticModule
+    ChessgroundModule
   ],
   declarations: [
     LastGameComponent

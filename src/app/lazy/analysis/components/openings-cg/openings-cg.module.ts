@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MovesTableModule } from '@shared/components/moves-table/moves.table.module';
-import { ChessgroundStaticModule } from '@shared/components/chessground-static/chessground-static.module';
+import { ChessgroundModule } from '@shared/components/chessground/chessground.module';
 import { OpeningsCgComponent } from './openings-cg.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ChessgroundStaticModule,
+    ChessgroundModule,
     MovesTableModule
   ],
   declarations: [

@@ -1,51 +1,57 @@
 import {
   Component,
   OnInit,
+  Input,
+  Output,
   ElementRef,
   ViewChild,
   ViewContainerRef,
-  ComponentFactoryResolver,
-  ComponentRef,
-  ViewEncapsulation,
-  Output,
+  OnChanges,
   EventEmitter,
-  OnDestroy
+  SimpleChanges,
+  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-
 import { Chessground } from 'chessground';
-import { Key, Role, MoveMetadata } from 'chessground/types';
+import { Color, Role, FEN } from 'chessground/types';
 import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
-import {
-  toColor,
-  toDests,
-  opPlay,
-  aiPlay,
-  defConfig
-} from '@core/utils/chess.utils';
-import { MoveConfig } from '@core/interfaces/socket.interfaces';
+import { toDests, playOtherSide, toVertical, toPromotion } from '@core/utils/chess.utils';
 import { CgMove } from '@core/interfaces/chess.interfaces';
-import { GameModes } from '@core/interfaces/game.interafces';
-import { ChessGameService } from '@core/services/chess-game/chess-game.service';
-import { PromotionChoiceComponent } from '@shared/components/promotion-choice/promotion-choice.component';
+import { TrackChanges } from '@core/decorators/changes.decorator';
+import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
+import { toColor } from '@core/utils/chess.utils';
+import { take } from 'rxjs/operators';
+import { PromotionChoiceService } from '../promotion-choice/promotion-choice.service';
 
 @Component({
   selector: 'app-chessground',
   templateUrl: './chessground.component.html',
-  styleUrls: ['./chessground.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./chessground.component.scss']
 })
-export class ChessgroundComponent implements OnInit, OnDestroy {
+export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  private promotinRef: ComponentRef<PromotionChoiceComponent>;
-  private movesSubscription: Subscription;
-  private promotionSubject: Subject<any> = new Subject();
-  private chess: Chess = new Chess();
-  private cg: Api = null;
+  @Input()
+  width: number;
+
+  @Input()
+  height: number;
+
+  @Input()
+  zoom: number;
+
+  @Input()
+  orientation: Color;
+
+  @Input()
+  coordinates = false;
+
+  @Input()
+  fen: string;
+
+  @Output()
+  cgMove = new EventEmitter<CgMove>();
 
   @ViewChild('chessBoard', { static: false })
   chessBoard: ElementRef;
@@ -53,73 +59,97 @@ export class ChessgroundComponent implements OnInit, OnDestroy {
   @ViewChild('promotionContainer', { read: ViewContainerRef, static: false })
   entry: ViewContainerRef;
 
-  @Output()
-  cgMove = new EventEmitter<CgMove>();
+  private cg: Api = null;
+  private chess: Chess = new Chess();
 
   private initChessground(): void {
-    this.cg = Chessground(this.chessBoard.nativeElement, defConfig(this.chess, this.chessService.orientation));
+    this.cg = Chessground(this.chessBoard.nativeElement, {
+      orientation: this.orientation,
+      coordinates: this.coordinates,
+      movable: {
+        color: 'white',
+        free: false,
+        dests: toDests(this.chess),
+        showDests: true,
+      },
+    });
     this.cg.set({
+      fen: this.fen,
       movable: {
         events: {
-          after: (this.chessService.mode === GameModes.LIVE) ?
-            opPlay(this.cg, this.chess, this.cgMove) : aiPlay(this.cg, this.chess, this.promotionSubject, this.cgMove),
-            afterNewPiece: (role: Role, key: Key, metadata: MoveMetadata) => {
-              console.log(role, key, metadata);
+          after: playOtherSide(this.cg, this.chess, (move: CgMove) => {
+            if (move.promotion) {
+              this.promotionService.setPromotion({ column: toVertical(move.to), color: this.chess.turn() });// .next();
+              this.promotionService.promotion$.pipe(take(1)).subscribe((role: Role) => {
+                this.cg.setPieces({ [move.to]: { role , color: toColor(this.chess), promoted: true} });
+                this.chess.move({ from: move.from, to: move.to, promotion: toPromotion(role) });
+                this.cg.set({
+                  turnColor: toColor(this.chess),
+                  movable: {
+                    color: toColor(this.chess),
+                    dests: toDests(this.chess)
+                  }
+                });
+              });
+            } else {
+              this.chess.move({ from: move.from, to: move.to });
             }
+            this.cgMove.emit(move);
+          })
         }
       }
     });
   }
 
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private chessService: ChessGameService) { }
+  constructor(private promotionService: PromotionChoiceService) { }
 
   ngOnInit() {
-    this.movesSubscription = this.chessService.$moves.subscribe((move: MoveConfig) => {
-      console.log('Move', move);
-      this.makeMove(move);
-    });
-    this.initChessground();
-    this.promotionSubject.subscribe((col: any) => {
-      this.createComponent(91, col.column - 1, col.color);
-    });
+    this.promotionService.promotion$.subscribe((col: any) => {
+      this.promotionService.createComponent(this.entry, 17, col.column - 1, col.color); // TODO: calculate dynamically
+    }); // TODO: unsibscribe with takeUntil
   }
 
   ngOnDestroy() {
-    this.chessService.destroySocket();
-    this.movesSubscription.unsubscribe();
-    this.promotionSubject.unsubscribe();
+
   }
 
-  makeMove({ from, to }: { from: Key, to: Key }): void {
-    this.chess.move({ from, to });
-    this.cg.move(from, to);
-    this.cg.set({
-      turnColor: toColor(this.chess),
-      movable: {
-        color: toColor(this.chess),
-        dests: toDests(this.chess)
-      }
-    });
+  ngAfterViewInit() {
+    this.initChessground();
   }
 
-  createComponent(top: number, column: number, color: string) {
-    this.entry.clear();
-    const factory = this.resolver.resolveComponentFactory(PromotionChoiceComponent);
-    this.promotinRef = this.entry.createComponent(factory);
-    this.promotinRef.instance.top = top + 'px';
-    this.promotinRef.instance.color = color;
-    this.promotinRef.instance.column = column;
-    this.promotinRef.instance.promotion
-      .pipe(take(1))
-      .subscribe((role: Role) => {
-        this.promotionSubject.next(role);
-        this.destroyComponent();
+  @TrackChanges<number>('zoom', 'setZoom', ChangesStrategy.NonFirst)
+  @TrackChanges<FEN>('fen', 'setFEN', ChangesStrategy.NonFirst)
+  @TrackChanges<Color>('orientation', 'setOrientation', ChangesStrategy.NonFirst)
+  ngOnChanges(changes: SimpleChanges) {
+  }
+
+  setZoom() {
+    const el = this.chessBoard.nativeElement;
+    if (el) {
+      const px = `${this.zoom / 100 * 320}px`;
+      el.style.width = px;
+      el.style.height = px;
+      document.body.dispatchEvent(new Event('chessground.resize'));
+    }
+  }
+
+  setFEN() {
+    if (this.chess.validate_fen(this.fen).valid) {
+      this.chess.load(this.fen);
+      this.cg.set({
+        fen: this.fen,
+        turnColor: toColor(this.chess),
+        movable: {
+          color: toColor(this.chess),
+          dests: toDests(this.chess)
+        }
       });
+    } else {
+      console.error('Error setting fen');
+    }
   }
 
-  destroyComponent() {
-    this.promotinRef.destroy();
+  setOrientation(orientation: Color) {
+    this.cg.set({ orientation });
   }
 }

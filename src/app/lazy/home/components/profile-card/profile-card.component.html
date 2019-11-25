@@ -18,13 +18,13 @@
       <div class="d-flex justify-content-between games">
         <div *ngFor="let game of games" class="games__info">
           <div class="cg-wrapper">
-            <app-chessground-static
+            <app-chessground
               [width]="112"
               [height]="112"
               [fen]="game.fen"
               [zoom]="zoom"
               [orientation]="game.orientation">
-            </app-chessground-static>
+            </app-chessground>
           </div>
           <div class="games__info-title">{{ game.title }}</div>
         </div>
