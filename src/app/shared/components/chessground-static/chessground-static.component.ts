@@ -5,12 +5,16 @@ import {
   Output,
   ElementRef,
   ViewChild,
+  ViewContainerRef,
   OnChanges,
   EventEmitter,
   SimpleChanges,
-  AfterViewInit } from '@angular/core';
+  AfterViewInit,
+  ComponentRef,
+  OnDestroy,
+  ComponentFactoryResolver} from '@angular/core';
 import { Chessground } from 'chessground';
-import { Color } from 'chessground/types';
+import { Color, Role } from 'chessground/types';
 import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
@@ -19,13 +23,16 @@ import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
 import { toColor } from '@core/utils/chess.utils';
+import { PromotionChoiceComponent } from '../promotion-choice/promotion-choice.component';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chessground-static',
   templateUrl: './chessground-static.component.html',
   styleUrls: ['./chessground-static.component.scss']
 })
-export class ChessgroundStaticComponent implements OnChanges, AfterViewInit {
+export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   @Input()
   width: number;
@@ -51,8 +58,13 @@ export class ChessgroundStaticComponent implements OnChanges, AfterViewInit {
   @ViewChild('chessBoard', { static: false })
   chessBoard: ElementRef;
 
+  @ViewChild('promotionContainer', { read: ViewContainerRef, static: false })
+  entry: ViewContainerRef;
+
   private cg: Api = null;
   private chess: Chess = new Chess();
+  private promotinRef: ComponentRef<PromotionChoiceComponent>;
+  private promotionSubject: Subject<any> = new Subject();
 
   private initChessground(): void {
     this.cg = Chessground(this.chessBoard.nativeElement, {
@@ -69,13 +81,23 @@ export class ChessgroundStaticComponent implements OnChanges, AfterViewInit {
       fen: this.fen,
       movable: {
         events: {
-          after: playOtherSide(this.cg, this.chess, this.cgMove)
+          after: playOtherSide(this.cg, this.chess, (move: CgMove) => this.cgMove.emit(move))
         }
       }
     });
   }
 
-  constructor() { }
+  constructor(private resolver: ComponentFactoryResolver) { }
+
+  ngOnInit() {
+    this.promotionSubject.subscribe((col: any) => {
+      this.createComponent(91, col.column - 1, col.color);
+    });
+  }
+
+  ngOnDestroy() {
+
+  }
 
   ngAfterViewInit() {
     this.initChessground();
@@ -115,5 +137,24 @@ export class ChessgroundStaticComponent implements OnChanges, AfterViewInit {
 
   setOrientation(orientation: Color) {
     this.cg.set({ orientation });
+  }
+
+  createComponent(top: number, column: number, color: string) {
+    this.entry.clear();
+    const factory = this.resolver.resolveComponentFactory(PromotionChoiceComponent);
+    this.promotinRef = this.entry.createComponent(factory);
+    this.promotinRef.instance.top = top + 'px';
+    this.promotinRef.instance.color = color;
+    this.promotinRef.instance.column = column;
+    this.promotinRef.instance.promotion
+      .pipe(take(1))
+      .subscribe((role: Role) => {
+        this.promotionSubject.next(role);
+        this.destroyComponent();
+      });
+  }
+
+  destroyComponent() {
+    this.promotinRef.destroy();
   }
 }

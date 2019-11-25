@@ -120,7 +120,7 @@ export const toFEN = (m: string): FEN => {
 export const toColor = (chess: Chess) => (chess.turn() === 'w')  ? 'white' : 'black';
 export const toPromotion = (role: Role) => role.substring(0, 1);
 
-export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove> = null) => {
+export const playOtherSide = (cg: Api, chess: Chess, callback: Function) => {
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     cg.set({
@@ -130,9 +130,7 @@ export const playOtherSide = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove
         dests: toDests(chess)
       }
     });
-    if (cgMove) {
-      cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
-    }
+    callback({ from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
   };
 };
 
