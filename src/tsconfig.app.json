@@ -1,5 +1,6 @@
 {
   "extends": "../tsconfig.json",
+  "compileOnSave": true,
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [],
@@ -21,6 +22,9 @@
         "environments/environment"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
   },
   "exclude": [
     "test.ts",

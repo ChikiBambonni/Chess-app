@@ -7,7 +7,8 @@ import {
   ViewChild,
   OnChanges,
   EventEmitter,
-  SimpleChanges } from '@angular/core';
+  SimpleChanges,
+  AfterViewInit } from '@angular/core';
 import { Chessground } from 'chessground';
 import { Color } from 'chessground/types';
 import { Api } from 'chessground/api';
@@ -24,7 +25,7 @@ import { toColor } from '@core/utils/chess.utils';
   templateUrl: './chessground-static.component.html',
   styleUrls: ['./chessground-static.component.scss']
 })
-export class ChessgroundStaticComponent implements OnInit, OnChanges {
+export class ChessgroundStaticComponent implements OnChanges, AfterViewInit {
 
   @Input()
   width: number;
@@ -54,40 +55,33 @@ export class ChessgroundStaticComponent implements OnInit, OnChanges {
   private chess: Chess = new Chess();
 
   private initChessground(): void {
-    setTimeout(() => {
-      this.cg = Chessground(this.chessBoard.nativeElement, {
-        orientation: this.orientation,
-        coordinates: this.coordinates,
-        // movable: {
-        //   color: null,
-        //   dests: {}
-        // },
-        movable: {
-          color: 'white',
-          free: false,
-          dests: toDests(this.chess),
-          showDests: true,
-        },
-      });
-      this.cg.set({
-        fen: this.fen,
-        movable: {
-          events: {
-            after: playOtherSide(this.cg, this.chess, this.cgMove)
-          }
+    this.cg = Chessground(this.chessBoard.nativeElement, {
+      orientation: this.orientation,
+      coordinates: this.coordinates,
+      movable: {
+        color: 'white',
+        free: false,
+        dests: toDests(this.chess),
+        showDests: true,
+      },
+    });
+    this.cg.set({
+      fen: this.fen,
+      movable: {
+        events: {
+          after: playOtherSide(this.cg, this.chess, this.cgMove)
         }
-      });
-    }, 200);
+      }
+    });
   }
 
   constructor() { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.initChessground();
-    setTimeout(() => this.setZoom(), 200);
   }
 
-  @TrackChanges('zoom', 'setZoom')
+  @TrackChanges('zoom', 'setZoom', ChangesStrategy.NonFirst)
   @TrackChanges('fen', 'setFEN', ChangesStrategy.NonFirst)
   @TrackChanges('orientation', 'setOrientation', ChangesStrategy.NonFirst)
   ngOnChanges(changes: SimpleChanges) {
