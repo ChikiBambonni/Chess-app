@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PromotionChoiceComponent } from './promotion-choice.component';
+import { PromotionChoiceService } from './promotion-choice.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { PromotionChoiceComponent } from './promotion-choice.component';
   ],
   exports: [
     PromotionChoiceComponent
+  ],
+  providers: [
+    PromotionChoiceService
   ]
 })
 export class PromotionChoiceModule { }

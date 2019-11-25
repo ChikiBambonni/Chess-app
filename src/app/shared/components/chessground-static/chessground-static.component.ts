@@ -10,11 +10,10 @@ import {
   EventEmitter,
   SimpleChanges,
   AfterViewInit,
-  ComponentRef,
   OnDestroy,
-  ComponentFactoryResolver} from '@angular/core';
+} from '@angular/core';
 import { Chessground } from 'chessground';
-import { Color, Role } from 'chessground/types';
+import { Color, Role, FEN } from 'chessground/types';
 import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
@@ -23,9 +22,8 @@ import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
 import { toColor } from '@core/utils/chess.utils';
-import { PromotionChoiceComponent } from '../promotion-choice/promotion-choice.component';
-import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { PromotionChoiceService } from '../promotion-choice/promotion-choice.service';
 
 @Component({
   selector: 'app-chessground-static',
@@ -63,8 +61,6 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
 
   private cg: Api = null;
   private chess: Chess = new Chess();
-  private promotinRef: ComponentRef<PromotionChoiceComponent>;
-  private promotionSubject: Subject<any> = new Subject();
 
   private initChessground(): void {
     this.cg = Chessground(this.chessBoard.nativeElement, {
@@ -82,10 +78,9 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
       movable: {
         events: {
           after: playOtherSide(this.cg, this.chess, (move: CgMove) => {
-            console.log(move);
             if (move.promotion) {
-              this.promotionSubject.next({ column: toVertical(move.to), color: this.chess.turn() });
-              this.promotionSubject.pipe(take(1)).subscribe((role: Role) => {
+              this.promotionService.setPromotion({ column: toVertical(move.to), color: this.chess.turn() });// .next();
+              this.promotionService.promotion$.pipe(take(1)).subscribe((role: Role) => {
                 this.cg.setPieces({ [move.to]: { role , color: toColor(this.chess), promoted: true} });
                 this.chess.move({ from: move.from, to: move.to, promotion: toPromotion(role) });
                 this.cg.set({
@@ -106,12 +101,12 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
     });
   }
 
-  constructor(private resolver: ComponentFactoryResolver) { }
+  constructor(private promotionService: PromotionChoiceService) { }
 
   ngOnInit() {
-    this.promotionSubject.subscribe((col: any) => {
-      this.createComponent(17, col.column - 1, col.color); // TODO: calculate dynamically
-    });
+    this.promotionService.promotion$.subscribe((col: any) => {
+      this.promotionService.createComponent(this.entry, 17, col.column - 1, col.color); // TODO: calculate dynamically
+    }); // TODO: unsibscribe with takeUntil
   }
 
   ngOnDestroy() {
@@ -122,9 +117,9 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
     this.initChessground();
   }
 
-  @TrackChanges('zoom', 'setZoom', ChangesStrategy.NonFirst)
-  @TrackChanges('fen', 'setFEN', ChangesStrategy.NonFirst)
-  @TrackChanges('orientation', 'setOrientation', ChangesStrategy.NonFirst)
+  @TrackChanges<number>('zoom', 'setZoom', ChangesStrategy.NonFirst)
+  @TrackChanges<FEN>('fen', 'setFEN', ChangesStrategy.NonFirst)
+  @TrackChanges<Color>('orientation', 'setOrientation', ChangesStrategy.NonFirst)
   ngOnChanges(changes: SimpleChanges) {
   }
 
@@ -156,24 +151,5 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
 
   setOrientation(orientation: Color) {
     this.cg.set({ orientation });
-  }
-
-  createComponent(top: number, column: number, color: string) {
-    this.entry.clear();
-    const factory = this.resolver.resolveComponentFactory(PromotionChoiceComponent);
-    this.promotinRef = this.entry.createComponent(factory);
-    this.promotinRef.instance.top = top + 'px';
-    this.promotinRef.instance.color = color;
-    this.promotinRef.instance.column = column;
-    this.promotinRef.instance.promotion
-      .pipe(take(1))
-      .subscribe((role: Role) => {
-        this.promotionSubject.next(role);
-        this.destroyComponent();
-      });
-  }
-
-  destroyComponent() {
-    this.promotinRef.destroy();
   }
 }
