@@ -18,7 +18,7 @@ import { Color, Role } from 'chessground/types';
 import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
-import { toDests, playOtherSide } from '@core/utils/chess.utils';
+import { toDests, playOtherSide, toVertical, toPromotion } from '@core/utils/chess.utils';
 import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
@@ -81,7 +81,19 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
       fen: this.fen,
       movable: {
         events: {
-          after: playOtherSide(this.cg, this.chess, (move: CgMove) => this.cgMove.emit(move))
+          after: playOtherSide(this.cg, this.chess, (move: CgMove) => {
+            console.log(move);
+            if (move.promotion) {
+              this.promotionSubject.next({ column: toVertical(move.to), color: this.chess.turn() });
+              this.promotionSubject.pipe(take(1)).subscribe((role: Role) => {
+                this.cg.setPieces({ [move.to]: { role , color: toColor(this.chess), promoted: true} });
+                this.chess.move({ from: move.from, to: move.to, promotion: toPromotion(role) });
+              });
+            } else {
+              this.chess.move({ from: move.from, to: move.to });
+            }
+            this.cgMove.emit(move);
+          })
         }
       }
     });
@@ -91,7 +103,7 @@ export class ChessgroundStaticComponent implements OnInit, OnDestroy, OnChanges,
 
   ngOnInit() {
     this.promotionSubject.subscribe((col: any) => {
-      this.createComponent(91, col.column - 1, col.color);
+      this.createComponent(17, col.column - 1, col.color); // TODO: calculate dynamically
     });
   }
 

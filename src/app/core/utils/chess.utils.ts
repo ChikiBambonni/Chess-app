@@ -87,8 +87,7 @@ export const defConfig = (chess: Chess, orien: Color): Config => {
 };
 
 export const isPromotion = (chess: Chess) => {
-  const moves = chess.moves({ verbode: true });
-  return moves.some(m => m.includes('='));
+  return chess.moves({ verbode: true }).some(m => m.includes('=')); // TODO: write tests for this fn
 };
 
 export const toDests = (chess: Chess) => {
@@ -122,6 +121,7 @@ export const toPromotion = (role: Role) => role.substring(0, 1);
 
 export const playOtherSide = (cg: Api, chess: Chess, callback: Function) => {
   return (orig, dest) => {
+    const promotion = isPromotion(chess);
     chess.move({from: orig, to: dest});
     cg.set({
       turnColor: toColor(chess),
@@ -130,26 +130,33 @@ export const playOtherSide = (cg: Api, chess: Chess, callback: Function) => {
         dests: toDests(chess)
       }
     });
-    callback({ from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
+    callback({
+      from: orig,
+      to: dest,
+      turn: chess.turn(),
+      fen: chess.fen(),
+      promotion
+    });
   };
 };
 
 export const aiPlay = (cg: Api, chess: Chess, promotionSubject: Subject<any>, cgMove: EventEmitter<CgMove> = null) => {
   return (orig, dest) => {
+
     if (isPromotion(chess)) {
       promotionSubject.next({ column: toVertical(dest), color: chess.turn() });
       promotionSubject.pipe(take(1)).subscribe((role: Role) => {
         cg.setPieces({ [dest]: { role , color: toColor(chess), promoted: true} });
         chess.move({ from: orig, to: dest, promotion: toPromotion(role) });
         if (cgMove) {
-          cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
+          cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen(), promotion: false });
         }
         randomPlay(cg, chess, cgMove);
       });
     } else {
       chess.move({ from: orig, to: dest });
       if (cgMove) {
-        cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
+        cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen(), promotion: false });
       }
       randomPlay(cg, chess, cgMove);
     }
@@ -160,7 +167,7 @@ export const opPlay = (cg: Api, chess: Chess, cgMove: EventEmitter<CgMove> = nul
   return (orig, dest) => {
     chess.move({from: orig, to: dest});
     if (cgMove) {
-      cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() });
+      cgMove.emit({from: orig, to: dest, turn: chess.turn(), fen: chess.fen() , promotion: false});
     }
   };
 };

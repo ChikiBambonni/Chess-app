@@ -8,4 +8,5 @@ export interface CgMove {
   to: Key;
   turn: CgTurn;
   fen: FEN;
+  promotion: boolean;
 }
