@@ -18,6 +18,7 @@ import { Api } from 'chessground/api';
 import * as Chess from 'chess.js';
 
 import { toDests, playOtherSide, toVertical, toPromotion } from '@core/utils/chess.utils';
+import { ChessgroundService } from './chessground.service';
 import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
@@ -101,7 +102,9 @@ export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, After
     });
   }
 
-  constructor(private promotionService: PromotionChoiceService) { }
+  constructor(
+    private promotionService: PromotionChoiceService,
+    private cgService: ChessgroundService) { }
 
   ngOnInit() {
     this.promotionService.promotion$.subscribe((col: any) => {
@@ -124,32 +127,14 @@ export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, After
   }
 
   setZoom() {
-    const el = this.chessBoard.nativeElement;
-    if (el) {
-      const px = `${this.zoom / 100 * 320}px`;
-      el.style.width = px;
-      el.style.height = px;
-      document.body.dispatchEvent(new Event('chessground.resize'));
-    }
+    this.cgService.setZoom(this.chessBoard.nativeElement, this.zoom);
   }
 
   setFEN() {
-    if (this.chess.validate_fen(this.fen).valid) {
-      this.chess.load(this.fen);
-      this.cg.set({
-        fen: this.fen,
-        turnColor: toColor(this.chess),
-        movable: {
-          color: toColor(this.chess),
-          dests: toDests(this.chess)
-        }
-      });
-    } else {
-      console.error('Error setting fen');
-    }
+    this.cgService.setFEN(this.chess, this.cg, this.fen);
   }
 
-  setOrientation(orientation: Color) {
-    this.cg.set({ orientation });
+  setOrientation() {
+    this.cgService.setOrientation(this.cg, this.orientation);
   }
 }
