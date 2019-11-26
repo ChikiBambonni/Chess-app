@@ -1,3 +1,4 @@
+import { PromotionChoiceService } from './../promotion-choice/promotion-choice.service';
 import {
   Component,
   OnInit,
@@ -11,6 +12,7 @@ import {
   SimpleChanges,
   AfterViewInit,
   OnDestroy,
+  Inject,
 } from '@angular/core';
 import { Chessground } from 'chessground';
 import { Color, Role, FEN } from 'chessground/types';
@@ -23,15 +25,17 @@ import { CgMove } from '@core/interfaces/chess.interfaces';
 import { TrackChanges } from '@core/decorators/changes.decorator';
 import { ChangesStrategy } from '@core/enums/changes-strategy.emuns';
 import { toColor } from '@core/utils/chess.utils';
-import { take } from 'rxjs/operators';
-import { PromotionChoiceService } from '../promotion-choice/promotion-choice.service';
+import { take, takeUntil } from 'rxjs/operators';
+import { TakeUntilDestroy } from '@core/decorators/take-util-destroy.decorator';
+import { ChessgroundBase } from './chessground.constants';
 
 @Component({
   selector: 'app-chessground',
   templateUrl: './chessground.component.html',
   styleUrls: ['./chessground.component.scss']
 })
-export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+@TakeUntilDestroy
+export class ChessgroundComponent extends ChessgroundBase implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   @Input()
   width: number;
@@ -51,17 +55,13 @@ export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, After
   @Input()
   fen: string;
 
-  @Output()
-  cgMove = new EventEmitter<CgMove>();
-
   @ViewChild('chessBoard', { static: false })
   chessBoard: ElementRef;
 
   @ViewChild('promotionContainer', { read: ViewContainerRef, static: false })
   entry: ViewContainerRef;
 
-  private cg: Api = null;
-  private chess: Chess = new Chess();
+  private componentDestroy: Function;
 
   private initChessground(): void {
     this.cg = Chessground(this.chessBoard.nativeElement, {
@@ -78,43 +78,28 @@ export class ChessgroundComponent implements OnInit, OnDestroy, OnChanges, After
       fen: this.fen,
       movable: {
         events: {
-          after: playOtherSide(this.cg, this.chess, (move: CgMove) => {
-            if (move.promotion) {
-              this.promotionService.setPromotion({ column: toVertical(move.to), color: this.chess.turn() });// .next();
-              this.promotionService.promotion$.pipe(take(1)).subscribe((role: Role) => {
-                this.cg.setPieces({ [move.to]: { role , color: toColor(this.chess), promoted: true} });
-                this.chess.move({ from: move.from, to: move.to, promotion: toPromotion(role) });
-                this.cg.set({
-                  turnColor: toColor(this.chess),
-                  movable: {
-                    color: toColor(this.chess),
-                    dests: toDests(this.chess)
-                  }
-                });
-              });
-            } else {
-              this.chess.move({ from: move.from, to: move.to });
-            }
-            this.cgMove.emit(move);
-          })
+          after: playOtherSide(this.cg, this.chess, this.playOtherSide)
         }
       }
     });
   }
 
   constructor(
-    private promotionService: PromotionChoiceService,
-    private cgService: ChessgroundService) { }
+    @Inject(PromotionChoiceService) promotionService: PromotionChoiceService,
+    private cgService: ChessgroundService) {
+      super(promotionService);
+    }
 
   ngOnInit() {
-    this.promotionService.promotion$.subscribe((col: any) => {
+    this.promotionService.promotion$.pipe(
+      takeUntil(this.componentDestroy())
+    )
+    .subscribe((col: any) => {
       this.promotionService.createComponent(this.entry, 17, col.column - 1, col.color); // TODO: calculate dynamically
-    }); // TODO: unsibscribe with takeUntil
+    });
   }
 
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 
   ngAfterViewInit() {
     this.initChessground();
